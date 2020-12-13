@@ -370,27 +370,20 @@
           return false;
         });
       });
-      document.addEventListener("aos:in:chart-1", ({ detail }) => {
-        refresh_chart("cameo-divergent-stacked-bars");
-      });
-      document.addEventListener("aos:in:chart-2", ({ detail }) => {
-        refresh_chart("cameo-run");
-      });
-      document.addEventListener("aos:in:chart-3", ({ detail }) => {
-        refresh_chart("cameo-line");
-      });
-
-      document.addEventListener("aos:in:chart-4", ({ detail }) => {
-        refresh_chart("cameo-rank");
-      });
-
-      document.addEventListener("aos:in:chart-5", ({ detail }) => {
-        refresh_chart("cameo-multi-axis-prediction");
-      });
-
-      document.addEventListener("aos:in:chart-6", ({ detail }) => {
-        refresh_chart("cameo-map-tw");
-      });
+      let ary_charts = [
+        "cameo-divergent-stacked-bars",
+        "cameo-run",
+        "cameo-line",
+        "cameo-rank",
+        "cameo-multi-axis-prediction",
+        "cameo-map-tw"
+      ];
+      for (let i = 1; i <= ary_charts.length; i++) {
+        let str_aos = "aos:in:chart-" + i;
+        document.addEventListener(str_aos, ({ detail }) => {
+          refresh_chart(ary_charts[i - 1]);
+        });
+      }
     </script>
   </body>
 </html>

@@ -1,8 +1,13 @@
 ---
+2020-12-13 18:40 bowen
+done 已經把六張圖都完成區域變數呼叫 refresh_chart
+---
+
 2020-12-13 17:33 caro
 done chartOne function 成功！
 todo 要把全域變數的 chart1 變成區域變數
 todo 要把 chartOne function 可以共用化
+
 ---
 
 2020-12-13 17:20 caro
