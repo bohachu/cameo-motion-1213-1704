@@ -1,6 +1,16 @@
 ---
+2020-12-13 22:32 caro
+done 下載的檔名現在是 amcharts
+done 下載 icon 會擋到圖表
+done 操場圖的「開始」截到了
+done 全部 landing.html 前台顯示調整完畢
+---
+
+---
+
 2020-12-13 18:40 bowen
 done 已經把六張圖都完成區域變數呼叫 refresh_chart
+
 ---
 
 2020-12-13 17:33 caro
