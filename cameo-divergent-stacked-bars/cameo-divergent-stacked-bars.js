@@ -1,6 +1,8 @@
 import dfjs from "https://jspm.dev/dataframe-js";
 import { load_js_async, load_css } from "../cameo-common/cameo-load.js";
 
+var chart1;
+
 class CameoDivergentStackedBars extends HTMLElement {
   connectedCallback() {
     this.str_random_id = "id_" + Math.random().toString(36).substr(2, 9);
@@ -75,10 +77,9 @@ class CameoDivergentStackedBars extends HTMLElement {
     am4core.useTheme(am4themes_animated);
     // Themes end
 
-    // amcharts License
-    am4core.addLicense("CH1234567");
     // Create chart instance
     var chart = am4core.create(this.str_random_id, am4charts.XYChart);
+    chart1 = chart;
 
     // Export
     chart.exporting.menu = new am4core.ExportMenu();
@@ -277,6 +278,9 @@ am4core.addLicense("MP251292242");
 am4core.addLicense("TL251292242");
 
 export function chartOne() {
-  alert("chartOne");
-  return "okok";
+  chart1.appear();
+  chart1.series.each(function (series) {
+    series.appear();
+  });
+  console.log("有執行到1");
 }

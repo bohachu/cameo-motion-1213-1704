@@ -1,6 +1,13 @@
 ---
+2020-12-13 17:33 caro
+done chartOne function 成功！
+todo 要把全域變數的 chart1 變成區域變數
+todo 要把 chartOne function 可以共用化
+---
+
 2020-12-13 17:20 caro
 測試衝突的發生
+
 ---
 
 2020-12-13 17:16 bowen
