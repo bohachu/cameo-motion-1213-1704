@@ -80,6 +80,7 @@ class CameoRun extends HTMLElement {
       this.str_random_id,
       am4plugins_timeline.CurveChart
     );
+    this.chart = chart;
     chart.curveContainer.padding(50, 50, 50, 50);
 
     // Export
