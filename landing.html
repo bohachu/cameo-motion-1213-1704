@@ -376,25 +376,21 @@
       document.addEventListener("aos:in:chart-2", ({ detail }) => {
         refresh_chart("cameo-run");
       });
-      // document.addEventListener("aos:in:chart-3", ({ detail }) => {
-      //   chartThree();
-      //   //console.log('CHART2 FIRE');
-      // });
+      document.addEventListener("aos:in:chart-3", ({ detail }) => {
+        refresh_chart("cameo-line");
+      });
 
-      // document.addEventListener("aos:in:chart-4", ({ detail }) => {
-      //   chartFour();
-      //   //console.log('CHART2 FIRE');
-      // });
+      document.addEventListener("aos:in:chart-4", ({ detail }) => {
+        refresh_chart("cameo-rank");
+      });
 
-      // document.addEventListener("aos:in:chart-5", ({ detail }) => {
-      //   chartFive();
-      //   //console.log('CHART2 FIRE');
-      // });
+      document.addEventListener("aos:in:chart-5", ({ detail }) => {
+        refresh_chart("cameo-multi-axis-prediction");
+      });
 
-      // document.addEventListener("aos:in:chart-6", ({ detail }) => {
-      //   chartSix();
-      //   //console.log('CHART2 FIRE');
-      // });
+      document.addEventListener("aos:in:chart-6", ({ detail }) => {
+        refresh_chart("cameo-map-tw");
+      });
     </script>
   </body>
 </html>

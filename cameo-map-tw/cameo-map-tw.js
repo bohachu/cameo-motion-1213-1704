@@ -98,6 +98,7 @@ class CameoMapTw extends HTMLElement {
 
     // Create map instance
     var chart = am4core.create(this.str_random_id, am4maps.MapChart);
+    this.chart = chart;
 
     // Set map definition
     chart.geodata = am4geodata_worldHigh;

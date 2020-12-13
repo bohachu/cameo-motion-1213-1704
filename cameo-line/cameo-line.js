@@ -79,6 +79,7 @@ class CameoLine extends HTMLElement {
 
     // Create chart instance
     var chart = am4core.create(this.str_random_id, am4charts.XYChart);
+    this.chart = chart;
 
     // Export
     chart.exporting.menu = new am4core.ExportMenu();

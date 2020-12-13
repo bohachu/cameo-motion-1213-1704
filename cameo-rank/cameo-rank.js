@@ -83,6 +83,7 @@ class CameoRank extends HTMLElement {
      */
 
     var chart = am4core.create(this.str_random_id, am4charts.XYChart);
+    this.chart = chart;
     chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
     chart.paddingRight = 40;
