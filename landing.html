@@ -343,7 +343,16 @@
     <script src="cameo-map-tw/cameo-map-tw.js" type="module"></script>
 
     <script type="module">
-      import { chartOne } from "./cameo-divergent-stacked-bars/cameo-divergent-stacked-bars.js";
+      function refresh_chart(str_cameo_motion_component_tag_name) {
+        let cameo_motion_component = document.getElementsByTagName(
+          str_cameo_motion_component_tag_name
+        )[0];
+        cameo_motion_component.chart.appear();
+        cameo_motion_component.chart.series.each(function (series) {
+          series.appear();
+        });
+      }
+      // import { chartOne } from "./cameo-divergent-stacked-bars/cameo-divergent-stacked-bars.js";
 
       AOS.init({
         duration: 800, // values from 0 to 3000, with step 50ms
@@ -362,15 +371,11 @@
         });
       });
       document.addEventListener("aos:in:chart-1", ({ detail }) => {
-        chartOne();
-        //console.log('CHART1 FIRE');
+        refresh_chart("cameo-divergent-stacked-bars");
       });
-
-      // document.addEventListener("aos:in:chart-2", ({ detail }) => {
-      //   chartTwo();
-      //   //console.log('CHART2 FIRE');
-      // });
-
+      document.addEventListener("aos:in:chart-2", ({ detail }) => {
+        refresh_chart("cameo-run");
+      });
       // document.addEventListener("aos:in:chart-3", ({ detail }) => {
       //   chartThree();
       //   //console.log('CHART2 FIRE');
