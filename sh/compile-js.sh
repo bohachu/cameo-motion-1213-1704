@@ -18,7 +18,7 @@ mv cameo-line/cameo-line-obfuscated.js dist/cameo-line/cameo-line.js
 
 javascript-obfuscator cameo-rank/cameo-rank.js
 mkdir -p dist/cameo-rank
-mv cameo-rank/cameo-line-rank.js dist/cameo-rank/cameo-rank.js
+mv cameo-rank/cameo-rank-obfuscated.js dist/cameo-rank/cameo-rank.js
 
 javascript-obfuscator cameo-multi-axis-prediction/cameo-multi-axis-prediction.js
 mkdir -p dist/cameo-multi-axis-prediction
