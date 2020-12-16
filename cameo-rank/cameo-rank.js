@@ -9,7 +9,7 @@ class CameoRank extends HTMLElement {
     this.str_random_id = "id_" + Math.random().toString(36).substr(2, 9);
     this.innerHTML = `
       <div class="cameo-rank" id="${this.str_random_id}" 
-        style="width: 100%; height: 500px;"></div>
+        style="width: 100%; height: 600px;"></div>
     `;
     this.chart_render();
   }
@@ -86,7 +86,8 @@ class CameoRank extends HTMLElement {
     this.chart = chart;
     chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-    chart.paddingRight = 40;
+    // 避免讓 exporting menu icon 擋到圖表
+    chart.paddingRight = 70;
 
     // var title = chart.titles.create();
     // title.text = "[bold font-size: 20]台灣半導體營收排行榜";
@@ -96,6 +97,8 @@ class CameoRank extends HTMLElement {
 
     // Export
     chart.exporting.menu = new am4core.ExportMenu();
+    chart.exporting.filePrefix = dic_meta["圖表下載檔名"];
+    chart.exporting.useWebFonts = false;
     chart.exporting.menu.items = [
       {
         label: "...",
@@ -130,9 +133,9 @@ class CameoRank extends HTMLElement {
     categoryAxis.dataFields.category = "name";
     categoryAxis.renderer.grid.template.strokeOpacity = 0;
     categoryAxis.renderer.minGridDistance = 10;
-    categoryAxis.renderer.labels.template.dx = -40;
-    categoryAxis.renderer.minWidth = 120;
-    categoryAxis.renderer.tooltip.dx = -40;
+    categoryAxis.renderer.labels.template.dx = -30;
+    categoryAxis.renderer.minWidth = 130;
+    categoryAxis.renderer.tooltip.dx = -30;
     categoryAxis.fontSize = "12px";
 
     var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());

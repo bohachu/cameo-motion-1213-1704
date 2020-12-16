@@ -8,7 +8,7 @@ class CameoMultiAxisPrediction extends HTMLElement {
     this.str_random_id = "id_" + Math.random().toString(36).substr(2, 9);
     this.innerHTML = `
       <div class="cameo-multi-axis-prediction" id="${this.str_random_id}" 
-        style="width: 100%; height: 500px;"></div>
+        style="width: 100%; height: 600px;"></div>
     `;
     this.chart_render();
   }
@@ -88,9 +88,13 @@ class CameoMultiAxisPrediction extends HTMLElement {
     // Create chart instance
     var chart = am4core.create(this.str_random_id, am4charts.XYChart);
     this.chart = chart;
+    // 避免讓 exporting menu icon 擋到圖表
+    chart.paddingRight = 65;
 
     // Export
     chart.exporting.menu = new am4core.ExportMenu();
+    chart.exporting.filePrefix = dic_meta["圖表下載檔名"];
+    chart.exporting.useWebFonts = false;
     chart.exporting.menu.items = [
       {
         label: "...",

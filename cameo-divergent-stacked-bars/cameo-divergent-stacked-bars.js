@@ -79,8 +79,13 @@ class CameoDivergentStackedBars extends HTMLElement {
     var chart = am4core.create(this.str_random_id, am4charts.XYChart);
     this.chart = chart;
 
+    // 避免讓 exporting menu icon 擋到圖表
+    chart.paddingRight = 65;
+
     // Export
     chart.exporting.menu = new am4core.ExportMenu();
+    chart.exporting.filePrefix = dic_meta["圖表下載檔名"];
+    chart.exporting.useWebFonts = false;
     chart.exporting.menu.items = [
       {
         label: "...",
@@ -101,7 +106,7 @@ class CameoDivergentStackedBars extends HTMLElement {
         ]
       }
     ];
-    // Title
+
     var title = chart.titles.push(new am4core.Label());
     // title.text = "臺灣產業產值與同期比較：可關注新興能源產值";
     title.text = dic_meta["圖表標題"];

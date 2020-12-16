@@ -6,7 +6,7 @@ class CameoMapTw extends HTMLElement {
     this.str_random_id = "id_" + Math.random().toString(36).substr(2, 9);
     this.innerHTML = `
       <div class="cameo-map-tw" id="${this.str_random_id}" 
-        style="width: 100%; height: 500px;"></div>
+        style="width: 100%; height: 600px;"></div>
     `;
     this.chart_render();
   }
@@ -113,6 +113,8 @@ class CameoMapTw extends HTMLElement {
 
     // Export
     chart.exporting.menu = new am4core.ExportMenu();
+    chart.exporting.filePrefix = dic_meta["圖表下載檔名"];
+    chart.exporting.useWebFonts = false;
     chart.exporting.menu.items = [
       {
         label: "...",
