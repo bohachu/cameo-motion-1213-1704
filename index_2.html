@@ -596,9 +596,14 @@
                                                         <span class="more">了解更多</span>
                                                     </div>
                                                     <div class="chart-holder">
-                                                        <div id="chartdiv-divergent-bar">
 
-                                                        </div>
+<!-- 2020-12-16 15:52 bowen modify begin -->                                                    
+<div>
+    <cameo-divergent-stacked-bars data="app-cameo-divergent-stacked-bars/data/data.csv"
+    meta="app-cameo-divergent-stacked-bars/data/meta.csv"></cameo-divergent-stacked-bars>
+</div>
+
+
                                                     </div>
 
                                                 </a>
@@ -618,10 +623,13 @@
 
                                                     </div>
                                                     <div class="chart-holder">
-                                                        <div id="chartdiv-line">
 
-                                                        </div>
+<!-- 2020-12-16 15:52 bowen modify begin -->
+<div>
+    <cameo-line data="app-cameo-line/data/data.csv" meta="app-cameo-line/data/meta.csv"></cameo-line>
+</div>
 
+    
                                                     </div>
 
                                                 </a>
@@ -641,9 +649,11 @@
 
                                                     </div>
                                                     <div class="chart-holder">
-                                                        <div id="chartdiv-rank">
 
-                                                        </div>
+<!-- 2020-12-16 15:52 bowen modify begin -->
+<div>
+    <cameo-rank data="app-cameo-rank/data/data.csv" meta="app-cameo-rank/data/meta.csv"></cameo-rank>
+</div>
 
                                                     </div>
 
@@ -1700,12 +1710,13 @@
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
         <script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
         <script src="https://cdn.amcharts.com/lib/4/geodata/worldHigh.js"></script>
-        <script src="am-divergent-stacked-bars.js"></script>
+        <!-- <script src="am-divergent-stacked-bars.js"></script>
         <script src="am-run.js"></script>
         <script src="am-line.js"></script>
         <script src="am-rank.js"></script>
         <script src="am-multi-axis.js"></script>
-        <script src="am-tw-map.js"></script>
+        <script src="am-tw-map.js"></script> -->
+
         <script>
             $(document).on('ready', function() {
 
@@ -1819,7 +1830,35 @@
             });
             */
         </script>
-        <script>
+
+
+
+        <script src="cameo-divergent-stacked-bars/cameo-divergent-stacked-bars.js" type="module"></script>
+        <script src="cameo-run/cameo-run.js" type="module"></script>
+        <script src="cameo-line/cameo-line.js" type="module"></script>
+        <script src="cameo-rank/cameo-rank.js" type="module"></script>
+        <script src="cameo-multi-axis-prediction/cameo-multi-axis-prediction.js" type="module"></script>
+        <script src="cameo-map-tw/cameo-map-tw.js" type="module"></script>
+
+        <script type="module">
+
+function refresh_chart(str_cameo_motion_component_tag_name) {
+    console.log("str_cameo_motion_component_tag_name");
+    console.log(str_cameo_motion_component_tag_name);
+    let cameo_motion_component = document.getElementsByTagName(
+        str_cameo_motion_component_tag_name)[0];
+    console.log("cameo_motion_component");
+    console.log(cameo_motion_component);
+    console.log("cameo_motion_component.chart");
+    console.log(cameo_motion_component.chart);
+    if (cameo_motion_component.chart !== undefined){
+        cameo_motion_component.chart.appear();
+        cameo_motion_component.chart.series.each(function (series) {
+            series.appear();
+        });
+    }
+}
+
             var swiper_hero = new Swiper('.swiper_hero', {
                 loop: true,
                 speed: 800,
@@ -1840,13 +1879,16 @@
                         var idx = e.activeIndex;
                         var chart_id = this.slides[idx].dataset.id;
                         if (chart_id === "1") {
-                            chartOne();
+                            // chartOne();
+                            refresh_chart("cameo-divergent-stacked-bars");
                             console.log('1')
                         } else if (chart_id === "2") {
-                            chartThree();
+                            // chartThree();
+                            refresh_chart("cameo-line");
                             console.log('2')
                         } else if (chart_id === "3") {
-                            chartFour();
+                            // chartFour();
+                            refresh_chart("cameo-rank");
                             console.log('3')
                         } else {
                             console.log('else')
