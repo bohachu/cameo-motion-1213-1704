@@ -3,6 +3,42 @@
 .hero {
     box-shadow: rgba(#C9D7E0, 0.5) 0px 4px 6px -1px, rgba(#C9D7E0, 0.2) 0px 2px 4px -1px;
     //margin-bottom: 20px;
+    .swiper-slide-active {
+        .hero_item {
+            .title {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            p {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    }
+    .swiper-slide-prev {
+        .hero_item {
+            .title {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            p {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+        }
+    }
+    .swiper-slide-next {
+        .hero_item {
+            .title {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            p {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+        }
+    }
 }
 
 .hero_item {
@@ -54,6 +90,15 @@
         line-height: 1.375em;
         font-weight: bold;
         color: #072448;
+        transition: all .7s ease;
+        opacity: 0;
+        transition-delay: .4s;
+        display: block;
+        margin-bottom: 0.5em;
+        @include lg {
+            width: 90%;
+        }
+        //transform: translateY(30px);
         // @include xs_md {
         //     min-height: 2.9em;
         // }
@@ -61,7 +106,18 @@
     p {
         font-size: 13px;
         color: rgba(#000, 0.5);
+        transition: all .7s ease;
+        transition-delay: .6s;
         display: block;
+        opacity: 0;
+        //transform: translateY(40px);
+        @include lg {
+            font-size: 14px;
+            width: 90%;
+        }
+        @include xxxl {
+            font-size: 15px;
+        }
         // @include xs_md {
         //     min-height: 6em;
         // }
@@ -84,14 +140,6 @@
         p {
             color: rgba(#fff, 0.8);
         }
-        // .more {
-        //     color: #777;
-        //     background-color: rgba(#fff, .8);
-        //     &:hover {
-        //         color: #333;
-        //         background-color: rgba(#fff, 1);
-        //     }
-        // }
     }
     .chart-holder {
         //border: 1px solid #000;
@@ -120,15 +168,10 @@
             -webkit-box-shadow: 0px -1px 15px -3px rgba(0, 0, 0, 0.05);
             box-shadow: 0px -1px 15px -3px rgba(0, 0, 0, 0.05);
             position: relative;
-            height: 320px;
+            //動圖元件高度
+            height: 420px;
             @include md {
-                height: 350px;
-            }
-            @include xxl {
-                height: 380px;
-            }
-            @include xxxl {
-                height: 420px;
+                height: 450px;
             }
             &:after {
                 content: "";
