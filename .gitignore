@@ -1,6 +1,9 @@
 .vscode/settings.json
 dist/
 dist/*
+
 .env
 node_modules/
-sh/package-lock.json
+
+package-lock.json
+
