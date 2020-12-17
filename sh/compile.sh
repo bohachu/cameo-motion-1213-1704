@@ -4,7 +4,7 @@
 source .env
 
 cd ..
-
+rm -rf dist/*
 # function obs_js_2_dist() {
 #     module_name = $1
 #     javascript-obfuscator $module_name/"$module_name.js"
