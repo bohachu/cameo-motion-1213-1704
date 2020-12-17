@@ -23,10 +23,8 @@
 <link rel="stylesheet" href="https://ieknet.iek.org.tw/assets/vendor/dzsparallaxer/dzsparallaxer.css">
 <link rel="stylesheet" href="https://ieknet.iek.org.tw/assets/css/unify.css">
 <link rel="stylesheet" href="https://ieknet.iek.org.tw/assets/css/IEK2019.css">
-<!-- cameo 動圖輪播元件 -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<link rel="stylesheet" href="scss/iek_2020.css">
-
+<link rel="stylesheet" href="scss/iek-carousel.css">
 <script src="https://ieknet.iek.org.tw/js/jquery-1.11.2.min.js"></script>
 
 <body>
@@ -580,7 +578,6 @@
                 <div class="row">
                     <div class="col-xl-9">
                         <div id="news-section" class="">
-                          <!-- cameo 動圖輪播元件 -->
                             <div class="container ">
                                 <div class="hero">
                                     <!-- Slider main container -->
@@ -599,14 +596,14 @@
                                                         <span class="more">了解更多</span>
                                                     </div>
                                                     <div class="chart-holder">
-                                                        <div>
-                                                      <cameo-divergent-stacked-bars
-                                                      data="app-cameo-divergent-stacked-bars/data/data.csv"
-                                                      meta="app-cameo-divergent-stacked-bars/data/meta.csv"
-                                                    ></cameo-divergent-stacked-bars>
-                                                        </div>
 
-                                                        </div>
+<!-- 2020-12-16 15:52 bowen modify begin -->                                                    
+<div>
+    <cameo-divergent-stacked-bars data="app-cameo-divergent-stacked-bars/data/data.csv"
+    meta="app-cameo-divergent-stacked-bars/data/meta.csv"></cameo-divergent-stacked-bars>
+</div>
+
+
                                                     </div>
 
                                                 </a>
@@ -626,15 +623,13 @@
 
                                                     </div>
                                                     <div class="chart-holder">
-                                                     <div>
-                                                      <cameo-line
-                                                      data="app-cameo-line/data/data.csv"
-                                                      meta="app-cameo-line/data/meta.csv"
-                                                    ></cameo-line>
-                                                            </div>
 
-                                                        </div>
+<!-- 2020-12-16 15:52 bowen modify begin -->
+<div>
+    <cameo-line data="app-cameo-line/data/data.csv" meta="app-cameo-line/data/meta.csv"></cameo-line>
+</div>
 
+    
                                                     </div>
 
                                                 </a>
@@ -644,7 +639,7 @@
                                                     <div class="text-holder">
 
                                                         <div class="text">
-                                                            <h3 class="title">臺灣半導體公司營收排行榜
+                                                            <h3 class="title">臺灣半導體公司</br>營收排行榜
                                                             </h3>
 
                                                             <p>台灣半導體前十大上市櫃公司之合併營收表現，包含台灣IC設計、IC製造及IC封測產業之重要廠商。圖表展示台灣半導體產業中當月營收排行榜中的領導廠商。</p>
@@ -654,14 +649,11 @@
 
                                                     </div>
                                                     <div class="chart-holder">
-                                                            <div>
-                                                      <cameo-rank
-                                                      data="app-cameo-rank/data/data.csv"
-                                                      meta="app-cameo-rank/data/meta.csv"
-                                                    ></cameo-rank>
-                                                            </div>
 
-                                                        </div>
+<!-- 2020-12-16 15:52 bowen modify begin -->
+<div>
+    <cameo-rank data="app-cameo-rank/data/data.csv" meta="app-cameo-rank/data/meta.csv"></cameo-rank>
+</div>
 
                                                     </div>
 
@@ -1708,7 +1700,7 @@
         <script src="https://ieknet.iek.org.tw/assets/js/components/hs.sticky-block.js"></script>
         <script src="https://ieknet.iek.org.tw/assets/js/components/hs.go-to.js"></script>
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-        <!--cameo 動圖引用-->
+        <!--動圖新增-->
         <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
         <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
         <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
@@ -1718,26 +1710,7 @@
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
         <script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
         <script src="https://cdn.amcharts.com/lib/4/geodata/worldHigh.js"></script>
-        <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/aos/3.0.0-beta.6/aos.js"
-          integrity="sha512-tnNM6PPNOVfZ5sGPw6hThCrcUBeqt2mVEk3EAj8tCtuMHqbuVm5/HsZagrr8W2aaFE+6rKIByGwQbEnmodrYVg=="
-          crossorigin="anonymous"
-        ></script>
 
-        <script
-          src="cameo-divergent-stacked-bars/cameo-divergent-stacked-bars.js"
-          type="module"
-        ></script>
-        <script src="cameo-run/cameo-run.js" type="module"></script>
-        <script src="cameo-line/cameo-line.js" type="module"></script>
-        <script src="cameo-rank/cameo-rank.js" type="module"></script>
-        <script
-          src="cameo-multi-axis-prediction/cameo-multi-axis-prediction.js"
-          type="module"
-        ></script>
-        <script src="cameo-map-tw/cameo-map-tw.js" type="module"></script>
-        
-        
         <script>
             $(document).on('ready', function() {
 
@@ -1851,22 +1824,42 @@
             });
             */
         </script>
-        
-        <!-- cameo 動圖輪播元件 -->
-        <script>
-            function refresh_chart(str_cameo_motion_component_tag_name) {
-                let cameo_motion_component = document.getElementsByTagName(
-                str_cameo_motion_component_tag_name
-                )[0];
-                cameo_motion_component.chart.appear();
-                cameo_motion_component.chart.series.each(function (series) {
-                series.appear();
-                });
-            }
+
+
+        <!--動圖新增-->
+        <script src="lib/v1/cameo-divergent-stacked-bars/cameo-divergent-stacked-bars.js" type="module"></script>
+        <script src="lib/v1/cameo-run/cameo-run.js" type="module"></script>
+        <script src="lib/v1/cameo-line/cameo-line.js" type="module"></script>
+        <script src="lib/v1/cameo-rank/cameo-rank.js" type="module"></script>
+        <script src="lib/v1/cameo-multi-axis-prediction/cameo-multi-axis-prediction.js" type="module"></script>
+        <script src="lib/v1/cameo-map-tw/cameo-map-tw.js" type="module"></script>
+
+        <script type="module">
+
+function refresh_chart(str_cameo_motion_component_tag_name) {
+    console.log("str_cameo_motion_component_tag_name");
+    console.log(str_cameo_motion_component_tag_name);
+    let cameo_motion_component = document.getElementsByTagName(
+        str_cameo_motion_component_tag_name)[0];
+    console.log("cameo_motion_component");
+    console.log(cameo_motion_component);
+    console.log("cameo_motion_component.chart");
+    console.log(cameo_motion_component.chart);
+    if (cameo_motion_component.chart !== undefined){
+        cameo_motion_component.chart.appear();
+        cameo_motion_component.chart.series.each(function (series) {
+            series.appear();
+        });
+    }
+}
+
             var swiper_hero = new Swiper('.swiper_hero', {
                 loop: true,
+                speed: 800,
                 autoHeight: true,
-                // If we need pagination
+                autoplay: {
+                    delay: 5000,
+                },
                 pagination: {
                     el: '.page_hero',
                     clickable: true,
@@ -1881,15 +1874,12 @@
                         var chart_id = this.slides[idx].dataset.id;
                         if (chart_id === "1") {
                             refresh_chart("cameo-divergent-stacked-bars");
-                            // chartOne();
                             console.log('1')
                         } else if (chart_id === "2") {
                             refresh_chart("cameo-line");
-                            chartThree();
                             console.log('2')
                         } else if (chart_id === "3") {
                             refresh_chart("cameo-rank");
-                            chartFour();
                             console.log('3')
                         } else {
                             console.log('else')

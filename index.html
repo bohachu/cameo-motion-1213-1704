@@ -1,77 +1,404 @@
-<!-- https://fxsi5.csb.app/component-list.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>IEK 數據動圖</title>
     <meta charset="utf-8" />
-    <style>
-      table,
-      th,
-      td {
-        border: 1px solid black;
-        border-collapse: collapse;
-      }
-      th,
-      td {
-        padding: 5px;
-        text-align: left;
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="scss/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/3.0.0-beta.6/aos.css"
+      integrity="sha512-hoGlO+71fSG6lgS60I4bKvsFVB+bAnrVFDYlwSXoyNLppDcoupwJB7KbWq/63iACKn3gcgK9jMXd+T+YDeVrGQ=="
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
+
   <body>
-    <a href="landing.html">預覽：IEK動圖首頁</a><br />
-    <a href="app-cameo-map-tw.html">預覽：app-cameo-map-tw 臺灣地圖</a></br>
-    <a href="lib/v1/cameo-motion/cameo-table/cameo-table.html">預覽：cameo-table 表格</a>
-    <a href="lib/v1/cameo-core/cameo-df.html">預覽：cameo-df.html</a><br />
-    <h2 align="center">cameo component-list</h2>
+    <header class="header">
+      <a href="#">
+        <img src="/img/iek.svg" alt="" />
+      </a>
+      <a href="https://ieknet.iek.org.tw/" class="back">
+        <img src="/img/arrows.svg" alt="" />
+        <span>回IEK產業情報網</span>
+      </a>
+    </header>
 
-    <table style="width: 100%;">
-      <tr>
-        <th>元件編號</th>
-        <th>元件名稱</th>
-        <th>元件app名稱</th>
-        <th>中文對照圖</th>
-      </tr>
-      <tr>
-        <td>001</td>
-        <td>cameo-divergent-stacked-bars</td>
-        <td>app-cameo-divergent-stacked-bars</td>
-        <td>左右比較圖</td>
-      </tr>
+    <div class="banner">
+      <div
+        class="deco-banner"
+        data-aos="fade-down"
+        data-aos-delay="300"
+        data-aos-duration="1500"
+      >
+        <a href="#" class="scrolldown">
+          <div class="line"></div>
+          <div class="text-scroll">
+            <span>往</span>
+            <span>下</span>
+            <span>滑</span>
+            <span>動</span>
+          </div>
+          <img src="/img/mouse.svg" alt="" />
+        </a>
+      </div>
 
-      <tr>
-        <td>002</td>
-        <td>cameo-run</td>
-        <td>app-cameo-run</td>
-        <td>操場圖</td>
-      </tr>
+      <div class="text">
+        <h1 id="title-1">
+          <span data-aos="fade-up" data-aos-delay="0"
+            >全球肺炎疫情(COVID-19)
+          </span>
+          <span data-aos="fade-up" data-aos-delay="100">對臺灣產業影響</span>
+          <span data-aos="fade-up" data-aos-delay="200">關鍵報告總論</span>
+        </h1>
+        <h6 data-aos="fade-up" data-aos-delay="300">2020/06/24 最終回</h6>
+      </div>
+    </div>
 
-      <tr>
-        <td>003</td>
-        <td>cameo-map-tw</td>
-        <td>app-cameo-map-tw</td>
-        <td>臺灣地圖</td>
-      </tr>
+    <div class="container">
+      <div class="row pb-5 pt-5">
+        <div class="col-md-4 pt-5 my-auto">
+          <img
+            src="img/index-icon/001-B-analytics.png"
+            style="width: 75px; height: 75px;"
+            alt="圖001左右比較圖-001-B-analytics"
+            data-aos="fade-up"
+            data-aos-delay="0"
+          />
+          <h3 class="pt-3" data-aos="fade-up" data-aos-delay="100">
+            臺灣產業產值</br>與同期比較
+          </h3>
+          <p data-aos="fade-up" data-aos-delay="200">
+            產業季產值
+          </p>
+          <hr />
+          <p1 data-aos="fade-up" data-aos-delay="300">
+            針對半導體、顯示器、通訊、電子零組件、機械、汽機車、醫療器材、電子材料、石化、特化及新興能源等十一大產業之季產值進行比較。
+          </p1>
+          <div class="pt-1" data-aos="fade-up" data-aos-delay="400">
+            <update>2020.12.31 更新</update>
+          </div>
+        </div>
+        <div
+          class="col-md-8 pt-5 my-auto"
+          data-aos="fade-up"
+          data-aos-id="chart-1"
+        >
+          <cameo-divergent-stacked-bars
+            data="app-cameo-divergent-stacked-bars/data/data.csv"
+            meta="app-cameo-divergent-stacked-bars/data/meta.csv"
+          ></cameo-divergent-stacked-bars>
+        </div>
+      </div>
+    </div>
 
-      <tr>
-        <td>004</td>
-        <td>cameo-rank</td>
-        <td>app-cameo-rank</td>
-        <td>排行榜圖</td>
-      </tr>
+    <div class="graybg">
+      <div class="container">
+        <div class="row pb-5 pt-5">
+          <div
+            class="col-md-8 pt-5 my-auto"
+            data-aos="fade-up"
+            data-aos-id="chart-2"
+          >
+            <cameo-run
+              data="app-cameo-run/data/data.csv"
+              meta="app-cameo-run/data/meta.csv"
+            ></cameo-run>
+          </div>
+          <div class="col-md-4 pt-5 my-auto">
+            <img
+              src="img/index-icon/002-B-crown.png"
+              style="width: 75px; height: 75px;"
+              alt="圖002操場圖-002-B-crown"
+              data-aos="fade-up"
+              data-aos-delay="0"
+            />
+            <h3 class="pt-3" data-aos="fade-up" data-aos-delay="100">
+              臺灣產業附加價值率
+            </h3>
+            <p data-aos="fade-up" data-aos-delay="200">產業附加價值觀測</p>
+            <hr />
+            <p1 data-aos="fade-up" data-aos-delay="300">
+              附加價值係指企業為了生產目的，雇用「生產要素」(包括勞動、土地、資本、企業經營等)，在「中間投入」(向其他企業購買之原料、半成品或相關服務)之上所新創造之產品與服務的價值附加價值率即是附加價值占總產值之比重。
+            </p1>
+            <div class="pt-1" data-aos="fade-up" data-aos-delay="400">
+              <update>2020.12.31 更新</update>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <tr>
-        <td>005</td>
-        <td>cameo-line</td>
-        <td>app-cameo-line</td>
-        <td>折線圖</td>
-      </tr>
+    <div class="container">
+      <div class="row pb-5 pt-5">
+        <div class="col-md-4 pt-5 my-auto">
+          <img
+            src="img/index-icon/005-B-planet-earth.png"
+            style="width: 75px; height: 75px;"
+            alt="圖005折線圖-005-B-planet-earth"
+            data-aos="fade-up"
+            data-aos-delay="0"
+          />
+          <h3 class="pt-3" data-aos="fade-up" data-aos-delay="100">
+            全球經濟成長率
+          </h3>
+          <p data-aos="fade-up" data-aos-delay="200">總體經濟指標</p>
+          <hr />
+          <p1 data-aos="fade-up" data-aos-delay="300">
+            實質國內生產毛額(GDP)年增率。透過全球主要國家經濟成長率之指標瞭解各國經濟實力、人民福祉和國際地位之發展現況。
+          </p1>
+          <div class="pt-1" data-aos="fade-up" data-aos-delay="400">
+            <update>2020.12.31 更新</update>
+          </div>
+        </div>
+        <div
+          class="col-md-8 pt-5 my-auto"
+          data-aos="fade-up"
+          data-aos-id="chart-3"
+        >
+          <cameo-line
+            data="app-cameo-line/data/data.csv"
+            meta="app-cameo-line/data/meta.csv"
+          ></cameo-line>
+        </div>
+      </div>
+    </div>
 
-      <tr>
-        <td>006</td>
-        <td>cameo-multi-axis-prediction</td>
-        <td>app-cameo-multi-axis-prediction</td>
-        <td>雙軸預測圖</td>
-      </tr>
-    </table>
+    <div class="graybg">
+      <div class="container">
+        <div class="row pb-5 pt-5">
+          <div
+            class="col-md-8 pt-5 my-auto"
+            data-aos="fade-up"
+            data-aos-id="chart-4"
+          >
+            <cameo-rank
+              data="app-cameo-rank/data/data.csv"
+              meta="app-cameo-rank/data/meta.csv"
+            ></cameo-rank>
+          </div>
+          <div class="col-md-4 pt-5 my-auto">
+            <img
+              src="img/index-icon/004-B-money.png"
+              style="width: 75px; height: 75px;"
+              alt="圖004排行榜圖-004-B-money"
+              data-aos="fade-up"
+              data-aos-delay="0"
+            />
+            <h3 class="pt-3" data-aos="fade-up" data-aos-delay="100">
+              臺灣半導體</br>公司營收排行榜
+            </h3>
+            <p data-aos="fade-up" data-aos-delay="200">產業前十大</p>
+            <hr />
+            <p1 data-aos="fade-up" data-aos-delay="300">
+              台灣半導體前十大上市櫃公司之合併營收表現，包含台灣IC設計、IC製造及IC封測產業之重要廠商。圖表展示台灣半導體產業中當月營收排行榜中的領導廠商。
+            </p1>
+            <div class="pt-1" data-aos="fade-up" data-aos-delay="400">
+              <update>2020.12.31 更新</update>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row pb-5 pt-5">
+        <div class="col-md-4 pt-5 my-auto">
+          <img
+            src="img/index-icon/006-B-analysis.png"
+            style="width: 75px; height: 75px;"
+            alt="圖006雙軸圖-006-B-analysis"
+            data-aos="fade-up"
+            data-aos-delay="0"
+          />
+          <h3 class="pt-3" data-aos="fade-up" data-aos-delay="100">
+            製造業 CQM </br>產值與成長率
+          </h3>
+          <p data-aos="fade-up" data-aos-delay="200">IEKCQM</p>
+          <hr />
+          <p1 data-aos="fade-up" data-aos-delay="300">
+            IEKCQM為產科國際所之「製造業趨勢預測模型及預警系統」，針對整體製造業產值的經濟模型，為觀測製造業景氣變化重要指標。
+          </p1>
+          <div class="pt-1" data-aos="fade-up" data-aos-delay="400">
+            <update>2020.12.31 更新</update>
+          </div>
+        </div>
+        <div
+          class="col-md-8 pt-5 my-auto"
+          data-aos="fade-up"
+          data-aos-id="chart-5"
+        >
+          <cameo-multi-axis-prediction
+            data="app-cameo-multi-axis-prediction/data/data.csv"
+            meta="app-cameo-multi-axis-prediction/data/meta.csv"
+          ></cameo-multi-axis-prediction>
+        </div>
+      </div>
+    </div>
+
+    <div class="graybg">
+      <div class="container">
+        <div class="row pb-5 pt-5">
+          <div
+            class="col-md-8 pt-5 my-auto"
+            data-aos="fade-up"
+            data-aos-id="chart-6"
+          >
+            <cameo-map-tw
+              data="app-cameo-map-tw/data/data.csv"
+              meta="app-cameo-map-tw/data/meta.csv"
+            ></cameo-map-tw>
+          </div>
+          <div class="col-md-4 pt-5 my-auto">
+            <img
+              src="img/index-icon/003-B-pie-chart.png"
+              style="width: 75px; height: 75px;"
+              alt="圖003地圖-003-B-pie-chart"
+              data-aos="fade-up"
+              data-aos-delay="0"
+            />
+            <h3 class="pt-3" data-aos="fade-up" data-aos-delay="100">
+              臺灣產業聚落
+            </h3>
+            <p data-aos="fade-up" data-aos-delay="200">
+              北部地區以半導體為大宗
+            </p>
+            <hr />
+            <p1 data-aos="fade-up" data-aos-delay="300">
+              台灣半導體產值包含IC設計業產值、IC製造業產值、IC封裝業產值及IC測試業產值。研院產科國際所產業分析師預估。
+            </p1>
+            <div class="pt-1" data-aos="fade-up" data-aos-delay="400">
+              <update>2020.12.31 更新</update>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="footer-top">
+          <h6>
+            還想蒐集更多情報? <br />
+            馬上告訴你
+          </h6>
+          <p>
+            相關訂閱資訊請至IEK產業情報網
+          </p>
+          <a href="https://ieknet.iek.org.tw/" class="btn-subscription"
+            >我要訂閱</a
+          >
+        </div>
+        <div class="copyright">
+          <img src="/img/ITRI.svg" alt="" />
+          <ul class="contact-info">
+            <li>版權所有 © 工業技術研究院 產業科技國際策略發展所</li>
+            <li>310 臺灣新竹縣竹東鎮中興路四段195號10館</li>
+            <li>+886-3-5912340</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="https://www.amcharts.com/lib/4/plugins/timeline.js"></script>
+    <script src="https://www.amcharts.com/lib/4/plugins/bullets.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/geodata/worldHigh.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/aos/3.0.0-beta.6/aos.js"
+      integrity="sha512-tnNM6PPNOVfZ5sGPw6hThCrcUBeqt2mVEk3EAj8tCtuMHqbuVm5/HsZagrr8W2aaFE+6rKIByGwQbEnmodrYVg=="
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="lib/v1/cameo-divergent-stacked-bars/cameo-divergent-stacked-bars.js"
+      type="module"
+    ></script>
+    <script src="lib/v1/cameo-run/cameo-run.js" type="module"></script>
+    <script src="lib/v1/cameo-line/cameo-line.js" type="module"></script>
+    <script src="lib/v1/cameo-rank/cameo-rank.js" type="module"></script>
+    <script
+      src="lib/v1/cameo-multi-axis-prediction/cameo-multi-axis-prediction.js"
+      type="module"
+    ></script>
+    <script src="lib/v1/cameo-map-tw/cameo-map-tw.js" type="module"></script>
+
+    <script type="module">
+
+      function refresh_chart(str_cameo_motion_component_tag_name) {
+        console.log("str_cameo_motion_component_tag_name");
+        console.log(str_cameo_motion_component_tag_name);
+        let cameo_motion_component = document.getElementsByTagName(
+          str_cameo_motion_component_tag_name)[0];
+        console.log("cameo_motion_component");
+        console.log(cameo_motion_component);
+        console.log("cameo_motion_component.chart");
+        console.log(cameo_motion_component.chart);
+        cameo_motion_component.chart.appear();
+        cameo_motion_component.chart.series.each(function (series) {
+          series.appear();
+        });
+      }
+
+      // function refresh_chart(str_cameo_motion_component_tag_name) {
+      //   let cameo_motion_component = document.getElementsByTagName(
+      //     str_cameo_motion_component_tag_name
+      //   )[0];
+      //   cameo_motion_component.chart.appear();
+      //   cameo_motion_component.chart.series.each(function (series) {
+      //     series.appear();
+      //   });
+      // }
+
+      AOS.init({
+        duration: 800, // values from 0 to 3000, with step 50ms
+        offset: 90 // offset (in px) from the original trigger point
+      });
+      $(function () {
+        var winHeight = $(window).height();
+        $(".scrolldown").on("click", function () {
+          $("html,body").stop(true, false).animate(
+            {
+              scrollTop: winHeight
+            },
+            800
+          );
+          return false;
+        });
+      });
+      let ary_charts = [
+        "cameo-divergent-stacked-bars",
+        "cameo-run",
+        "cameo-line",
+        "cameo-rank",
+        "cameo-multi-axis-prediction",
+        "cameo-map-tw"
+      ];
+      for (let i = 1; i <= ary_charts.length; i++) {
+        let str_aos = "aos:in:chart-" + i;
+        document.addEventListener(str_aos, ({ detail }) => {
+          refresh_chart(ary_charts[i - 1]);
+        });
+      }
+    </script>
   </body>
 </html>
