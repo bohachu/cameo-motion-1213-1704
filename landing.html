@@ -334,13 +334,13 @@
       type="module"
     ></script>
     <script src="lib/v1/cameo-run/cameo-run.js" type="module"></script>
-    <script src="cameo-line/cameo-line.js" type="module"></script>
-    <script src="cameo-rank/cameo-rank.js" type="module"></script>
+    <script src="lib/v1/cameo-line/cameo-line.js" type="module"></script>
+    <script src="lib/v1/cameo-rank/cameo-rank.js" type="module"></script>
     <script
-      src="cameo-multi-axis-prediction/cameo-multi-axis-prediction.js"
+      src="lib/v1/cameo-multi-axis-prediction/cameo-multi-axis-prediction.js"
       type="module"
     ></script>
-    <script src="cameo-map-tw/cameo-map-tw.js" type="module"></script>
+    <script src="lib/v1/cameo-map-tw/cameo-map-tw.js" type="module"></script>
 
     <script type="module">
 
@@ -396,7 +396,7 @@
       for (let i = 1; i <= ary_charts.length; i++) {
         let str_aos = "aos:in:chart-" + i;
         document.addEventListener(str_aos, ({ detail }) => {
-          // refresh_chart(ary_charts[i - 1]);
+          refresh_chart(ary_charts[i - 1]);
         });
       }
     </script>
