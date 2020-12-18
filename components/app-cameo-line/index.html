@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>app-cameo-divergent-stacked-bars</title>
+    <title>app-cameo-line</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -9,7 +9,7 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
 
-    <link rel="stylesheet" href="scss/style.css" />
+    <link rel="stylesheet" href="/scss/style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       rel="stylesheet"
@@ -31,10 +31,10 @@
     <div class="container">
       <div class="row pb-5 pt-5">
         <div class="col-md-8 pt-5 my-auto">
-          <cameo-divergent-stacked-bars
-            data="app-cameo-divergent-stacked-bars/data/data.csv"
-            meta="app-cameo-divergent-stacked-bars/data/meta.csv"
-          ></cameo-divergent-stacked-bars>
+          <cameo-line
+            data="data/data.csv"
+            meta="data/meta.csv"
+          ></cameo-line>
         </div>
       </div>
     </div>
@@ -53,9 +53,6 @@
       integrity="sha512-tnNM6PPNOVfZ5sGPw6hThCrcUBeqt2mVEk3EAj8tCtuMHqbuVm5/HsZagrr8W2aaFE+6rKIByGwQbEnmodrYVg=="
       crossorigin="anonymous"
     ></script>
-    <script
-      src="lib/v1/cameo-divergent-stacked-bars/cameo-divergent-stacked-bars.js"
-      type="module"
-    ></script>
+    <script src="/lib/v1/cameo-line/cameo-line.js" type="module"></script>
   </body>
 </html>
