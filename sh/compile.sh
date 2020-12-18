@@ -3,7 +3,7 @@
 # initial folder: 專案目錄/sh
 source .env
 
-lib_version="v1"
+lib_version=$JS_LIB_VERSION
 
 # 回到專案目錄
 cd ..
@@ -21,16 +21,15 @@ fi
 
 cp -R lib/ dist/
 cp -R app-* dist/
-echo "Copied app-* modules."
+cp -R cameo-* dist/
+echo "Copied app-* and cameo-* modules to dist."
 cp -R img dist/
-echo "Copied img folder."
 cp -R scss dist/
-
+echo "Copied img and scss folder."
 cp iek-carousel.html dist/
 cp index.html dist/
 cp favicon.ico dist/
-
-echo "Copied *.html."
+echo "Copied favicon.ico and *.html."
 
 function compile_module() {
     local module_path=$1
@@ -39,8 +38,8 @@ function compile_module() {
     javascript-obfuscator "$module_path/$js_name.js"
     rm "$module_path/$js_name.js"
     cp "$module_path/$js_name-obfuscated.js" "$module_path/$js_name.js"
-  
-    echo "Compiled module_path: $module_path ."
+    rm "$module_path/$js_name-obfuscated.js"
+    echo "Compiled js: $module_path/$js_name.js ."
 }
 
 compile_module "dist/lib/$lib_version/cameo-core" "cameo-df"
@@ -57,5 +56,5 @@ for Item in ${List[*]}
   done
 
 
-echo "Compiled in folder dist"
+echo "JS Compiled in folder dist"
 
