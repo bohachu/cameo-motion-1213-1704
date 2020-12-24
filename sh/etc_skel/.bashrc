@@ -101,6 +101,14 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# change my-web permissions
+chown -R $USER:analysts ~/my-web
+cd ~/my-web
+sudo find . -type d -exec chmod 0755 {} \;
+sudo find . -type f -exec chmod 0744 {} \;
+
+# create soft link to web if it not exists
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).

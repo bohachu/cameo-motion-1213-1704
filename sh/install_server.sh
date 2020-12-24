@@ -14,8 +14,8 @@
 echo "準備設定檔"
 if [[ ! -f .env ]]; then
     echo "Copying environment template..."
-    # cp .env-template .env
-    cp /home/$USER/$PRJ_DIR_NAME/sh/.env-template /home/$USER/$PRJ_DIR_NAME/sh/.env
+    cp .env-template .env
+    sudo chmod 600 .env
 fi
 
 source .env
@@ -213,97 +213,6 @@ unset NODE_OPTIONS
 # sudo rm -rf /var/lib/apt/lists/*
 
 
-echo "共享目錄設定"
-sudo groupadd analysts
-sudo usermod -aG analysts $USER
-# sudo usermod -g analysts $USER
-if [[ ! -d /srv/data/share ]]; then
-    sudo mkdir -p /srv/data/share
-if
-sudo chown -R root:analysts /srv/data/share
-sudo chmod -R 777 /srv/data/share
-
-if [[ ! -d $HTML_DIR ]]; then
-    sudo mkdir -p $HTML_DIR
-if
-sudo chown -R root:analysts $HTML_DIR
-sudo chmod -R 755 $HTML_DIR
-
-
-# setfacl only works in native linux; not working for WSL 
-# sudo apt install -y acl
-# Granting permission for a group named "analysts" would look something like this:
-sudo setfacl -R -m d:g:analysts:rwx /srv/data/share
-# 非群組的應該都看不到
-sudo setfacl -R -m d:o::r /srv/data/share
-# 加入權限使預設新建立的檔案都是rwx權限:
-sudo setfacl -R -m d:mask:rwx /srv/data/share
-
-sudo setfacl -R -m d:g:analysts:rwx $HTML_DIR
-# 非群組的應該都看不到
-sudo setfacl -R -m d:o::r $HTML_DIR
-# 加入權限使預設新建立的檔案都是rwx權限:
-sudo setfacl -R -m d:mask:rwx $HTML_DIR
-
-# 連結到主目錄
-sudo ln -s /srv/data/share /etc/skel/share
-sudo ln -s $HTML_DIR /etc/skel/www
-
-echo "設定增加使用者時的行為, 預設目錄和設定檔"
-cd /home/$USER/$PRJ_DIR_NAME/sh
-if [ -f /etc/default/useradd ]; then    
-    sudo rm /etc/default/useradd
-fi 
-sudo cp useradd-default-template /etc/default/useradd
-
-if [ ! -d /etc/skel ]; then    
-    sudo mkdir -p /etc/skel
-fi 
-cd /home/$USER/$PRJ_DIR_NAME/sh 
-
-sudo cp ~/.bashrc /etc/skel
-sudo cp ~/.bash_logout /etc/skel
-
-sudo cp etc_skel/*.ipynb /etc/skel
-
-
-# /usr/local/bin/julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; notebook(detached=true);'
-
-# ## install julia
-# cd ~
-# wget https://julialang-s3.julialang.org/bin/linux/x64/1.5/julia-1.5.3-linux-x86_64.tar.gz
-# tar xvfz julia-1.5.3-linux-x86_64.tar.gz
-# sudo chown -R root:users ~/julia-1.5.3/
-# # sudo chmod a+x ~/julia-1.5.3/bin/
-# # cd /usr/local/bin/
-# sudo ln -s ~/julia-1.5.3/bin/julia /usr/local/bin/julia
-
-source ~/.bashrc
-## jupyterlab julia 
-# /usr/local/bin/julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; notebook(detached=true);'
-
-# ## install julia genie
-# /usr/local/bin/julia -e 'import Pkg; Pkg.add("PackageCompiler");using PackageCompiler;Pkg.add("Genie");@time using Genie;@time PackageCompiler.create_sysimage(:Genie; replace_default=true)'
-
-# ## interact.jl
-# /usr/local/bin/julia -e 'using Pkg;Pkg.add("Interact");Pkg.add("IJulia");Pkg.add("WebIO")'
-# /usr/local/bin/julia -e 'using WebIO; using Interact; WebIO.install_jupyter_labextension();'
-
-# ## github
-# git config --global user.email "$DEFAULT_GIT_USER_EMAIL"
-# git config --global user.name "$DEFAULT_GIT_USER_NAME"
-# git config --global credential.helper cache
-# git config --global credential.helper store
-
-# ## deno
-# cd ~
-# curl -fsSL https://deno.land/x/install/install.sh | sh
-# # cd /usr/local/bin/
-
-echo "將檔案copy到網頁目錄中"
-sudo cp /home/$USER/$PRJ_DIR_NAME/dist/* /var/www/$SITE_DOMAIN/html
-
-
 
 # # nginx 安裝啟動設定
 cd /home/$USER/$PRJ_DIR_NAME/sh
@@ -333,11 +242,103 @@ fi
 sudo /bin/cp -rf /home/$USER/$PRJ_DIR_NAME/dist/* /var/www/$SITE_DOMAIN/html
 
 # www需要讓特定使用者(如admin group)可以寫入 analysts也可寫入
-sudo chown -R $USER:analysts /var/www/$SITE_DOMAIN/html
-sudo chmod -R 755 /var/www/$SITE_DOMAIN/html
-cd /var/www/$SITE_DOMAIN
+sudo chown -R root:analysts $HTML_DIR
+sudo chmod -R 775 /$HTML_DIR
+cd $HTML_DIR
+# sudo find . -type d -exec chmod 0755 {} \;
+# sudo find . -type f -exec chmod 0644 {} \;
 sudo find . -type d -exec chmod 0755 {} \;
-sudo find . -type f -exec chmod 0644 {} \;
+sudo find . -type f -exec chmod 0774 {} \;
+
+
+
+echo "共享目錄設定"
+sudo groupadd analysts
+sudo usermod -aG analysts $USER
+# sudo usermod -g analysts $USER
+if [ ! -d /srv/data/share ]; then
+    sudo mkdir -p /srv/data/share
+if
+sudo chown -R root:analysts /srv/data/share
+sudo chmod -R 775 /srv/data/share
+
+if [ ! -d $HTML_DIR ]; then
+    sudo mkdir -p $HTML_DIR
+if
+## 後面發布時的流程會在處理
+# sudo chown -R root:analysts $HTML_DIR
+# sudo chmod -R 775 $HTML_DIR
+
+# 處理新使用者建立時行為
+echo "設定增加使用者時的行為, 預設目錄和設定檔..."
+
+if [ ! -d /etc/skel/my-web ]; then    
+    sudo mkdir -p /etc/skel/my-web
+fi 
+
+if [ ! -d /etc/skel/history ]; then  
+    sudo mkdir -p /etc/skel/history
+fi
+# 連結到新使用者建立時的home目錄
+sudo ln -s /srv/data/share /etc/skel/share
+sudo ln -s $HTML_DIR /etc/skel/www
+sudo chown -R :analysts /etc/skel/www
+echo "將檔案copy到網頁目錄中"
+sudo /bin/cp -rf /home/$USER/$PRJ_DIR_NAME/dist/* $HTML_DIR/
+sudo /bin/cp -rf /home/$USER/$PRJ_DIR_NAME/dist/* /etc/skel/my-web/
+sudo cp /home/$USER/$PRJ_DIR_NAME/reset.ipynb $HTML_DIR/
+
+
+# 新使用者建立時的預設設定 (其他手動建立的行為請見add_user.sh)
+cd /home/$USER/$PRJ_DIR_NAME/sh
+if [[ -f /etc/default/useradd ]]; then    
+    sudo rm /etc/default/useradd
+fi 
+sudo cp useradd-default-template /etc/default/useradd
+
+# sudo cp ~/.bashrc /etc/skel
+# sudo cp ~/.bash_logout /etc/skel
+sudo cp /home/$USER/$PRJ_DIR_NAME/sh/etc_skel/.bashrc /etc/skel
+sudo cp /home/$USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
+
+# 將fork 與 iframe功能複製到預設使用者目錄中
+# cd /home/$USER/$PRJ_DIR_NAME
+# sudo cp *.ipynb /etc/skel/
+sudo cp /home/$USER/$PRJ_DIR_NAME/fork_folder.ipynb /etc/skel/my-web/
+sudo cp /home/$USER/$PRJ_DIR_NAME/get_iframe_code.ipynb /etc/skel/my-web/
+
+
+# setfacl only works in native linux; not working for WSL 
+# sudo apt install -y acl
+# Granting permission for a group named "analysts" would look something like this:
+sudo setfacl -R -m d:g:analysts:rwx /srv/data/share
+# 非群組的應該都看不到
+sudo setfacl -R -m d:o::r /srv/data/share
+# 加入權限使預設新建立的檔案都是rwx權限:
+sudo setfacl -R -m d:mask:rwx /srv/data/share
+
+sudo setfacl -R -m d:g:analysts:rwx $HTML_DIR
+# 非群組的應該都看不到
+sudo setfacl -R -m d:o::rx $HTML_DIR
+# 加入權限使預設新建立的檔案都是rx權限:
+sudo setfacl -R -m d:mask:r $HTML_DIR
+
+# 讓還原www 只能讓預設admin操作
+# sudo adduser $INIT_ADMIN_USER root
+sudo usermod -a -G ssl-cert root
+# sudo chown $INIT_ADMIN_USER:root /home/$USER/$PRJ_DIR_NAME/reset.ipynb
+
+#複製工作檔案過去
+cp /home/$USER/$PRJ_DIR_NAME/sh/add_user.sh /home/$INIT_ADMIN_USER
+cp /home/$USER/$PRJ_DIR_NAME/sh/add_admin_user.sh /home/$INIT_ADMIN_USER
+cp /home/$USER/$PRJ_DIR_NAME/sh/update_jupyterhub_config_then_restart.sh /home/$INIT_ADMIN_USER
+cp /home/$USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py /home/$INIT_ADMIN_USER
+sudo chown $INIT_ADMIN_USER:$INIT_ADMIN_USER /home/$INIT_ADMIN_USER/*.sh
+sudo chown $INIT_ADMIN_USER:$INIT_ADMIN_USER /home/$INIT_ADMIN_USER/*.py
+sudo chmod +x /home/$INIT_ADMIN_USER/*.sh
+sudo chmod +x /home/$INIT_ADMIN_USER/*.py
+
+cd /home/$USER
 
 sudo mkdir -p /var/ssl
 # ssl_certificate 
@@ -347,11 +348,31 @@ sudo cp /home/$USER/$PRJ_DIR_NAME/secrets/private.key /var/ssl/private.key
 # set permission of private key
 # optional, but safer. Private keys then have group ssl-cert, owner root, and permissions 640.
 sudo addgroup ssl-cert
-sudo adduser root ssl-cert
+# sudo adduser root ssl-cert
+sudo usermod -a -G ssl-cert root
 sudo chown root:ssl-cert /var/ssl/private.key
 sudo chmod 600 /var/ssl/private.key
 sudo chown root:ssl-cert /var/ssl/certificate.crt
 sudo chmod 644 /var/ssl/certificate.crt
+
+# 讓reset.ipynb只有admin可以操作
+sudo chown root:sudo /home/$USER/$PRJ_DIR_NAME/reset.ipynb
+
+
+# /usr/local/bin/julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; notebook(detached=true);'
+
+# ## install julia
+# cd ~
+# wget https://julialang-s3.julialang.org/bin/linux/x64/1.5/julia-1.5.3-linux-x86_64.tar.gz
+# tar xvfz julia-1.5.3-linux-x86_64.tar.gz
+# sudo chown -R root:users ~/julia-1.5.3/
+# # sudo chmod a+x ~/julia-1.5.3/bin/
+# # cd /usr/local/bin/
+# sudo ln -s ~/julia-1.5.3/bin/julia /usr/local/bin/julia
+
+source ~/.bashrc
+
+
 
 cd /home/$USER
 
@@ -375,6 +396,26 @@ sudo systemctl daemon-reload
 sudo systemctl enable jupyterhub.service
 sudo systemctl start jupyterhub.service
 
+## jupyterlab julia 
+# /usr/local/bin/julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; notebook(detached=true);'
+
+# ## install julia genie
+# /usr/local/bin/julia -e 'import Pkg; Pkg.add("PackageCompiler");using PackageCompiler;Pkg.add("Genie");@time using Genie;@time PackageCompiler.create_sysimage(:Genie; replace_default=true)'
+
+# ## interact.jl
+# /usr/local/bin/julia -e 'using Pkg;Pkg.add("Interact");Pkg.add("IJulia");Pkg.add("WebIO")'
+# /usr/local/bin/julia -e 'using WebIO; using Interact; WebIO.install_jupyter_labextension();'
+
+# ## deno
+# cd ~
+# curl -fsSL https://deno.land/x/install/install.sh | sh
+# # cd /usr/local/bin/
+
+# ## github
+# git config --global user.email "$DEFAULT_GIT_USER_EMAIL"
+# git config --global user.name "$DEFAULT_GIT_USER_NAME"
+# git config --global credential.helper cache
+# git config --global credential.helper store
 
 
 echo "設定完成!"

@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 # https://github.com/jupyterhub/ldapauthenticator/issues/54
-# init folder: /home/$USER/$PRJ_DIR_NAME/sh
-source .env 
 
 user=$1  
 # userhome="/home/ad-domain/${user}"
-# userhome="/home/${user}"
+userhome="/home/${user}"
 if id "$1" &>/dev/null; then
     echo 'user already exists'
 else
@@ -29,7 +27,9 @@ else
 
     # Add user to the sharedfolder group
     # usermod -aG sharedfolder ${user}
-    sudo usermod -aG analysts ${user}
+    sudo usermod -a -G analysts ${user}    
+    # add to sudoer
+    sudo usermod -a -G sudo ${user} 
     # change my-web permissions
     if [ -d ~/my-web ]; then    
         chown -R $USER:analysts ~/my-web
@@ -40,8 +40,6 @@ else
         sudo find . -type f -exec chmod 0744 {} \;
         cd ..       
     fi 
-
-    # create soft link to web if it not exists
 
     # Create notebook directory and symlink the datalab folder into it
     # sudo mkdir -p ${userhome}/notebooks  

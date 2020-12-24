@@ -11,9 +11,9 @@ if [[ -f /etc/skel/homepage.html ]]; then
 fi
 sudo cp homepage.html /etc/skel
 
-if [[ -d $HTML_DIR ]]; then
-    sudo rm $HTML_DIR
-fi
+# if [[ -d $HTML_DIR ]]; then
+#     sudo rm $HTML_DIR
+# fi
 
-sudo cp -R dist/* $HTML_DIR
+sudo /bin/cp -Rf dist/* $HTML_DIR
 
