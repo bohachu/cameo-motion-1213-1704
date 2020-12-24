@@ -228,11 +228,11 @@ echo "共享目錄設定"
 sudo groupadd analysts
 sudo usermod -aG analysts $USER
 # sudo usermod -g analysts $USER
-if [[ ! -d /srv/data/share_data_analysts ]]; then
-    sudo mkdir -p /srv/data/share_data_analysts
+if [[ ! -d /srv/data/share ]]; then
+    sudo mkdir -p /srv/data/share
 if
-sudo chown -R root:analysts /srv/data/share_data_analysts
-sudo chmod -R 777 /srv/data/share_data_analysts
+sudo chown -R root:analysts /srv/data/share
+sudo chmod -R 777 /srv/data/share
 
 if [[ ! -d $HTML_DIR ]]; then
     sudo mkdir -p $HTML_DIR
@@ -244,11 +244,11 @@ sudo chmod -R 755 $HTML_DIR
 # setfacl only works in native linux; not working for WSL 
 # sudo apt install -y acl
 # Granting permission for a group named "analysts" would look something like this:
-sudo setfacl -R -m d:g:analysts:rwx /srv/data/share_data_analysts
+sudo setfacl -R -m d:g:analysts:rwx /srv/data/share
 # 非群組的應該都看不到
-sudo setfacl -R -m d:o::r /srv/data/share_data_analysts
+sudo setfacl -R -m d:o::r /srv/data/share
 # 加入權限使預設新建立的檔案都是rwx權限:
-sudo setfacl -R -m d:mask:rwx /srv/data/share_data_analysts
+sudo setfacl -R -m d:mask:rwx /srv/data/share
 
 sudo setfacl -R -m d:g:analysts:rwx $HTML_DIR
 # 非群組的應該都看不到
@@ -257,7 +257,7 @@ sudo setfacl -R -m d:o::r $HTML_DIR
 sudo setfacl -R -m d:mask:rwx $HTML_DIR
 
 # 連結到主目錄
-sudo ln -s /srv/data/share_data_analysts /etc/skel/share_data_analysts
+sudo ln -s /srv/data/share /etc/skel/share
 sudo ln -s $HTML_DIR /etc/skel/www
 
 echo "設定增加使用者時的行為, 預設目錄和設定檔"
@@ -276,6 +276,7 @@ sudo cp ~/.bashrc /etc/skel
 sudo cp ~/.bash_logout /etc/skel
 
 sudo cp etc_skel/*.ipynb /etc/skel
+
 
 # /usr/local/bin/julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; notebook(detached=true);'
 
@@ -312,6 +313,12 @@ source ~/.bashrc
 
 echo "將檔案copy到網頁目錄中"
 sudo cp /home/$USER/$PRJ_DIR_NAME/dist/* /var/www/$SITE_DOMAIN/html
+
+# 建立jupyterhub_cookie_secret
+cd ~
+sudo openssl rand -hex 32 > jupyterhub_cookie_secret
+sudo cp jupyterhub_cookie_secret /srv/jupyterhub/jupyterhub_cookie_secret
+
 
 # # nginx 安裝啟動設定
 

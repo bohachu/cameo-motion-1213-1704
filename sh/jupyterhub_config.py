@@ -56,6 +56,7 @@ c.LocalAuthenticator.create_system_users = True
 
 c.JupyterHub.ssl_key = '/var/ssl/private.key'
 c.JupyterHub.ssl_cert = '/var/ssl/certificate.crt'
+c.JupyterHub.cookie_secret_file = '/srv/jupyterhub/jupyterhub_cookie_secret'
 # data_dir = os.environ.get('DATA_VOLUME_CONTAINER', '/data')
 # c.JupyterHub.data_files_path = '/opt/jupyterhub/share/jupyterhub'
 # data_dir = "/srv/data/"
