@@ -118,17 +118,6 @@ fi
 sudo cp /home/$USER/$PRJ_DIR_NAME/sh/userlist /opt/jupyterhub/etc/jupyterhub/userlist
 
 
-# Setup Systemd service
-echo "Setup Jupyterhub systemd service"
-sudo mkdir -p /opt/jupyterhub/etc/systemd
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/jupyterhub.service /opt/jupyterhub/etc/systemd/jupyterhub.service
-sudo ln -s /opt/jupyterhub/etc/systemd/jupyterhub.service /etc/systemd/system/jupyterhub.service
-sudo chmod a+x /opt/jupyterhub/etc/systemd/jupyterhub.service
-sudo systemctl daemon-reload
-sudo systemctl enable jupyterhub.service
-sudo systemctl start jupyterhub.service
-
-
 # Part II: Conda Environments
 # 安裝使用者環境
 # 會將conda安裝在 /opt/conda/; 指令會在 /opt/conda/bin/conda
@@ -314,48 +303,77 @@ source ~/.bashrc
 echo "將檔案copy到網頁目錄中"
 sudo cp /home/$USER/$PRJ_DIR_NAME/dist/* /var/www/$SITE_DOMAIN/html
 
+
+
+# # nginx 安裝啟動設定
+cd /home/$USER/$PRJ_DIR_NAME/sh
+sudo systemctl stop nginx
+if [ ! -d /etc/nginx/sites-available/$SITE_DOMAIN ]; then 
+    sudo mkdir -p /etc/nginx/sites-available/$SITE_DOMAIN
+fi
+sudo cp /home/$USER/$PRJ_DIR_NAME/sh/nginx_http.conf /etc/nginx/sites-available/$SITE_DOMAIN/nginx_http.conf
+sudo cp /home/$USER/$PRJ_DIR_NAME/sh/htpasswd /etc/nginx/htpasswd
+if [ ! -d /etc/ssl/certs ]; then    
+    sudo mkdir -p /etc/ssl/certs
+fi 
+sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
+
+sudo rm /etc/nginx/sites-enabled/default
+sudo ln -s /etc/nginx/sites-available/$SITE_DOMAIN/nginx_http.conf /etc/nginx/sites-enabled/$SITE_DOMAIN.conf
+
+
+sudo /etc/init.d/nginx reload
+sudo systemctl stop nginx
+sudo systemctl start nginx
+
+# # 設定靜態網頁檔案
+if [ ! -d /var/www/$SITE_DOMAIN/html ]; then 
+    sudo mkdir -p /var/www/$SITE_DOMAIN/html/
+fi    
+sudo /bin/cp -rf /home/$USER/$PRJ_DIR_NAME/dist/* /var/www/$SITE_DOMAIN/html
+
+# www需要讓特定使用者(如admin group)可以寫入 analysts也可寫入
+sudo chown -R $USER:analysts /var/www/$SITE_DOMAIN/html
+sudo chmod -R 755 /var/www/$SITE_DOMAIN/html
+cd /var/www/$SITE_DOMAIN
+sudo find . -type d -exec chmod 0755 {} \;
+sudo find . -type f -exec chmod 0644 {} \;
+
+sudo mkdir -p /var/ssl
+# ssl_certificate 
+sudo cp /home/$USER/$PRJ_DIR_NAME/secrets/certificate.crt /var/ssl/certificate.crt
+# ssl_certificate_key 
+sudo cp /home/$USER/$PRJ_DIR_NAME/secrets/private.key /var/ssl/private.key
+# set permission of private key
+# optional, but safer. Private keys then have group ssl-cert, owner root, and permissions 640.
+sudo addgroup ssl-cert
+sudo adduser root ssl-cert
+sudo chown root:ssl-cert /var/ssl/private.key
+sudo chmod 600 /var/ssl/private.key
+sudo chown root:ssl-cert /var/ssl/certificate.crt
+sudo chmod 644 /var/ssl/certificate.crt
+
+cd /home/$USER
+
+# sudo systemctl daemon-reload
+# sudo systemctl enable nginx
+# sudo systemctl start nginx
 # 建立jupyterhub_cookie_secret
+
 cd ~
 sudo openssl rand -hex 32 > jupyterhub_cookie_secret
 sudo cp jupyterhub_cookie_secret /srv/jupyterhub/jupyterhub_cookie_secret
 sudo chmod 600 /srv/jupyterhub/jupyterhub_cookie_secret
 
-
-# # nginx 安裝啟動設定
-
-# cd /home/$USER/$PRJ_DIR_NAME/sh
-# sudo systemctl stop nginx
-# sudo mkdir -p /etc/nginx/sites-available/$SITE_DOMAIN
-# sudo cp /home/$USER/$PRJ_DIR_NAME/sh/nginx_http.conf /etc/nginx/sites-available/$SITE_DOMAIN/nginx_http.conf
-# sudo cp /home/$USER/$PRJ_DIR_NAME/sh/htpasswd /etc/nginx/htpasswd
-# sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
-
-# # sudo /etc/init.d/nginx reload
-# # sudo systemctl stop nginx
-
-# # 設定靜態網頁檔案
-# sudo mkdir -p /var/www/$SITE_DOMAIN/html/
-# sudo cp -R /home/$USER/$PRJ_DIR_NAME/src/* /var/www/$SITE_DOMAIN/html/
-
-# # www需要讓特定使用者(如admin group)可以寫入 但是analysts不能寫入
-# sudo chown -R $USER:$USER /var/www/$SITE_DOMAIN/html
-# sudo chmod -R 755 /var/www/$SITE_DOMAIN/html
-# cd /var/www/$SITE_DOMAIN
-# sudo find . -type d -exec chmod 0755 {} \;
-# sudo find . -type f -exec chmod 0644 {} \;
-# sudo rm /etc/nginx/sites-enabled/default
-# sudo ln -s /etc/nginx/sites-available/$SITE_DOMAIN/nginx_http.conf /etc/nginx/sites-enabled/$SITE_DOMAIN
-
-# sudo mkdir -p /var/ssl
-# # ssl_certificate 
-# sudo cp /home/$USER/$PRJ_DIR_NAME/secrets/certificate.crt /var/ssl/certificate.crt
-# # ssl_certificate_key 
-# sudo cp /home/$USER/$PRJ_DIR_NAME/secrets/private.key /var/ssl/private.key
-# cd /home/$USER
-
-# sudo systemctl daemon-reload
-# sudo systemctl enable nginx
-# sudo systemctl start nginx
+# Setup Systemd service
+echo "Setup Jupyterhub systemd service"
+sudo mkdir -p /opt/jupyterhub/etc/systemd
+sudo cp /home/$USER/$PRJ_DIR_NAME/sh/jupyterhub.service /opt/jupyterhub/etc/systemd/jupyterhub.service
+sudo ln -s /opt/jupyterhub/etc/systemd/jupyterhub.service /etc/systemd/system/jupyterhub.service
+sudo chmod a+x /opt/jupyterhub/etc/systemd/jupyterhub.service
+sudo systemctl daemon-reload
+sudo systemctl enable jupyterhub.service
+sudo systemctl start jupyterhub.service
 
 
 
