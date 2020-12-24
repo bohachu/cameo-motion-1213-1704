@@ -318,6 +318,7 @@ sudo cp /home/$USER/$PRJ_DIR_NAME/dist/* /var/www/$SITE_DOMAIN/html
 cd ~
 sudo openssl rand -hex 32 > jupyterhub_cookie_secret
 sudo cp jupyterhub_cookie_secret /srv/jupyterhub/jupyterhub_cookie_secret
+sudo chmod 600 /srv/jupyterhub/jupyterhub_cookie_secret
 
 
 # # nginx 安裝啟動設定
