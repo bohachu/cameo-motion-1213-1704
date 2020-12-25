@@ -35,10 +35,17 @@ else
         chown -R $USER:analysts ~/my-web
         # sudo mkdir -p $HTML_DIR/${user}
         sudo ln -s ~/my-web $HTML_DIR/${user}
+        # iek.cameo.tw/hanes/ 
+        #---
         cd ~/my-web
         sudo find . -type d -exec chmod 0755 {} \;
         sudo find . -type f -exec chmod 0744 {} \;
-        cd ..       
+        cd ..
+        sudo setfacl -R -m d:g:analysts:rwx ~/my-web
+        # 非群組的應該都看不到
+        sudo setfacl -R -m d:o::rx ~/my-web
+        # 加入權限使預設新建立的檔案都是rx權限:
+        sudo setfacl -R -m d:mask:r ~/my-web
     fi 
 
     # create soft link to web if it not exists

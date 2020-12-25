@@ -286,7 +286,7 @@ sudo chown -R :analysts /etc/skel/www
 echo "將檔案copy到網頁目錄中"
 sudo /bin/cp -rf /home/$USER/$PRJ_DIR_NAME/dist/* $HTML_DIR/
 sudo /bin/cp -rf /home/$USER/$PRJ_DIR_NAME/dist/* /etc/skel/my-web/
-sudo cp /home/$USER/$PRJ_DIR_NAME/reset.ipynb $HTML_DIR/
+sudo cp /home/$USER/$PRJ_DIR_NAME/settings.ipynb $HTML_DIR/
 
 
 # 新使用者建立時的預設設定 (其他手動建立的行為請見add_user.sh)
@@ -326,13 +326,14 @@ sudo setfacl -R -m d:mask:r $HTML_DIR
 # 讓還原www 只能讓預設admin操作
 # sudo adduser $INIT_ADMIN_USER root
 sudo usermod -a -G ssl-cert root
-# sudo chown $INIT_ADMIN_USER:root /home/$USER/$PRJ_DIR_NAME/reset.ipynb
 
 #複製工作檔案過去
-cp /home/$USER/$PRJ_DIR_NAME/sh/add_user.sh /home/$INIT_ADMIN_USER
-cp /home/$USER/$PRJ_DIR_NAME/sh/add_admin_user.sh /home/$INIT_ADMIN_USER
-cp /home/$USER/$PRJ_DIR_NAME/sh/update_jupyterhub_config_then_restart.sh /home/$INIT_ADMIN_USER
-cp /home/$USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py /home/$INIT_ADMIN_USER
+sudo cp /home/$USER/$PRJ_DIR_NAME/sh/.env /home/$INIT_ADMIN_USER
+sudo cp /home/$USER/$PRJ_DIR_NAME/sh/add_user.sh /home/$INIT_ADMIN_USER
+sudo cp /home/$USER/$PRJ_DIR_NAME/sh/add_admin_user.sh /home/$INIT_ADMIN_USER
+sudo cp /home/$USER/$PRJ_DIR_NAME/sh/update_jupyterhub_config_then_restart.sh /home/$INIT_ADMIN_USER
+sudo cp /home/$USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py /home/$INIT_ADMIN_USER
+sudo chown $INIT_ADMIN_USER:$INIT_ADMIN_USER /home/$INIT_ADMIN_USER/.env
 sudo chown $INIT_ADMIN_USER:$INIT_ADMIN_USER /home/$INIT_ADMIN_USER/*.sh
 sudo chown $INIT_ADMIN_USER:$INIT_ADMIN_USER /home/$INIT_ADMIN_USER/*.py
 sudo chmod +x /home/$INIT_ADMIN_USER/*.sh
@@ -355,8 +356,9 @@ sudo chmod 600 /var/ssl/private.key
 sudo chown root:ssl-cert /var/ssl/certificate.crt
 sudo chmod 644 /var/ssl/certificate.crt
 
-# 讓reset.ipynb只有admin可以操作
-sudo chown root:sudo /home/$USER/$PRJ_DIR_NAME/reset.ipynb
+# settings.ipynb只有admin可以操作
+sudo chown root:sudo /home/$USER/$PRJ_DIR_NAME/settings.ipynb
+sudo chmod 770 /home/$USER/$PRJ_DIR_NAME/settings.ipynb
 
 
 # /usr/local/bin/julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; notebook(detached=true);'

@@ -8,6 +8,8 @@ fi
 
 source .env
 
+
+
 sudo systemctl stop jupyterhub.service
 sudo cp jupyterhub_config.py /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
 sudo chmod a+x /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
