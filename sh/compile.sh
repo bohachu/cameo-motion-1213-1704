@@ -1,6 +1,8 @@
 #!/bin/bash
 # for ubuntu/debia/kali
 # initial folder: 專案目錄/sh
+# 不包含 components內的東西
+# 複製到 dist/
 source .env
 
 lib_version=$JS_LIB_VERSION
@@ -21,7 +23,7 @@ fi
 
 cp -R lib/ dist/
 cp -R app-* dist/
-cp -R cameo-* dist/
+# cp -R cameo-* dist/
 echo "Copied app-* and cameo-* modules to dist."
 cp -R img dist/
 cp -R scss dist/
@@ -37,7 +39,7 @@ function compile_module() {
     echo "Compiling module_path: $module_path"
     javascript-obfuscator "$module_path/$js_name.js"
     rm "$module_path/$js_name.js"
-    cp "$module_path/$js_name-obfuscated.js" "$module_path/$js_name.js"
+    /bin/cp "$module_path/$js_name-obfuscated.js" "$module_path/$js_name.js"
     rm "$module_path/$js_name-obfuscated.js"
     echo "Compiled js: $module_path/$js_name.js ."
 }
