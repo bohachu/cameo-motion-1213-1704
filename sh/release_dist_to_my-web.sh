@@ -21,7 +21,7 @@ sudo /bin/cp homepage.html /etc/skel/my-web
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/get_iframe.ipynb /etc/skel/my-web/
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/fork_component.ipynb /etc/skel/my-web/
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/get_preview_address.ipynb /etc/skel/my-web/
-sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/settings.ipynb /etc/skel/
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/settings.ipynb /etc/skel/
 
 
 if [ ! -d /etc/skel/my-web/components ]; then  
