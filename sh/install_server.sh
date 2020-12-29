@@ -23,7 +23,7 @@ source .env
 echo "設定時區為Taipei時區"
 sudo timedatectl set-timezone Asia/Taipei
 
-cd /home/$USER/
+cd /home/$INSTALL_USER/
 
 # conda ppa
 echo "Add conda ppa and install conda."
@@ -105,17 +105,17 @@ cd /opt/jupyterhub/etc/jupyterhub/
 # Create the configuration for JupyterHub
 # sudo /opt/jupyterhub/bin/jupyterhub --generate-config
 echo "Prepare jupyterhub_confug.py"
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
 sudo chmod a+x /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
 
 # userlist
 echo "Prepare userlist"
-cd /home/$USER/$PRJ_DIR_NAME/sh
+cd /home/$INSTALL_USER/$PRJ_DIR_NAME/sh
 if [[ ! -f userlist ]]; then
     echo "Copying environment template..."
     cp userlist-template userlist
 fi
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/userlist /opt/jupyterhub/etc/jupyterhub/userlist
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/userlist /opt/jupyterhub/etc/jupyterhub/userlist
 
 
 # Part II: Conda Environments
@@ -215,13 +215,13 @@ unset NODE_OPTIONS
 
 
 # # nginx 安裝啟動設定
-cd /home/$USER/$PRJ_DIR_NAME/sh
+cd /home/$INSTALL_USER/$PRJ_DIR_NAME/sh
 sudo systemctl stop nginx
 if [ ! -d /etc/nginx/sites-available/$SITE_DOMAIN ]; then 
     sudo mkdir -p /etc/nginx/sites-available/$SITE_DOMAIN
 fi
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/nginx_http.conf /etc/nginx/sites-available/$SITE_DOMAIN/nginx_http.conf
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/htpasswd /etc/nginx/htpasswd
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/nginx_http.conf /etc/nginx/sites-available/$SITE_DOMAIN/nginx_http.conf
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/htpasswd /etc/nginx/htpasswd
 if [ ! -d /etc/ssl/certs ]; then    
     sudo mkdir -p /etc/ssl/certs
 fi 
@@ -236,17 +236,21 @@ sudo systemctl stop nginx
 sudo systemctl start nginx
 
 # # 設定靜態網頁檔案
-if [ ! -d /var/www/$SITE_DOMAIN/html ]; then 
-    sudo mkdir -p /var/www/$SITE_DOMAIN/html/
+if [ ! -d $HTML_DIR ]; then 
+    sudo mkdir -p $HTML_DIR
 fi    
-sudo /bin/cp -rf /home/$USER/$PRJ_DIR_NAME/dist/* /var/www/$SITE_DOMAIN/html
+if [ ! -d $HTML_DIR-bak ]; then 
+    sudo mkdir -p $HTML_DIR-bak
+fi    
+
+sudo /bin/cp -rf /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/* $HTML_DIR
+sudo /bin/cp -rf /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/* $HTML_DIR-bak
 
 # www需要讓特定使用者(如admin group)可以寫入 analysts也可寫入
 sudo chown -R root:analysts $HTML_DIR
-sudo chmod -R 775 /$HTML_DIR
+sudo chmod -R 775 $HTML_DIR
 cd $HTML_DIR
-# sudo find . -type d -exec chmod 0755 {} \;
-# sudo find . -type f -exec chmod 0644 {} \;
+
 sudo find . -type d -exec chmod 0755 {} \;
 sudo find . -type f -exec chmod 0774 {} \;
 
@@ -262,9 +266,6 @@ if
 sudo chown -R root:analysts /srv/data/share
 sudo chmod -R 775 /srv/data/share
 
-if [ ! -d $HTML_DIR ]; then
-    sudo mkdir -p $HTML_DIR
-if
 ## 後面發布時的流程會在處理
 # sudo chown -R root:analysts $HTML_DIR
 # sudo chmod -R 775 $HTML_DIR
@@ -284,13 +285,13 @@ sudo ln -s /srv/data/share /etc/skel/share
 sudo ln -s $HTML_DIR /etc/skel/www
 sudo chown -R :analysts /etc/skel/www
 echo "將檔案copy到網頁目錄中"
-sudo /bin/cp -rf /home/$USER/$PRJ_DIR_NAME/dist/* $HTML_DIR/
-sudo /bin/cp -rf /home/$USER/$PRJ_DIR_NAME/dist/* /etc/skel/my-web/
-sudo cp /home/$USER/$PRJ_DIR_NAME/settings.ipynb $HTML_DIR/
+sudo /bin/cp -rf /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/* /etc/skel/my-web/
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/homepage.html /etc/skel/my-web/
+# sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/settings.ipynb $HTML_DIR/
 
 
 # 新使用者建立時的預設設定 (其他手動建立的行為請見add_user.sh)
-cd /home/$USER/$PRJ_DIR_NAME/sh
+cd /home/$INSTALL_USER/$PRJ_DIR_NAME/sh
 if [[ -f /etc/default/useradd ]]; then    
     sudo rm /etc/default/useradd
 fi 
@@ -298,15 +299,24 @@ sudo cp useradd-default-template /etc/default/useradd
 
 # sudo cp ~/.bashrc /etc/skel
 # sudo cp ~/.bash_logout /etc/skel
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/etc_skel/.bashrc /etc/skel
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bashrc /etc/skel
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
 
 # 將fork 與 iframe功能複製到預設使用者目錄中
-# cd /home/$USER/$PRJ_DIR_NAME
-# sudo cp *.ipynb /etc/skel/
-sudo cp /home/$USER/$PRJ_DIR_NAME/fork_folder.ipynb /etc/skel/my-web/
-sudo cp /home/$USER/$PRJ_DIR_NAME/get_iframe_code.ipynb /etc/skel/my-web/
+function cp_file_to_etcskel() {
+    local filename=$1
+    if [[ ! -f /home/$new_user/$filename ]]; then
+        /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/$filename /etc/skel/$filename 
+    if
+}
+List=( "get_iframe.ipynb" "fork_component.ipynb" "get_preview_address.ipynb" "settings.ipynb" )
 
+
+for Item in ${List[*]} 
+  do
+    echo "cp_file_to_etcskel /home/$INSTALL_USER/$PRJ_DIR_NAME/program/$Item /etc/skel/$Item"
+    cp_file_to_etcskel $Item
+  done
 
 # setfacl only works in native linux; not working for WSL 
 # sudo apt install -y acl
@@ -327,25 +337,32 @@ sudo setfacl -R -m d:mask:r $HTML_DIR
 # sudo adduser $INIT_ADMIN_USER root
 sudo usermod -a -G ssl-cert root
 
-#複製工作檔案過去
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/.env /home/$INIT_ADMIN_USER
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/add_user.sh /home/$INIT_ADMIN_USER
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/add_admin_user.sh /home/$INIT_ADMIN_USER
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/update_jupyterhub_config_then_restart.sh /home/$INIT_ADMIN_USER
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py /home/$INIT_ADMIN_USER
+#複製工作檔案過去init admin home
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/.env /home/$INIT_ADMIN_USER
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/add_user.sh /home/$INIT_ADMIN_USER
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/add_admin_user.sh /home/$INIT_ADMIN_USER
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/update_jupyterhub_config_then_restart.sh /home/$INIT_ADMIN_USER
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py /home/$INIT_ADMIN_USER
 sudo chown $INIT_ADMIN_USER:$INIT_ADMIN_USER /home/$INIT_ADMIN_USER/.env
 sudo chown $INIT_ADMIN_USER:$INIT_ADMIN_USER /home/$INIT_ADMIN_USER/*.sh
 sudo chown $INIT_ADMIN_USER:$INIT_ADMIN_USER /home/$INIT_ADMIN_USER/*.py
 sudo chmod +x /home/$INIT_ADMIN_USER/*.sh
 sudo chmod +x /home/$INIT_ADMIN_USER/*.py
 
-cd /home/$USER
+# copy program/admin-settings.ipynb 還原www網站功能
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/admin-settings.ipynb /home/$INSTALL_USER
+
+# 建立預覽連結到網頁相對目錄下
+echo "建立預覽連結到$INIT_ADMIN_USER網頁相對目錄下"
+sudo ln -s /home/$INIT_ADMIN_USER/my-web $HTML_DIR/$INIT_ADMIN_USER
+
+cd /home/$INSTALL_USER
 
 sudo mkdir -p /var/ssl
 # ssl_certificate 
-sudo cp /home/$USER/$PRJ_DIR_NAME/secrets/certificate.crt /var/ssl/certificate.crt
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/certificate.crt /var/ssl/certificate.crt
 # ssl_certificate_key 
-sudo cp /home/$USER/$PRJ_DIR_NAME/secrets/private.key /var/ssl/private.key
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/private.key /var/ssl/private.key
 # set permission of private key
 # optional, but safer. Private keys then have group ssl-cert, owner root, and permissions 640.
 sudo addgroup ssl-cert
@@ -357,9 +374,10 @@ sudo chown root:ssl-cert /var/ssl/certificate.crt
 sudo chmod 644 /var/ssl/certificate.crt
 
 # settings.ipynb只有admin可以操作
-sudo chown root:sudo /home/$USER/$PRJ_DIR_NAME/settings.ipynb
-sudo chmod 770 /home/$USER/$PRJ_DIR_NAME/settings.ipynb
-
+sudo chown root:sudo /home/$INIT_ADMIN_USER/settings.ipynb
+sudo chown root:sudo /home/$INIT_ADMIN_USER/admin-settings.ipynb
+sudo chmod 770 /home/$INIT_ADMIN_USER/settings.ipynb
+sudo chmod 770 /home/$INIT_ADMIN_USER/admin-settings.ipynb
 
 # /usr/local/bin/julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; notebook(detached=true);'
 
@@ -373,8 +391,6 @@ sudo chmod 770 /home/$USER/$PRJ_DIR_NAME/settings.ipynb
 # sudo ln -s ~/julia-1.5.3/bin/julia /usr/local/bin/julia
 
 source ~/.bashrc
-
-
 
 cd /home/$USER
 
@@ -419,6 +435,8 @@ sudo systemctl start jupyterhub.service
 # git config --global credential.helper cache
 # git config --global credential.helper store
 
+echo "設定$INIT_ADMIN_USER password"
+sudo passwd $INIT_ADMIN_USER
 
 echo "設定完成!"
 
