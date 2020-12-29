@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# 使用情境: admin透過jupyterhub GUI建立使用者後, 手動處理後續
+# 使用情境: admin透過jupyterhub GUI建立admin使用者後, 手動處理後續
 # 001 建立密碼
 # 002 建立預覽連結到網頁相對目錄下
+# 003 將該有的檔案放至該目錄下
 # 用法 ./post_add_user.sh username
 # 執行目錄: admin home目錄
 
@@ -13,6 +14,9 @@ new_user=$1
 sudo passwd $new_user
 # 002 建立預覽連結到網頁相對目錄下
 sudo ln -s /home/$new_user/my-web $HTML_DIR/$new_user
+
+# copy program/admin-settings.ipynb 
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/admin-settings.ipynb /home/$new_user
 
 # 確認my-web 下都有東西
 if [[ ! -d /home/$new_user/my-web/ ]]; then
@@ -36,4 +40,4 @@ for Item in ${List[*]}
     cp_file_from_etcskel $Item
   done
 
-echo "Post add user process completed."
+echo "Post add admin user process completed."
