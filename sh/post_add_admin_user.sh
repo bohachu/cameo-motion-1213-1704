@@ -17,8 +17,13 @@ if [[ ! -f $HTML_DIR/$new_user ]]; then
     sudo ln -s /home/$new_user/my-web $HTML_DIR/$new_user
 fi
 # 003 add the user to analysts
-sudo usermod -aG analysts $new_user
+sudo usermod -a -G analysts $new_user
+sudo usermod -a -G sudo $new_user
 
+chown -R $new_user:analysts ~/my-web
+cd ~/my-web
+sudo find . -type d -exec chmod 0755 {} \;
+sudo find . -type f -exec chmod 0744 {} \;
 # function cp_file_from_etcskel() {
 #     local filename=$1
 #     if [[ ! -f /home/$new_user/$filename ]]; then
@@ -56,11 +61,17 @@ sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py /home/$new_use
 sudo chown $new_user:$new_user /home/$new_user/.env
 sudo chown $new_user:$new_user /home/$new_user/*.sh
 sudo chown $new_user:$new_user /home/$new_user/*.py
+sudo chown $new_user:$new_user /home/$new_user/*.ipynb
 sudo chmod +x /home/$new_user/*.sh
 sudo chmod +x /home/$new_user/*.py
 
 sudo chmod +x /home/$new_user/my-web/*.ipynb
 sudo chmod +x /home/$new_user/*.ipynb
+
+# settings.ipynb只有admin可以操作
+sudo chmod 740 /home/$new_user/settings.ipynb
+sudo chmod 740 /home/$new_user/admin-settings.ipynb
+
 
 echo "Post add admin user process completed."
 

@@ -19,6 +19,10 @@ fi
 # 003 add the user to analysts
 sudo usermod -aG analysts $new_user
 
+chown -R $new_user:analysts ~/my-web
+cd ~/my-web
+sudo find . -type d -exec chmod 0755 {} \;
+sudo find . -type f -exec chmod 0744 {} \;
 # # 確認my-web 下都有東西
 # function cp_file_from_etcskel() {
 #     local filename=$1
