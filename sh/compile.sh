@@ -5,32 +5,33 @@
 # 複製到 dist/
 source .env
 
+
 lib_version=$JS_LIB_VERSION
 
 # 回到專案目錄
-cd ..
+cd /home/$INSTALL_USER/$PRJ_DIR_NAME
 echo $PWD
-if [[ -d dist ]]; then
-    rm -rf dist/*
+if [[ -d /home/$INSTALL_USER/$PRJ_DIR_NAME/dist ]]; then
+    rm -rf /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/*
 fi
 
-if [[ ! -d dist ]]; then
-    mkdir dist
+if [[ ! -d /home/$INSTALL_USER/$PRJ_DIR_NAME/dist ]]; then
+    mkdir /home/$INSTALL_USER/$PRJ_DIR_NAME/dist
 fi
-if [[ ! -d dist/lib/$lib_version ]]; then
-    mkdir -p "dist/lib/$lib_version"
+if [[ ! -d /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version ]]; then
+    mkdir -p /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version
 fi
 
-cp -R lib/ dist/
-cp -R app-* dist/
+cp -R /home/$INSTALL_USER/$PRJ_DIR_NAME/lib/ /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/
+cp -R /home/$INSTALL_USER/$PRJ_DIR_NAME/app-* /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/
 # cp -R cameo-* dist/
 echo "Copied app-* and cameo-* modules to dist."
-cp -R img dist/
-cp -R scss dist/
+cp -R img /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/
+cp -R scss /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/
 echo "Copied img and scss folder."
-cp iek-carousel.html dist/
-cp index.html dist/
-cp favicon.ico dist/
+cp /home/$INSTALL_USER/$PRJ_DIR_NAME/iek-carousel.html /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/
+cp /home/$INSTALL_USER/$PRJ_DIR_NAME/index.html /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/
+cp /home/$INSTALL_USER/$PRJ_DIR_NAME/favicon.ico /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/
 echo "Copied favicon.ico and *.html."
 
 function compile_module() {
@@ -44,17 +45,17 @@ function compile_module() {
     echo "Compiled js: $module_path/$js_name.js ."
 }
 
-compile_module "dist/lib/$lib_version/cameo-core" "cameo-df"
+compile_module "/home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version/cameo-core" "cameo-df"
 echo "compile_module dist/lib/$lib_version/cameo-core cameo-df"
-compile_module "dist/lib/$lib_version/cameo-core" "cameo-load"
-echo "compile_module dist/lib/$lib_version/cameo-core cameo-load"
+compile_module "/home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version/cameo-core" "cameo-load"
+echo "compile_module /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version/cameo-core cameo-load"
 
 List=( "cameo-divergent-stacked-bars" "cameo-run" "cameo-line" "cameo-rank" "cameo-multi-axis-prediction" "cameo-map-tw" "cameo-table")
 
 for Item in ${List[*]} 
   do
     echo "compile_module dist/lib/$lib_version/$Item $Item"
-    compile_module "dist/lib/$lib_version/$Item" $Item
+    compile_module "/home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version/$Item" $Item
   done
 
 

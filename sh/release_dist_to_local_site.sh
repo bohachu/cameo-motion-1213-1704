@@ -1,6 +1,7 @@
 #!/bin/bash
 # for ubuntu/debia/kali
 # initial folder: 專案目錄/sh
+# 重新打包dist之後, 可執行此程式將檔案複製到HTML_DIR
 # cp to $HTML_DIR, default to /var/www/iek.cameo.tw/html
 
 source .env
