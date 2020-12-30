@@ -12,28 +12,39 @@ new_user=$1
 # 001 建立密碼
 sudo passwd $new_user
 # 002 建立預覽連結到網頁相對目錄下
-sudo ln -s /home/$new_user/my-web $HTML_DIR/$new_user
+if [[ ! -f $HTML_DIR/$new_user ]]; then
+    sudo ln -s /home/$new_user/my-web $HTML_DIR/$new_user
+fi
 
-# 確認my-web 下都有東西
-if [[ ! -d /home/$new_user/my-web/ ]]; then
-    sudo mkdir -p /home/$new_user/my-web/
-if
-/bin/cp -Rf dist/* /home/$new_user/my-web/
-/bin/cp homepage.html /home/$new_user/my-web/
+# 003 add the user to analysts
+sudo usermod -aG analysts $new_user
 
-function cp_file_from_etcskel() {
-    local filename=$1
-    if [[ ! -f /home/$new_user/$filename ]]; then
-        /bin/cp /etc/skel/$filename /home/$new_user/$filename
-    if
-}
-List=( "get_iframe.ipynb" "fork_component.ipynb" "get_preview_address.ipynb" "settings.ipynb" )
+# # 確認my-web 下都有東西
+# function cp_file_from_etcskel() {
+#     local filename=$1
+#     if [[ ! -f /home/$new_user/$filename ]]; then
+#         /bin/cp /etc/skel/$filename /home/$new_user/$filename
+#     if
+# }
+# if [[ ! -d /home/$new_user/my-web/ ]]; then
+#     sudo mkdir -p /home/$new_user/my-web/
+
+## already copied /etc/skel/* to home/newuser
+  # /bin/cp -Rf /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/* /home/$new_user/my-web/
+  # /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/homepage.html /home/$new_user/my-web/
 
 
-for Item in ${List[*]} 
-  do
-    echo "cp_file_from_etcskel /etc/skel/$Item /home/$new_user/$Item"
-    cp_file_from_etcskel $Item
-  done
+  # List=( "get_iframe.ipynb" "fork_component.ipynb" "get_preview_address.ipynb" "settings.ipynb" )
+
+
+  # for Item in ${List[*]} 
+  #   do
+  #     echo "cp_file_from_etcskel /etc/skel/$Item /home/$new_user/$Item"
+  #     cp_file_from_etcskel $Item
+  #   done
+# if
+
+sudo chmod +x /home/$new_user/my-web/*.ipynb
+sudo chmod +x /home/$new_user/*.ipynb
 
 echo "Post add user process completed."
