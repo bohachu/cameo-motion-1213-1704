@@ -44,17 +44,19 @@ function compile_module() {
     rm "$module_path/$js_name-obfuscated.js"
     echo "Compiled js: $module_path/$js_name.js ."
 }
-
+# echo "compile_module dist/lib/$lib_version/cameo-core cameo-df"
 compile_module "/home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version/cameo-core" "cameo-df"
-echo "compile_module dist/lib/$lib_version/cameo-core cameo-df"
+# echo "compile_module /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version/cameo-core cameo-load"
 compile_module "/home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version/cameo-core" "cameo-load"
-echo "compile_module /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version/cameo-core cameo-load"
+# echo "compile_module /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version/cameo-motion/cameo-table cameo-table" 
+compile_module "/home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version/cameo-motion/cameo-table" "cameo-table"
 
-List=( "cameo-divergent-stacked-bars" "cameo-run" "cameo-line" "cameo-rank" "cameo-multi-axis-prediction" "cameo-map-tw" "cameo-table")
+
+List=( "cameo-divergent-stacked-bars" "cameo-line" "cameo-map-tw" "cameo-multi-axis-prediction" "cameo-rank" "cameo-run" )
 
 for Item in ${List[*]} 
   do
-    echo "compile_module dist/lib/$lib_version/$Item $Item"
+    # echo "compile_module dist/lib/$lib_version/$Item $Item"
     compile_module "/home/$INSTALL_USER/$PRJ_DIR_NAME/dist/lib/$lib_version/$Item" $Item
   done
 
