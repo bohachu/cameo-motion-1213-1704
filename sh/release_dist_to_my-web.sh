@@ -19,7 +19,7 @@ fi
 
 if [ ! -d /etc/skel/my-web ]; then  
     sudo mkdir -p /etc/skel/my-web
-if
+fi
 sudo /bin/cp -Rf dist/* /etc/skel/my-web/
 
 if [[ -f /etc/skel/homepage.html ]]; then
@@ -38,7 +38,7 @@ function cp_file_to_etcskel() {
     local file_dest_folder=$2 
     if [[ ! -f /home/$new_user/$filename ]]; then
         # /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/$filename /etc/skel/$filename 
-        /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/$filename $file_dest_folder/$filename
+        sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/$filename $file_dest_folder/$filename
     fi
 }
 
@@ -57,8 +57,10 @@ sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/settings.ipynb /etc
 if [ ! -d /etc/skel/my-web/components ]; then  
     sudo mkdir -p /etc/skel/my-web/components
 fi
-sudo /bin/cp  /home/$INSTALL_USER/$PRJ_DIR_NAME/components/* /etc/skel/my-web/components
+
+sudo /bin/cp -Rf /home/$INSTALL_USER/$PRJ_DIR_NAME/components/* /etc/skel/my-web/components/
 
 sudo chown -R root:root /etc/skel
 sudo chown -R :analysts /etc/skel/my-web
 
+echo "Deploy dist to /etc/skel completed."
