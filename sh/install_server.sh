@@ -253,6 +253,8 @@ sudo usermod -aG analysts $USER
 # www需要讓特定使用者(如admin group)可以寫入 analysts也可寫入
 sudo chown -R root:analysts $HTML_DIR
 sudo chmod -R 775 $HTML_DIR
+sudo chown -R root:analysts $HTML_DIR-bak
+sudo chmod -R 775 $HTML_DIR-bak
 cd $HTML_DIR
 
 sudo find . -type d -exec chmod 0755 {} \;
