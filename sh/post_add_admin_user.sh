@@ -14,7 +14,7 @@ echo "開始Admin建立後的後續處理:"
 echo "001 建立 $new_user 密碼"
 sudo passwd $new_user
 echo "002 建立預覽連結到網頁相對目錄下"
-if [[ ! -f $HTML_DIR/$new_user ]]; then
+if [[ ! -d $HTML_DIR/$new_user ]]; then
     sudo ln -s /home/$new_user/my-web $HTML_DIR/$new_user
 fi
 echo "003 add the user to analysts and sudo"
@@ -23,8 +23,8 @@ sudo usermod -a -G sudo $new_user
 
 sudo chown -R $new_user:analysts /home/$new_user/my-web
 cd /home/$new_user/my-web
-sudo find . -type d -exec chmod 0755 {} \ 
-sudo find . -type f -exec chmod 0744 {} \ 
+sudo find . -type d -exec chmod 0755 {} \;
+sudo find . -type f -exec chmod 0744 {} \;
 # function cp_file_from_etcskel() {
 #     local filename=$1
 #     if [[ ! -f /home/$new_user/$filename ]]; then

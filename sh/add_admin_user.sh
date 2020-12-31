@@ -11,7 +11,8 @@ if id "$1" &>/dev/null; then
 else
     echo 'user not found; creating user:'
     sudo useradd -m -p $(openssl passwd -6 ${user}) -G analysts ${user} 
-
+    sudo cp -r /etc/skel/* /home/${user}/
+    sudo chown -R ${user}:${user} /home/${user}/
 fi
 
 # post_add_admin_user ${user}

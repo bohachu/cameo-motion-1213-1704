@@ -13,52 +13,8 @@ else
     # Use realmd to add the user with passwd = username
     # realm permit ${user}                   
     sudo useradd -m -p $(openssl passwd -6 ${user}) -G analysts ${user} 
-    # sudo useradd -m -p $(openssl passwd -6 tuseradd) -G analysts tuseradd
-    # sudo groupadd ${user}
-    # sudo usermod -aG ${user} ${user}
-    # sudo usermod -g ${user} ${user}
-    
-    # if [ ! -d "${userhome}" ]; then 
-    #      # Create home directory       
-    #      sudo mkdir -p "${userhome}"             
-    # fi 
-    # cp -R /etc/skel ${userhome}
-    
-    # chown "${user}:domain users" "${userhome}"   
-    # sudo chown -R "${user}:analysts" "${userhome}"   
-
-    # Add user to the sharedfolder group
-    # usermod -aG sharedfolder ${user}
-    sudo usermod -aG analysts ${user}
-    # change my-web permissions
-    if [ -d ~/my-web ]; then    
-        chown -R $USER:analysts ~/my-web
-        # sudo mkdir -p $HTML_DIR/${user}
-        sudo ln -s ~/my-web $HTML_DIR/${user}
-        # iek.cameo.tw/hanes/ 
-        #---
-        cd ~/my-web
-        sudo find . -type d -exec chmod 0755 {} \;
-        sudo find . -type f -exec chmod 0744 {} \;
-        cd ..
-        sudo setfacl -R -m d:g:analysts:rwx ~/my-web
-        # 非群組的應該都看不到
-        sudo setfacl -R -m d:o::rx ~/my-web
-        # 加入權限使預設新建立的檔案都是rx權限:
-        sudo setfacl -R -m d:mask:r ~/my-web
-    fi 
-
-    # create soft link to web if it not exists
-
-    # Create notebook directory and symlink the datalab folder into it
-    # sudo mkdir -p ${userhome}/notebooks  
-    # chown ${user}:domain\ users ${userhome}/notebooks -R  
-    # sudo chown -R ${user}:analysts ${userhome}/notebooks 
-
-    # Symlink a shared folder into the user notebook directory
-    # ln -s /home/sharedfolder ${userhome}/notebooks/sharedfolder
-    # sudo ln -s /srv/data/share_data_analysts  /home/${user}/share_data_analysts  
-
+    sudo cp -r /etc/skel/* /home/${user}/
+    sudo chown -R ${user}:${user} /home/${user}/
 fi
 
 
