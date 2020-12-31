@@ -246,6 +246,10 @@ fi
 sudo /bin/cp -rf /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/* $HTML_DIR
 sudo /bin/cp -rf /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/* $HTML_DIR-bak
 
+echo "共享目錄設定"
+sudo groupadd analysts
+sudo usermod -aG analysts $USER
+
 # www需要讓特定使用者(如admin group)可以寫入 analysts也可寫入
 sudo chown -R root:analysts $HTML_DIR
 sudo chmod -R 775 $HTML_DIR
@@ -254,11 +258,11 @@ cd $HTML_DIR
 sudo find . -type d -exec chmod 0755 {} \;
 sudo find . -type f -exec chmod 0774 {} \;
 
+cd $HTML_DIR-bak
 
+sudo find . -type d -exec chmod 0755 {} \;
+sudo find . -type f -exec chmod 0774 {} \;
 
-echo "共享目錄設定"
-sudo groupadd analysts
-sudo usermod -aG analysts $USER
 # sudo usermod -g analysts $USER
 # if [ ! -d /srv/data/share ]; then
 #     sudo mkdir -p /srv/data/share
@@ -281,7 +285,9 @@ sudo cp useradd-default-template /etc/default/useradd
 # sudo cp ~/.bash_logout /etc/skel
 sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bashrc /etc/skel
 sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
-
+sudo chmod +x /etc/skel/*.sh
+sudo chmod +x /etc/skel/*.ipynb
+sudo chmod +x /etc/skel/my-web/*.ipynb
 
 # setfacl only works in native linux; not working for WSL 
 # sudo apt install -y acl
@@ -293,11 +299,13 @@ sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
 # sudo setfacl -R -m d:mask:rwx /srv/data/share
 
 sudo setfacl -R -m d:g:analysts:rwx $HTML_DIR
+sudo setfacl -R -m d:g:analysts:rwx $HTML_DIR-bak
 # 非群組的應該都看不到
 sudo setfacl -R -m d:o::rx $HTML_DIR
+sudo setfacl -R -m d:o::rx $HTML_DIR-bak
 # 加入權限使預設新建立的檔案都是rx權限:
 sudo setfacl -R -m d:mask:r $HTML_DIR
-
+sudo setfacl -R -m d:mask:r $HTML_DIR-bak
 # 讓還原www 只能讓預設admin操作
 sudo usermod -a -G ssl-cert root
 
