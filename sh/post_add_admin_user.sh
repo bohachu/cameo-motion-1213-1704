@@ -11,7 +11,7 @@ source .env
 new_user=$1
 echo "開始Admin建立後的後續處理:"
 # 建立一般使用者後, admin使用者須跑兩個動作
-echo "001 建立 $new_user 密碼
+echo "001 建立 $new_user 密碼"
 sudo passwd $new_user
 echo "002 建立預覽連結到網頁相對目錄下"
 if [[ ! -f $HTML_DIR/$new_user ]]; then
@@ -21,10 +21,10 @@ echo "003 add the user to analysts and sudo"
 sudo usermod -a -G analysts $new_user
 sudo usermod -a -G sudo $new_user
 
-chown -R $new_user:analysts ~/my-web
+chown -R $new_user:analysts /home/$new_user/my-web
 cd ~/my-web
-sudo find . -type d -exec chmod 0755 {} \;
-sudo find . -type f -exec chmod 0744 {} \;
+sudo find . -type d -exec chmod 0755 {} \ 
+sudo find . -type f -exec chmod 0744 {} \ 
 # function cp_file_from_etcskel() {
 #     local filename=$1
 #     if [[ ! -f /home/$new_user/$filename ]]; then
@@ -42,7 +42,7 @@ sudo find . -type f -exec chmod 0744 {} \;
   # List=( "get_iframe.ipynb" "fork_component.ipynb" "get_preview_address.ipynb" "settings.ipynb" )
   # for Item in ${List[*]} 
   #   do
-  #     echo "cp_file_from_etcskel /etc/skel/$Item /home/$new_user/$Item"
+  #     echo "cp_file_from_etcskel /etc/skel/$Item /home/$new_user/$Item "
   #     cp_file_from_etcskel $Item
   #   done
 
