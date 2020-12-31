@@ -21,8 +21,8 @@ echo "003 add the user to analysts and sudo"
 sudo usermod -a -G analysts $new_user
 sudo usermod -a -G sudo $new_user
 
-chown -R $new_user:analysts /home/$new_user/my-web
-cd ~/my-web
+sudo chown -R $new_user:analysts /home/$new_user/my-web
+cd /home/$new_user/my-web
 sudo find . -type d -exec chmod 0755 {} \ 
 sudo find . -type f -exec chmod 0744 {} \ 
 # function cp_file_from_etcskel() {
