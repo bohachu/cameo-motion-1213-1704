@@ -9,14 +9,15 @@
 source .env
 
 new_user=$1
+echo "開始Admin建立後的後續處理:"
 # 建立一般使用者後, admin使用者須跑兩個動作
-# 001 建立密碼
+echo "001 建立 $new_user 密碼
 sudo passwd $new_user
-# 002 建立預覽連結到網頁相對目錄下
+echo "002 建立預覽連結到網頁相對目錄下"
 if [[ ! -f $HTML_DIR/$new_user ]]; then
     sudo ln -s /home/$new_user/my-web $HTML_DIR/$new_user
 fi
-# 003 add the user to analysts
+echo "003 add the user to analysts and sudo"
 sudo usermod -a -G analysts $new_user
 sudo usermod -a -G sudo $new_user
 
