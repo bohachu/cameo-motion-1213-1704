@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -f jupyterhub_cookie_secret]; then
+if [ -f jupyterhub_cookie_secret ]; then
     rm jupyterhub_cookie_secret
 fi
 sudo openssl rand -hex 32 > jupyterhub_cookie_secret
