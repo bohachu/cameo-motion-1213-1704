@@ -260,35 +260,15 @@ echo "共享目錄設定"
 sudo groupadd analysts
 sudo usermod -aG analysts $USER
 # sudo usermod -g analysts $USER
-if [ ! -d /srv/data/share ]; then
-    sudo mkdir -p /srv/data/share
-if
-sudo chown -R root:analysts /srv/data/share
-sudo chmod -R 775 /srv/data/share
+# if [ ! -d /srv/data/share ]; then
+#     sudo mkdir -p /srv/data/share
+# if
+# sudo chown -R root:analysts /srv/data/share
+# sudo chmod -R 775 /srv/data/share
 
 ## 後面發布時的流程會在處理
 # sudo chown -R root:analysts $HTML_DIR
 # sudo chmod -R 775 $HTML_DIR
-
-# 處理新使用者建立時行為
-echo "設定增加使用者時的行為, 預設目錄和設定檔..."
-
-if [ ! -d /etc/skel/my-web ]; then    
-    sudo mkdir -p /etc/skel/my-web
-fi 
-
-if [ ! -d /etc/skel/history ]; then  
-    sudo mkdir -p /etc/skel/history
-fi
-# 連結到新使用者建立時的home目錄
-sudo ln -s /srv/data/share /etc/skel/share
-sudo ln -s $HTML_DIR /etc/skel/www
-sudo chown -R :analysts /etc/skel/www
-echo "將檔案copy到網頁目錄中"
-sudo /bin/cp -rf /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/* /etc/skel/my-web/
-sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/homepage.html /etc/skel/my-web/
-# sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/settings.ipynb $HTML_DIR/
-
 
 # 新使用者建立時的預設設定 (其他手動建立的行為請見add_user.sh)
 cd /home/$INSTALL_USER/$PRJ_DIR_NAME/sh
@@ -302,30 +282,15 @@ sudo cp useradd-default-template /etc/default/useradd
 sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bashrc /etc/skel
 sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
 
-# 將fork 與 iframe功能複製到預設使用者目錄中
-function cp_file_to_etcskel() {
-    local filename=$1
-    if [[ ! -f /home/$new_user/$filename ]]; then
-        /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/$filename /etc/skel/$filename 
-    if
-}
-List=( "get_iframe.ipynb" "fork_component.ipynb" "get_preview_address.ipynb" "settings.ipynb" )
-
-
-for Item in ${List[*]} 
-  do
-    echo "cp_file_to_etcskel /home/$INSTALL_USER/$PRJ_DIR_NAME/program/$Item /etc/skel/$Item"
-    cp_file_to_etcskel $Item
-  done
 
 # setfacl only works in native linux; not working for WSL 
 # sudo apt install -y acl
-# Granting permission for a group named "analysts" would look something like this:
-sudo setfacl -R -m d:g:analysts:rwx /srv/data/share
-# 非群組的應該都看不到
-sudo setfacl -R -m d:o::r /srv/data/share
-# 加入權限使預設新建立的檔案都是rwx權限:
-sudo setfacl -R -m d:mask:rwx /srv/data/share
+# # Granting permission for a group named "analysts" would look something like this:
+# sudo setfacl -R -m d:g:analysts:rwx /srv/data/share
+# # 非群組的應該都看不到
+# sudo setfacl -R -m d:o::r /srv/data/share
+# # 加入權限使預設新建立的檔案都是rwx權限:
+# sudo setfacl -R -m d:mask:rwx /srv/data/share
 
 sudo setfacl -R -m d:g:analysts:rwx $HTML_DIR
 # 非群組的應該都看不到
@@ -334,27 +299,7 @@ sudo setfacl -R -m d:o::rx $HTML_DIR
 sudo setfacl -R -m d:mask:r $HTML_DIR
 
 # 讓還原www 只能讓預設admin操作
-# sudo adduser $INIT_ADMIN_USER root
 sudo usermod -a -G ssl-cert root
-
-#複製工作檔案過去init admin home
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/.env /home/$INIT_ADMIN_USER
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/add_user.sh /home/$INIT_ADMIN_USER
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/add_admin_user.sh /home/$INIT_ADMIN_USER
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/update_jupyterhub_config_then_restart.sh /home/$INIT_ADMIN_USER
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py /home/$INIT_ADMIN_USER
-sudo chown $INIT_ADMIN_USER:$INIT_ADMIN_USER /home/$INIT_ADMIN_USER/.env
-sudo chown $INIT_ADMIN_USER:$INIT_ADMIN_USER /home/$INIT_ADMIN_USER/*.sh
-sudo chown $INIT_ADMIN_USER:$INIT_ADMIN_USER /home/$INIT_ADMIN_USER/*.py
-sudo chmod +x /home/$INIT_ADMIN_USER/*.sh
-sudo chmod +x /home/$INIT_ADMIN_USER/*.py
-
-# copy program/admin-settings.ipynb 還原www網站功能
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/admin-settings.ipynb /home/$INSTALL_USER
-
-# 建立預覽連結到網頁相對目錄下
-echo "建立預覽連結到$INIT_ADMIN_USER網頁相對目錄下"
-sudo ln -s /home/$INIT_ADMIN_USER/my-web $HTML_DIR/$INIT_ADMIN_USER
 
 cd /home/$INSTALL_USER
 
@@ -372,12 +317,6 @@ sudo chown root:ssl-cert /var/ssl/private.key
 sudo chmod 600 /var/ssl/private.key
 sudo chown root:ssl-cert /var/ssl/certificate.crt
 sudo chmod 644 /var/ssl/certificate.crt
-
-# settings.ipynb只有admin可以操作
-sudo chown root:sudo /home/$INIT_ADMIN_USER/settings.ipynb
-sudo chown root:sudo /home/$INIT_ADMIN_USER/admin-settings.ipynb
-sudo chmod 770 /home/$INIT_ADMIN_USER/settings.ipynb
-sudo chmod 770 /home/$INIT_ADMIN_USER/admin-settings.ipynb
 
 # /usr/local/bin/julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; notebook(detached=true);'
 
@@ -435,8 +374,6 @@ sudo systemctl start jupyterhub.service
 # git config --global credential.helper cache
 # git config --global credential.helper store
 
-echo "設定$INIT_ADMIN_USER password"
-sudo passwd $INIT_ADMIN_USER
 
 echo "設定完成!"
 
