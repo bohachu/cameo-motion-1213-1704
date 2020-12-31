@@ -8,3 +8,4 @@ node_modules/
 
 package-lock.json
 
+jupyterhub_cookie_secret

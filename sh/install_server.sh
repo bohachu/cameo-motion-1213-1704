@@ -349,14 +349,17 @@ cd /home/$USER
 # 建立jupyterhub_cookie_secret
 
 cd ~
+if [ -f jupyterhub_cookie_secret]; then
+    rm jupyterhub_cookie_secret
+fi
 sudo openssl rand -hex 32 > jupyterhub_cookie_secret
-sudo cp jupyterhub_cookie_secret /srv/jupyterhub/jupyterhub_cookie_secret
+sudo /bin/cp jupyterhub_cookie_secret /srv/jupyterhub/jupyterhub_cookie_secret
 sudo chmod 600 /srv/jupyterhub/jupyterhub_cookie_secret
 
 # Setup Systemd service
 echo "Setup Jupyterhub systemd service"
 sudo mkdir -p /opt/jupyterhub/etc/systemd
-sudo cp /home/$USER/$PRJ_DIR_NAME/sh/jupyterhub.service /opt/jupyterhub/etc/systemd/jupyterhub.service
+sudo /bin/cp /home/$USER/$PRJ_DIR_NAME/sh/jupyterhub.service /opt/jupyterhub/etc/systemd/jupyterhub.service
 sudo ln -s /opt/jupyterhub/etc/systemd/jupyterhub.service /etc/systemd/system/jupyterhub.service
 sudo chmod a+x /opt/jupyterhub/etc/systemd/jupyterhub.service
 sudo systemctl daemon-reload
