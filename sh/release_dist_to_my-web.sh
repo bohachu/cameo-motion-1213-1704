@@ -39,8 +39,9 @@ function cp_file_to_etcskel() {
     if [[ ! -f /home/$new_user/$filename ]]; then
         # /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/$filename /etc/skel/$filename 
         /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/$filename $file_dest_folder/$filename
-    if
+    fi
 }
+
 List=( "get_iframe.ipynb" "fork_component.ipynb" "get_preview_address.ipynb" )
 
 
