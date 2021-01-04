@@ -5,18 +5,8 @@
 # cp to $HTML_DIR, default to /var/www/iek.cameo.tw/html
 
 source .env
-cd ..
+cd /home/$INSTALL_USER/$PRJ_DIR_NAME
 
-
-echo "overwrite homepage.html for every user"
-if [[ -f /etc/skel/homepage.html ]]; then
-    sudo rm /etc/skel/homepage.html
-fi
-sudo cp homepage.html /etc/skel/
-
-# if [[ -d $HTML_DIR ]]; then
-#     sudo rm $HTML_DIR
-# fi
 
 echo "複製到HTML_DIR"
 
@@ -28,6 +18,9 @@ if [ ! -d $HTML_DIR-bak ]; then
 fi
 sudo /bin/cp -Rf dist/* $HTML_DIR-bak
 
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/get-www-iframe.ipynb $HTML_DIR/get-www-iframe.ipynb
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/get-www-iframe.ipynb $HTML_DIR-bak/get-www-iframe.ipynb
+
 echo "add group analysts"
 sudo groupadd analysts
 
@@ -38,12 +31,12 @@ sudo chown -R root:analysts $HTML_DIR-bak
 sudo chmod -R 775 $HTML_DIR-bak
 cd $HTML_DIR
 
-sudo find . -type d -exec chmod 0755 {} \;
+sudo find . -type d -exec chmod 0775 {} \;
 sudo find . -type f -exec chmod 0774 {} \;
 
 cd $HTML_DIR-bak
 
-sudo find . -type d -exec chmod 0755 {} \;
+sudo find . -type d -exec chmod 0775 {} \;
 sudo find . -type f -exec chmod 0774 {} \;
 
 

@@ -42,7 +42,7 @@ function cp_file_to_etcskel() {
     fi
 }
 
-List=( "get_iframe.ipynb" "fork_component.ipynb" "get_preview_address.ipynb" )
+List=( "get-myweb-iframe.ipynb" "get-iframe.ipynb" "fork-component.ipynb" "get-preview-address.ipynb" )
 
 
 for Item in ${List[*]} 
