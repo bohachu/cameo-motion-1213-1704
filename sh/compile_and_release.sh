@@ -7,11 +7,11 @@ bash ./compile.sh
 echo "Compile完成。"
 
 echo "發佈到網站目錄..."
-bash ./release_dist_to_local_site.sh
+sudo bash release_dist_to_local_site.sh
 echo "發佈到網站目錄完成。"
 
 echo "發佈到預設使用者目錄..."
-bash ./release_dist_to_my-web.sh
+sudo bash release_dist_to_my-web.sh
 echo "發佈到預設使用者目錄完成。"
 
 echo "重新佈署完成, 請手動更新既有使用者目錄中的檔案"
