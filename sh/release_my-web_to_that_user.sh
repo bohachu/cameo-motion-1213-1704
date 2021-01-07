@@ -33,6 +33,7 @@ fi
 
 echo "重新設定/home/$that_user檔案目錄權限"
 chown -R $that_user:analysts /home/$that_user/my-web
+chown -R $that_user:analysts /home/$that_user/*.ipynb
 cd /home/$that_user/my-web
 sudo find . -type d -exec chmod 0755 {} \;
 sudo find . -type f -exec chmod 0744 {} \;

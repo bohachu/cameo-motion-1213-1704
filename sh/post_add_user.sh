@@ -20,6 +20,7 @@ fi
 sudo usermod -aG analysts $new_user
 
 chown -R $new_user:analysts /home/$new_user/my-web
+chown -R $new_user:analysts /home/$new_user/*.ipynb
 cd /home/$new_user/my-web
 sudo find . -type d -exec chmod 0755 {} \;
 sudo find . -type f -exec chmod 0744 {} \;
