@@ -17,7 +17,9 @@ if [[ ! -f .env ]]; then
     cp .env-template .env
     sudo chmod 600 .env
 fi
-
+if [[ ! -f etc_skel/.user-env ]]; then
+    cp etc_skel/.user-env-template etc_skel/.user-env
+fi
 source .env
 
 echo "設定時區為Taipei時區"
