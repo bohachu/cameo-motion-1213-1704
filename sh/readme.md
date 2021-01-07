@@ -41,11 +41,14 @@ compile dist, 包含js加密和打包, 產出的網站檔案在dist
 發佈到預設使用者目錄
 ./release_dist_to_my-web.sh
 
+### 005 若重新佈署,既有使用者須轉移進新的檔案
+./release_my-web_to_that_user.sh
+
 ### 005 安裝jupyterhub, jupyterlab, extension等主程式
 第一次安裝server時需要安裝
 
 cd 專案目錄/sh 
-執行 ./install_server.sh
+./install_server.sh
 
 ### 006 建立第一位jupyterhub admin帳號
 有兩種方法:
