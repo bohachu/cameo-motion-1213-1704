@@ -36,6 +36,7 @@ sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/add_user.sh /home/$new_user
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/post_add_user.sh /home/$new_user
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/add_admin_user.sh /home/$new_user
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/post_add_admin_user.sh /home/$new_user
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/setup_my-web_permission_that_user.sh /home/$new_user
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/update_jupyterhub_config_then_restart.sh /home/$new_user
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py /home/$new_user
 sudo chown $new_user:$new_user /home/$new_user/.env
