@@ -21,12 +21,13 @@ if [ ! -d /etc/skel/my-web ]; then
     sudo mkdir -p /etc/skel/my-web
 fi
 sudo /bin/cp -Rf dist/* /etc/skel/my-web/
+echo "已將dist/* 複製至/etc/skel/my-web/"
 
 if [[ -f /etc/skel/homepage.html ]]; then
     sudo rm /etc/skel/homepage.html
 fi
 sudo /bin/cp homepage.html /etc/skel/my-web
-
+echo "已將homepage.html 複製至/etc/skel/my-web/"
 # cp those ipynb and components
 # sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/get_iframe.ipynb /etc/skel/my-web/
 # sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/fork_component.ipynb /etc/skel/my-web/
@@ -53,12 +54,14 @@ for Item in ${List[*]}
 
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/settings.ipynb /etc/skel/
 
+## 因為dist內已經預先保留components, 讓縮圖可以正常顯示, 所以這裡不需要做 
+# TODO: 未來需要修改路徑, 讓dist 和www 目錄不須有components
+# if [ ! -d /etc/skel/my-web/components ]; then  
+#     sudo mkdir -p /etc/skel/my-web/components
+# fi
 
-if [ ! -d /etc/skel/my-web/components ]; then  
-    sudo mkdir -p /etc/skel/my-web/components
-fi
-
-sudo /bin/cp -Rf /home/$INSTALL_USER/$PRJ_DIR_NAME/components/* /etc/skel/my-web/components/
+# sudo /bin/cp -Rf /home/$INSTALL_USER/$PRJ_DIR_NAME/components/* /etc/skel/my-web/components/
+# echo "已將/home/$INSTALL_USER/$PRJ_DIR_NAME/components/* 複製至/etc/skel/my-web/components/"
 
 sudo chown -R root:root /etc/skel
 sudo chown -R :analysts /etc/skel/my-web
