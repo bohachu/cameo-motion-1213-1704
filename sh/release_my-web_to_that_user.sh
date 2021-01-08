@@ -32,13 +32,14 @@ if [[ ! -d $HTML_DIR/$that_user ]]; then
 fi
 
 echo "重新設定/home/$that_user檔案目錄權限"
-chown -R $that_user:analysts /home/$that_user/my-web
-chown -R $that_user:analysts /home/$that_user/*.ipynb
-cd /home/$that_user/my-web
-sudo find . -type d -exec chmod 0755 {} \;
-sudo find . -type f -exec chmod 0744 {} \;
+sudo bash setup_my-web_permission_that_user.sh $that_user
+# chown -R $that_user:analysts /home/$that_user/my-web
+# cd /home/$that_user/my-web
+# sudo find . -type d -exec chmod 0755 {} \;
+# sudo find . -type f -exec chmod 0744 {} \;
 
-sudo chmod +x /home/$that_user/my-web/*.ipynb
+# sudo chmod +x /home/$that_user/my-web/*.ipynb
+chown -R $that_user:analysts /home/$that_user/*.ipynb
 sudo chmod +x /home/$that_user/*.ipynb
 
-echo "Deploy dist to /home/$that_user/ completed."
+echo "Deploy /etc/skel to /home/$that_user/ completed."
