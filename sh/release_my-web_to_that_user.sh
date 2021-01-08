@@ -4,7 +4,6 @@
 # 使用情境: 重新佈署既有使用者home資料夾,home/my-web 資料夾
 
 source .env
-cd ..
 that_user=$1
 echo "重新佈署既有使用者home資料夾,/home/$that_user/ 資料夾..."
 
@@ -32,8 +31,7 @@ if [[ ! -d $HTML_DIR/$that_user ]]; then
 fi
 
 echo "重新設定/home/$that_user檔案目錄權限"
-cd sh
-sudo bash sh/setup_my-web_permission_that_user.sh $that_user
+sudo bash setup_my-web_permission_that_user.sh $that_user
 # chown -R $that_user:analysts /home/$that_user/my-web
 # cd /home/$that_user/my-web
 # sudo find . -type d -exec chmod 0755 {} \;
