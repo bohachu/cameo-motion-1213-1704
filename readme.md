@@ -1,4 +1,10 @@
 ---
+2021-01-08 12:28 Hanes, AC v1.0 release
+done fix www, myweb 權限, even after restore, add user/admin user
+done compile, release and permission setting
+
+
+---
 2021-01-01 10:56 新年快樂 caro
 挖空 GDP 折線圖變數：標題，像是中華民國等等
 
