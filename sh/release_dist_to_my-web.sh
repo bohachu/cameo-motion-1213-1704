@@ -62,5 +62,7 @@ sudo /bin/cp -Rf /home/$INSTALL_USER/$PRJ_DIR_NAME/components/* /etc/skel/my-web
 
 sudo chown -R root:root /etc/skel
 sudo chown -R :analysts /etc/skel/my-web
+sudo chmod +x /etc/skel/my-web/*.ipynb
+sudo chmod +x /etc/skel/*.ipynb
 
 echo "Deploy dist to /etc/skel completed."
