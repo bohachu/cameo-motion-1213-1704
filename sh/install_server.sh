@@ -317,9 +317,9 @@ cd /home/$INSTALL_USER
 
 sudo mkdir -p /var/ssl
 # ssl_certificate 
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/certificate.crt /var/ssl/certificate.crt
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/certificate.crt /var/ssl/certificate.crt
 # ssl_certificate_key 
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/private.key /var/ssl/private.key
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/private.key /var/ssl/private.key
 # set permission of private key
 # optional, but safer. Private keys then have group ssl-cert, owner root, and permissions 640.
 sudo addgroup ssl-cert
