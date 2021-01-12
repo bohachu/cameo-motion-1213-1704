@@ -17,5 +17,3 @@ sudo ln -s /root/admin_util/.*.sh /home/$the_user/
 sudo ln -s /root/admin_util/*.ipynb /home/$the_user/
 
 sudo chmod 740 /home/$the_user/*.ipynb
-
-
