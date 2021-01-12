@@ -36,12 +36,14 @@ fi
 
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/admin-settings.ipynb /root/admin_util/
 
-sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/* /root/admin_util/
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/.*.sh /root/admin_util/
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/*.ipynb /root/admin_util/
+
 sudo ln -s /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/.env /root/admin_util/.env
 sudo chown -R root:root /root/admin_util
 sudo chmod 770 -R /root/admin_util/
-sudo chmod +x /root/admin_util/.*.sh
-sudo chmod +x /root/admin_util/*.ipynb
+# sudo chmod +x /root/admin_util/.*.sh
+# sudo chmod +x /root/admin_util/*.ipynb
 
 echo "完成佈署admin_util維護工具。"
 
