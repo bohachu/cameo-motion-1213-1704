@@ -12,14 +12,14 @@ new_user=$1
 # 001 建立密碼
 sudo passwd $new_user
 # 002 建立預覽連結到網頁相對目錄下
-if [[ ! -d $HTML_DIR/$new_user ]]; then
-    sudo ln -s /home/$new_user/my-web $HTML_DIR/$new_user
+if [[ ! -d $HTML_DIR/.$new_user ]]; then
+    sudo ln -s /home/$new_user/my-web $HTML_DIR/.$new_user
 fi
 
 # 003 add the user to analysts
 sudo usermod -a -G analysts $new_user
 
-sudo bash setup_my-web_permission_that_user.sh $new_user
+sudo bash /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/setup_my-web_permission_that_user.sh $new_user
 # chown -R $new_user:analysts /home/$new_user/my-web
 
 # cd /home/$new_user/my-web

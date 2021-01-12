@@ -11,12 +11,16 @@
 # 靜態網頁目錄: cp 專案目錄/src 
 # cd /home/$USER/$PRJ_DIR_NAME/sh
 # rm /home/$USER/$PRJ_DIR_NAME/sh/.env
+chmod +x *.sh
+
 echo "準備設定檔"
+
 if [[ ! -f .env ]]; then
     echo "Copying environment template..."
     cp .env-template .env
     sudo chmod 600 .env
 fi
+
 if [[ ! -f etc_skel/.user-env ]]; then
     cp etc_skel/.user-env-template etc_skel/.user-env
 fi
@@ -269,10 +273,13 @@ sudo cp useradd-default-template /etc/default/useradd
 
 # sudo cp ~/.bashrc /etc/skel
 # sudo cp ~/.bash_logout /etc/skel
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bashrc /etc/skel
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bashrc /etc/skel
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
 sudo chmod +x /etc/skel/.bashrc
 sudo chmod +x /etc/skel/.bash_logout
+
+echo "準備admin維護工具"
+sudo bash /home/$INSTALL_USER/$PRJ_DIR_NAME/deploy_admin_util.sh
 
 # /usr/local/bin/julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; notebook(detached=true);'
 
