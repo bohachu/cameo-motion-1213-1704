@@ -12,6 +12,10 @@ if [[ -d $HTML_DIR/$the_user ]]; then
     sudo rm -f $HTML_DIR/$the_user
     echo "$HTML_DIR/$the_user 已成功移除"
 fi
+
+sudo chmod 0750 /home/$the_user
+echo "/home/$the_user 已改成0750"
+
 echo "處理$the_user my-web HTML目錄...完成"
 
 
