@@ -19,7 +19,7 @@ else
     sudo chown -R ${user}:${user} /home/${user}/
 fi
 
-
+sudo bash /root/admin_util/.post_add_user.sh ${user}
 # set password
 # sudo passwd ${user}
 

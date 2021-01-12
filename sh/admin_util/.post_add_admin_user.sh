@@ -6,56 +6,33 @@
 # 用法 ./post_add_user.sh username
 # 執行目錄: admin home目錄
 
-source .env
+source /root/admin_util/.env
 
 new_user=$1
+
+echo "處理一般使用者權限設定"
+sudo bash /root/admin_util/.post_add_user.sh $new_user
 echo "開始Admin建立後的後續處理:"
-# 建立一般使用者後, admin使用者須跑兩個動作
-echo "001 建立 $new_user 密碼"
-sudo passwd $new_user
-echo "002 建立預覽連結到網頁相對目錄下"
-if [[ ! -d $HTML_DIR/.$new_user ]]; then
-    sudo ln -s /home/$new_user/my-web $HTML_DIR/.$new_user
-fi
-echo "003 add the user to analysts and sudo"
-sudo usermod -a -G analysts $new_user
+
+echo "001 add the user to sudo and root"
+
 sudo usermod -a -G sudo $new_user
-
-# admin跟一般user不同的功能
 sudo usermod -a -G root $new_user
-sudo ln -s /root/admin_util/* /home/$new_user/
 
+echo "002 建立admin_util連結"
+sudo ln -s /root/admin_util/.*.sh /home/$new_user/
+sudo ln -s /root/admin_util/.env /home/$new_user/
 
-# sudo bash /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/.setup_my-web_permission_that_user.sh $new_user
-# # sudo chown -R $new_user:analysts /home/$new_user/my-web
-# # cd /home/$new_user/my-web
-# # sudo find . -type d -exec chmod 0755 {} \;
-# # sudo find . -type f -exec chmod 0744 {} \;
-# # sudo chmod +x /home/$new_user/my-web/*.ipynb
+echo "003 複製.ipynb"
+sudo /bin/cp /root/admin_util/*.ipynb /home/$new_user/
 
-# sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/admin-settings.ipynb /home/$new_user
-
-# # 複製admin維護工作檔案到家目錄
-# sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/.env /home/$new_user
-# sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/add_user.sh /home/$new_user
-# sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/post_add_user.sh /home/$new_user
-# sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/add_admin_user.sh /home/$new_user
-# sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/post_add_admin_user.sh /home/$new_user
-# sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/setup_my-web_permission_that_user.sh /home/$new_user
-# sudo chown $new_user:$new_user /home/$new_user/.env
-# sudo chown $new_user:$new_user /home/$new_user/*.sh
-# sudo chown $new_user:$new_user /home/$new_user/*.py
-# sudo chown $new_user:$new_user /home/$new_user/*.ipynb
-# sudo chmod +x /home/$new_user/*.sh
-# sudo chmod +x /home/$new_user/*.py
-
-
-# sudo chmod +x /home/$new_user/*.ipynb
-
+echo "004 調整權限"
+sudo chown $new_user:$new_user /home/$new_user/*.py
+sudo chown -R $new_user:$new_user /home/$new_user/*.ipynb
+sudo chmod +x /home/$new_user/*.ipynb
 # # settings.ipynb只有admin可以操作
-# sudo chmod 740 /home/$new_user/settings.ipynb
-# sudo chmod 740 /home/$new_user/admin-settings.ipynb
-
+sudo chmod 740 /home/$new_user/settings.ipynb
+sudo chmod 740 /home/$new_user/admin-settings.ipynb
 
 echo "Post add admin user process completed."
 
