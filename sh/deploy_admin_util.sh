@@ -37,7 +37,6 @@ fi
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/admin-settings.ipynb /root/admin_util/
 
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/.*.sh /root/admin_util/
-sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/*.ipynb /root/admin_util/
 
 sudo ln -s /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/.env /root/admin_util/.env
 sudo chown -R root:root /root/admin_util
