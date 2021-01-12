@@ -277,7 +277,8 @@ sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bashrc /etc/skel
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
 sudo chmod +x /etc/skel/.bashrc
 sudo chmod +x /etc/skel/.bash_logout
-sudo chmod 750 /etc/skel
+sudo chmod 755 /etc/skel
+# 750會讓 /home/user/my-web無法顯示在網站上
 
 echo "準備admin維護工具"
 sudo bash /home/$INSTALL_USER/$PRJ_DIR_NAME/deploy_admin_util.sh
