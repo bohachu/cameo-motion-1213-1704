@@ -273,6 +273,7 @@ sudo cp useradd-default-template /etc/default/useradd
 
 # sudo cp ~/.bashrc /etc/skel
 # sudo cp ~/.bash_logout /etc/skel
+<<<<<<< HEAD
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bashrc /etc/skel
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
 sudo chmod +x /etc/skel/.bashrc
@@ -285,6 +286,13 @@ sudo bash /home/$INSTALL_USER/$PRJ_DIR_NAME/deploy_admin_util.sh
 
 echo "建立起始admin帳號"
 sudo bash /root/admin_util/add_admin_user.sh $INIT_ADMIN_USER
+=======
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bashrc /etc/skel
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
+sudo chmod +x /etc/skel/.bashrc
+sudo chmod +x /etc/skel/.bash_logout
+
+>>>>>>> 168ce75 (AC: jupyter lab clean)
 
 # /usr/local/bin/julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; notebook(detached=true);'
 
