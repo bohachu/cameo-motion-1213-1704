@@ -26,12 +26,12 @@ sudo /bin/cp -Rf /etc/skel/*  /home/$that_user/
 echo "複製/home/$that_user 資料夾完成"
 
 echo "重新建立my-web連結"
-if [[ ! -d $HTML_DIR/$that_user ]]; then
-    sudo ln -s /home/$that_user/my-web $HTML_DIR/$that_user
+if [[ ! -d $HTML_DIR/.$that_user ]]; then
+    sudo ln -s /home/$that_user/my-web $HTML_DIR/.$that_user
 fi
 
 echo "重新設定/home/$that_user檔案目錄權限"
-sudo bash setup_my-web_permission_that_user.sh $that_user
+sudo bash /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/.setup_my-web_permission_that_user.sh $that_user
 # chown -R $that_user:analysts /home/$that_user/my-web
 # cd /home/$that_user/my-web
 # sudo find . -type d -exec chmod 0755 {} \;
@@ -41,4 +41,4 @@ sudo bash setup_my-web_permission_that_user.sh $that_user
 chown -R $that_user:analysts /home/$that_user/*.ipynb
 sudo chmod +x /home/$that_user/*.ipynb
 
-echo "Deploy /etc/skel to /home/$that_user/ completed."
+echo "Deploy /etc/skel/my-web to /home/$that_user/my-web completed."
