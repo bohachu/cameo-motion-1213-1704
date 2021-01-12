@@ -8,7 +8,7 @@ if [[ ! -d /root/admin_util ]]; then
     sudo chmod 770 -R /root/admin_util/
 fi
 
-sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/admin-settings.ipynb /root/admin_util/
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/管理者系統設定.ipynb /root/admin_util/
 
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/.*.sh /root/admin_util/
 
