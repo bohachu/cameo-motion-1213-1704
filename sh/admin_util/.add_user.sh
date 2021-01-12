@@ -13,6 +13,8 @@ else
     # Use realmd to add the user with passwd = username
     # realm permit ${user}                   
     sudo useradd -m -p $(openssl passwd -6 ${user}) -G analysts ${user} 
+    sudo mkdir -p $userhome
+    sudo chown ${user}:${user} userhome
     sudo cp -r /etc/skel/* /home/${user}/
     sudo chown -R ${user}:${user} /home/${user}/
 fi
