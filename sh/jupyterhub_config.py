@@ -7,7 +7,7 @@ import os, sys, subprocess
 c.JupyterHub.admin_access = True
 
 # c.JupyterHub.base_rul = ''
-c.JupyterHub.bind_url = 'https://:3801/'
+c.JupyterHub.bind_url = 'http://127.0.0.1:3801/'
 
 c.PAMAuthenticator.admin_groups = {'sudo'}
 c.Authenticator.admin_users = {'cameo','iek','cameo2','hanes','caro'}
