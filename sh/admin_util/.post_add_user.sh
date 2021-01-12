@@ -7,29 +7,32 @@
 
 source /root/admin_util/.env
 
-new_user=$1
-# 建立一般使用者後, admin使用者須跑兩個動作
+the_user=$1
+
 echo "001 建立密碼"
-sudo passwd $new_user
+sudo passwd $the_user
 echo "002 建立預覽連結到網頁相對目錄下"
-if [[ ! -d $HTML_DIR/.$new_user ]]; then
-    sudo ln -s /home/$new_user/my-web $HTML_DIR/.$new_user
+if [[ ! -d $HTML_DIR/.$the_user ]]; then
+    sudo ln -s /home/$the_user/my-web $HTML_DIR/.$the_user
 fi
 
 echo "003 add the user to analysts"
-sudo usermod -a -G analysts $new_user
+sudo usermod -a -G analysts $the_user
 
-echo "004 設定my-web權限"
-sudo bash /root/admin_util/.setup_my-web_permission_that_user.sh $new_user
-# chown -R $new_user:analysts /home/$new_user/my-web
+echo "004 設定Home目錄檔案權限"
+sudo chown -R $the_user:analysts /home/$the_user/*.ipynb
+sudo chmod +x /home/$the_user/*.ipynb
+sudo chmod 0750 /home/$the_user
 
-# cd /home/$new_user/my-web
+echo "005 設定my-web權限"
+sudo bash /root/admin_util/.setup_my-web_permission_that_user.sh $the_user
+# chown -R $the_user:analysts /home/$the_user/my-web
+
+# cd /home/$the_user/my-web
 # sudo find . -type d -exec chmod 0755 {} \;
 # sudo find . -type f -exec chmod 0744 {} \;
 
-# sudo chmod +x /home/$new_user/my-web/*.ipynb
-echo "005 設定Home目錄檔案權限"
-sudo chown -R $new_user:analysts /home/$new_user/*.ipynb
-sudo chmod +x /home/$new_user/*.ipynb
+# sudo chmod +x /home/$the_user/my-web/*.ipynb
+
 
 echo "Post add user process completed."
