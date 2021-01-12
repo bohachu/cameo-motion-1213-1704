@@ -80,10 +80,10 @@ echo "Install Python3, Jupyterhub, Jupyterlab libraries."
 sudo python3 -m venv /opt/jupyterhub/
 sudo /opt/jupyterhub/bin/python3 -m pip install --upgrade pip --no-cache-dir 
 sudo /opt/jupyterhub/bin/python3 -m pip install \
-    wheel jupyterhub jupyterlab ipywidgets jupyterhub-nativeauthenticator \
-    nbgitpuller voila voila-gridstack ipyleaflet \
+    wheel jupyterhub jupyterlab ipywidgets  \
+    nbgitpuller voila voila-gridstack  \
     nbgitpuller google-cloud-storage pandas scikit-learn widgetsnbextension \
-    pandas matplotlib ipympl numba numexpr xlrd psycopg2 ipyleaflet jupyterlab_iframe \
+    pandas matplotlib ipympl numba numexpr xlrd psycopg2 jupyterlab_iframe \
     --no-cache-dir
 
 # pip install 
@@ -95,6 +95,7 @@ sudo /opt/jupyterhub/bin/python3 -m pip install \
 #     "xlrd==1.2" \
 #     "pandas==1.1.4" \
 #     "ipympl==0.5.8" \
+# jupyterhub-nativeauthenticator ipyleaflet
 
 
 sudo npm install -g configurable-http-proxy -y
@@ -165,19 +166,20 @@ sudo /opt/conda/bin/conda install -p /opt/conda/envs/python \
     "nbgitpuller==0.9" \
     "voila==0.2.4" \
     "voila-gridstack==0.0.12" \
-    "ipyleaflet==0.13.3" \
     "psutil==5.7.3" \
     "google-cloud-storage" \
     "nose==1.3.7" \
     "scikit-learn==0.23.2" \
     -y 
 
+# "ipyleaflet==0.13.3" 
+
 # "jupyterhub=$JUPYTERHUB_VERSION" \
 # "jupyterlab=$JUPYTERLAB_VERSION" \
 # "notebook=$NOTEBOOK_VERSION" \
 #cv2 not available
 sudo /opt/conda/envs/python/bin/python -m pip install --upgrade pip --no-cache-dir 
-sudo /opt/conda/envs/python/bin/pip3 install keplergl --no-cache-dir 
+# sudo /opt/conda/envs/python/bin/pip3 install keplergl --no-cache-dir 
 
 
 sudo chmod -R a+w /opt/conda/ && \
@@ -195,17 +197,18 @@ sudo /opt/jupyterhub/bin/jupyter serverextension enable voila --sys-prefix && \
 sudo /opt/jupyterhub/bin/jupyter nbextension install --py widgetsnbextension --sys-prefix && \
 sudo /opt/jupyterhub/bin/jupyter nbextension enable widgetsnbextension --py --sys-prefix && \
 sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build && \
-sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager keplergl-jupyter --no-build && \
+# sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager keplergl-jupyter --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install jupyter-matplotlib --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install jupyterlab_filetree --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-sidecar --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install @jupyterlab/geojson-extension --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install spreadsheet-editor --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-voila/jupyterlab-preview --no-build && \
-sudo /opt/jupyterhub/bin/jupyter nbextension enable --py --sys-prefix ipyleaflet && \
-sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager jupyter-leaflet --no-build && \
+# sudo /opt/jupyterhub/bin/jupyter nbextension enable --py --sys-prefix ipyleaflet && \
+# sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager jupyter-leaflet --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install jupyterlab_iframe  --no-build && \
 sudo /opt/jupyterhub/bin/jupyter serverextension enable --py jupyterlab_iframe && \
+sudo /opt/jupyterhub/bin/jupyter clean && \
 sudo /opt/jupyterhub/bin/jupyter lab build --minimize=False && \
 unset NODE_OPTIONS 
 
@@ -214,9 +217,28 @@ unset NODE_OPTIONS
 
 # sudo rm -rf /var/lib/apt/lists/*
 
+echo "SSL憑證設定"
+sudo usermod -a -G ssl-cert root
+
+cd /home/$INSTALL_USER
+
+sudo mkdir -p /var/ssl
+# ssl_certificate 
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/certificate.crt /var/ssl/certificate.crt
+# ssl_certificate_key 
+sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/private.key /var/ssl/private.key
+# set permission of private key
+# optional, but safer. Private keys then have group ssl-cert, owner root, and permissions 640.
+sudo addgroup ssl-cert
+# sudo adduser root ssl-cert
+sudo usermod -a -G ssl-cert root
+sudo chown root:ssl-cert /var/ssl/private.key
+sudo chmod 600 /var/ssl/private.key
+sudo chown root:ssl-cert /var/ssl/certificate.crt
+sudo chmod 644 /var/ssl/certificate.crt
 
 
-# # nginx 安裝啟動設定
+echo "nginx 安裝啟動設定"
 cd /home/$INSTALL_USER/$PRJ_DIR_NAME/sh
 sudo systemctl stop nginx
 if [ ! -d /etc/nginx/sites-available/$SITE_DOMAIN ]; then 
@@ -237,48 +259,8 @@ sudo /etc/init.d/nginx reload
 sudo systemctl stop nginx
 sudo systemctl start nginx
 
-# # 設定靜態網頁檔案
-if [ ! -d $HTML_DIR ]; then 
-    sudo mkdir -p $HTML_DIR
-fi    
-if [ ! -d $HTML_DIR-bak ]; then 
-    sudo mkdir -p $HTML_DIR-bak
-fi    
 
-sudo /bin/cp -rf /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/* $HTML_DIR
-sudo /bin/cp -rf /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/* $HTML_DIR-bak
-
-echo "共享目錄設定"
-sudo groupadd analysts
-sudo usermod -aG analysts $USER
-
-# www需要讓特定使用者(如admin group)可以寫入 analysts也可寫入
-sudo chown -R root:analysts $HTML_DIR
-sudo chmod -R 775 $HTML_DIR
-sudo chown -R root:analysts $HTML_DIR-bak
-sudo chmod -R 775 $HTML_DIR-bak
-cd $HTML_DIR
-
-sudo find . -type d -exec chmod 0755 {} \;
-sudo find . -type f -exec chmod 0774 {} \;
-
-cd $HTML_DIR-bak
-
-sudo find . -type d -exec chmod 0755 {} \;
-sudo find . -type f -exec chmod 0774 {} \;
-
-# sudo usermod -g analysts $USER
-# if [ ! -d /srv/data/share ]; then
-#     sudo mkdir -p /srv/data/share
-# if
-# sudo chown -R root:analysts /srv/data/share
-# sudo chmod -R 775 /srv/data/share
-
-## 後面發布時的流程會在處理
-# sudo chown -R root:analysts $HTML_DIR
-# sudo chmod -R 775 $HTML_DIR
-
-# 新使用者建立時的預設設定 (其他手動建立的行為請見add_user.sh)
+echo "新使用者建立時的預設設定 (其他手動建立的行為請見post_add_user.sh)"
 cd /home/$INSTALL_USER/$PRJ_DIR_NAME/sh
 if [[ -f /etc/default/useradd ]]; then    
     sudo rm /etc/default/useradd
@@ -289,46 +271,9 @@ sudo cp useradd-default-template /etc/default/useradd
 # sudo cp ~/.bash_logout /etc/skel
 sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bashrc /etc/skel
 sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
-sudo chmod +x /etc/skel/*.sh
-sudo chmod +x /etc/skel/*.ipynb
-sudo chmod +x /etc/skel/my-web/*.ipynb
+sudo chmod +x /etc/skel/.bashrc
+sudo chmod +x /etc/skel/.bash_logout
 
-# setfacl only works in native linux; not working for WSL 
-# sudo apt install -y acl
-# # Granting permission for a group named "analysts" would look something like this:
-# sudo setfacl -R -m d:g:analysts:rwx /srv/data/share
-# # 非群組的應該都看不到
-# sudo setfacl -R -m d:o::r /srv/data/share
-# # 加入權限使預設新建立的檔案都是rwx權限:
-# sudo setfacl -R -m d:mask:rwx /srv/data/share
-
-sudo setfacl -R -m d:g:analysts:rwx $HTML_DIR
-sudo setfacl -R -m d:g:analysts:rwx $HTML_DIR-bak
-# 非群組的應該都看不到
-sudo setfacl -R -m d:o::rx $HTML_DIR
-sudo setfacl -R -m d:o::rx $HTML_DIR-bak
-# 加入權限使預設新建立的檔案都是rx權限:
-sudo setfacl -R -m d:mask:r $HTML_DIR
-sudo setfacl -R -m d:mask:r $HTML_DIR-bak
-# 讓還原www 只能讓預設admin操作
-sudo usermod -a -G ssl-cert root
-
-cd /home/$INSTALL_USER
-
-sudo mkdir -p /var/ssl
-# ssl_certificate 
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/certificate.crt /var/ssl/certificate.crt
-# ssl_certificate_key 
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/private.key /var/ssl/private.key
-# set permission of private key
-# optional, but safer. Private keys then have group ssl-cert, owner root, and permissions 640.
-sudo addgroup ssl-cert
-# sudo adduser root ssl-cert
-sudo usermod -a -G ssl-cert root
-sudo chown root:ssl-cert /var/ssl/private.key
-sudo chmod 600 /var/ssl/private.key
-sudo chown root:ssl-cert /var/ssl/certificate.crt
-sudo chmod 644 /var/ssl/certificate.crt
 
 # /usr/local/bin/julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; notebook(detached=true);'
 
@@ -350,6 +295,7 @@ cd /home/$USER
 # sudo systemctl start nginx
 # 建立jupyterhub_cookie_secret
 
+echo "建立jupyterhub_cookie_secret"
 cd ~
 if [ -f jupyterhub_cookie_secret]; then
     rm jupyterhub_cookie_secret
