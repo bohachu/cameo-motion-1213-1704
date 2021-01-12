@@ -277,6 +277,7 @@ sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bashrc /etc/skel
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/etc_skel/.bash_logout /etc/skel
 sudo chmod +x /etc/skel/.bashrc
 sudo chmod +x /etc/skel/.bash_logout
+sudo chmod 750 /etc/skel
 
 echo "準備admin維護工具"
 sudo bash /home/$INSTALL_USER/$PRJ_DIR_NAME/deploy_admin_util.sh
