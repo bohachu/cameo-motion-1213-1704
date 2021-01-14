@@ -284,12 +284,6 @@ echo "準備admin維護工具"
 sudo bash /home/$INSTALL_USER/$PRJ_DIR_NAME/deploy_admin_util.sh
 
 echo "建立起始admin帳號"
-sudo bash /root/admin_util/.add_admin_user.sh $INIT_ADMIN_USER
-
-echo "準備admin維護工具"
-sudo bash /home/$INSTALL_USER/$PRJ_DIR_NAME/deploy_admin_util.sh
-
-echo "建立起始admin帳號"
 sudo bash /root/admin_util/add_admin_user.sh $INIT_ADMIN_USER
 
 # /usr/local/bin/julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; notebook(detached=true);'

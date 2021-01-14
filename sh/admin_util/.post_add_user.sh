@@ -22,7 +22,8 @@ sudo usermod -a -G analysts $the_user
 echo "004 設定Home目錄檔案權限"
 sudo chown -R $the_user:analysts /home/$the_user/*.ipynb
 sudo chmod +x /home/$the_user/*.ipynb
-sudo chmod 0750 /home/$the_user
+sudo chmod 0755 /home/$the_user
+# 750會讓 my-web無法顯示在網站上
 
 echo "005 設定my-web權限"
 sudo bash /root/admin_util/.setup_my-web_permission_that_user.sh $the_user
