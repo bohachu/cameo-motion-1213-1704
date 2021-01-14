@@ -22,7 +22,9 @@ sudo ln -s /root/admin_util/.env /home/$the_user/
 
 echo "003 複製.ipynb"
 sudo /bin/cp /root/admin_util/管理者系統設定.ipynb /home/$the_user/
-sudo rm -f /home/$the_user/系統設定.ipynb
+if [ -f /home/$the_user/系統設定.ipynb ]; then
+    sudo rm -f /home/$the_user/系統設定.ipynb
+fi
 
 echo "004 調整權限"
 sudo chown $the_user:$the_user /home/$the_user/*.py
