@@ -1,3 +1,6 @@
+# 檔案目錄架構
+https://docs.google.com/spreadsheets/d/1tWdxukgrTkYYMxSWTksB98aDaiHLGq7kPeJgOC48TwY/edit#gid=0
+
 # 安裝
 ### 001 取得git repo
 cd 家目錄
@@ -7,22 +10,32 @@ git clone <repo網址>
 將private key和public key,和crt憑證 放置到專案目錄/secrets 目錄 下面
 
 ### 003 準備env檔案
-第一次佈署可以不用執行此步驟
-
-若不是第一次佈署, 建議人工檢查
 
 cd sh
 
 建立server環境設定檔, 如果不是第一次佈署, 需要檢查現有的.env是否所有key都一樣
 cp .env-template .env
 
+確認裡面的設定都符合環境, 
+INIT_ADMIN_USER: 第一個使用者的名稱
+INSTALL_USER: 本使用者名稱
+PRJ_DIR_NAME: 專案目錄名稱, 安裝時會引用
+SITE_DOMAIN: website domain name
+HTML_DIR: 靜態網站檔案放置的位置
+JS_LIB_VERSION: 版本號
+其他為開發/安裝的參數, 比較試當時狀況
+
+nano .env
+
+
 建立使用者加目錄中的環境設定檔(因為ipynb需要用到)
 cp etc_skel/.user-env-template etc_skel/.user-env
-修改.env and .user-env檔案以符合情境
+修改.env and .user-env檔案以符合情境 (主要是domain_name)
 
 
 ### 004 打包dist 並佈署到對應目錄
-將網站發布到wwwhtml目錄中
+將網站發布到 HTML_DIR 目錄中
+以及 HTML_DIR-bak目錄中 (還原原廠設定用途)
 
 cd 專案目錄/sh 
 安裝js-obfuscator
