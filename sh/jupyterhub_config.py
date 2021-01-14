@@ -4,14 +4,15 @@
 # https://github.com/jupyterhub/ldapauthenticator/issues/54
 # To put this config in /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py, run:
  # sudo ./update_jupyterhub_config_then_restart.sh
- 
+
 from jupyter_client.localinterfaces import public_ips
 import os, sys, subprocess
 
 c.JupyterHub.admin_access = True
 
 # c.JupyterHub.base_rul = ''
-c.JupyterHub.bind_url = 'http://127.0.0.1:3801/'
+# c.JupyterHub.bind_url = 'http://127.0.0.1:3801/' 會失效, jhub無法連線
+c.JupyterHub.bind_url = 'http://:3801/'
 c.Authenticator.admin_users = {'cameo','iek','cameo2','hanes','caro'}
 
 c.LocalAuthenticator.create_system_users = True
