@@ -30,3 +30,28 @@ echo "/home/$the_user 已改成0755"
 
 
 echo "處理$the_user my-web HTML目錄...完成"
+
+#處理 ipynb更名
+function remove_if_exists() {
+    local filepath=$1
+    if [ -f $filepath ]; then
+        sudo rm -f $filepath
+        echo "sudo rm -f $filepath ...Done!"
+    fi
+}
+# 移除既有 my-web下 .ipynb
+List=( "get-myweb-iframe.ipynb" "get-iframe.ipynb" "fork-component.ipynb" "get-preview-address.ipynb" )
+# cd /home/$the_user/my-web
+for Item in ${List[*]} 
+  do    
+    remove_if_exists /home/$the_user/my-web/$Item
+  done
+
+
+sudo /bin/cp /etc/skel/my-web/my-web功能設定.ipynb /home/$the_user/my-web/
+echo "/home/$the_user/my-web/*.ipynb -> /home/$the_user/my-web/my-web功能設定.ipynb ...Done!"
+
+remove_if_exists /home/$the_user/settings.ipynb
+
+sudo /bin/cp /etc/skel/系統設定.ipynb /home/$the_user/
+echo "/home/$the_user/settings.ipynb -> /home/$the_user/系統設定.ipynb ...Done!"
