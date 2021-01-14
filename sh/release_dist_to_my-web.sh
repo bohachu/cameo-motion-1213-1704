@@ -43,8 +43,9 @@ function cp_file_to_etcskel() {
     fi
 }
 
-List=( "get-myweb-iframe.ipynb" "get-iframe.ipynb" "fork-component.ipynb" "get-preview-address.ipynb" )
-
+# List=( "get-myweb-iframe.ipynb" "get-iframe.ipynb" "fork-component.ipynb" "get-preview-address.ipynb" )
+# my-web功能設定.ipynb (可以fork, get-iframe, prevew address)
+List=( "my-web功能設定.ipynb" )
 
 for Item in ${List[*]} 
   do
