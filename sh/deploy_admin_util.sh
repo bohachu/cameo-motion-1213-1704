@@ -2,7 +2,6 @@
 # 使用情境: Deploy admin_util, 給admin使用的工具
 # 放到 /root/admin_util
 source .env
-
 if [[ -d /root/admin_util ]]; then
     sudo rm -rf /root/admin_util
     echo "已移除既有 /root/admin_util"
