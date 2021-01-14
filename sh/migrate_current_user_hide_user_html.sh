@@ -28,7 +28,6 @@ fi
 sudo chmod 0755 /home/$the_user
 echo "/home/$the_user 已改成0755"
 
-
 echo "處理$the_user my-web HTML目錄...完成"
 
 #處理 ipynb更名
