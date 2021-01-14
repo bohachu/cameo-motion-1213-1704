@@ -4,7 +4,6 @@
 # https://github.com/jupyterhub/ldapauthenticator/issues/54
 # To put this config in /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py, run:
  # sudo ./update_jupyterhub_config_then_restart.sh
-
 from jupyter_client.localinterfaces import public_ips
 import os, sys, subprocess
 
