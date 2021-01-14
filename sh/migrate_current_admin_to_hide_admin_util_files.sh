@@ -1,10 +1,9 @@
 #!/bin/bash
 
 the_user=$1
-source .env
+# source .env
 
 
-<<<<<<< HEAD
 sudo bash migrate_current_user_hide_user_html.sh $the_user
 
 sudo chmod 740 /home/$the_user/*.ipynb
@@ -21,19 +20,15 @@ function remove_if_exists() {
 }
 remove_if_exists /home/$the_user/admin-settings.ipynb
 
-=======
-if [[ ! -d $HTML_DIR/.$new_user ]]; then
-    sudo ln -s /home/$new_user/my-web $HTML_DIR/.$new_user
-fi
-if [[ -d $HTML_DIR/$new_user ]]; then
-    sudo rm $HTML_DIR/$new_user
-fi
+sudo bash migrate_current_user_hide_user_html.sh $the_user
+
 
 echo "remove $the_user obsolete admin util files"
 sudo rm /home/$the_user/*.sh
 
 echo "Copy $the_user latest admin util files"
 sudo usermod -a -G root $the_user
-sudo ln -s /root/admin_util/* /home/$the_user/
->>>>>>> f701048 (AC:hide admin files to root/admin_util)
+
+sudo ln -s /root/admin_util/.*.sh /home/$the_user/
+sudo ln -s /root/admin_util/*.ipynb /home/$the_user/
 
