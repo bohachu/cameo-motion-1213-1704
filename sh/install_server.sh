@@ -241,7 +241,6 @@ sudo chmod 600 /var/ssl/private.key
 sudo chown root:ssl-cert /var/ssl/certificate.crt
 sudo chmod 644 /var/ssl/certificate.crt
 
-
 echo "nginx 安裝啟動設定"
 cd /home/$INSTALL_USER/$PRJ_DIR_NAME/sh
 sudo systemctl stop nginx
