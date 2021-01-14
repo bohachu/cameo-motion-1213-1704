@@ -14,9 +14,9 @@ function remove_if_exists() {
 
 remove_if_exists /etc/skel/settings.ipynb
 
-
+# ref https://askubuntu.com/questions/674333/how-to-pass-an-array-as-function-argument
 function remove_folder_ipynb() {
-    local folderpath=$1
+    local folderpath="$1"
     shift
     local arr=("$@")
     for Item in "$arr[@]}";
@@ -34,7 +34,7 @@ remove_folder_ipynb /etc/skel/my-web "${List[@]}"
 echo "移除 $HTML_DIR and $HTML_DIR-bak 舊ipynb"
 List2=( "get_iframe.ipynb" "get-www-iframe.ipynb" )
 
-remove_folder_ipynb $HTML_DIR "${List2[@]}"
-remove_folder_ipynb $HTML_DIR-bak "${List2[@]}"
+remove_folder_ipynb "$HTML_DIR" "${List2[@]}"
+remove_folder_ipynb "$HTML_DIR-bak" "${List2[@]}"
 
 echo "移除完成"
