@@ -2,6 +2,9 @@
 # Native Authenticator ref https://blog.jupyter.org/simpler-authentication-for-small-scale-jupyterhubs-with-nativeauthenticator-999534c77a09
 # https://native-authenticator.readthedocs.io/en/latest/index.html
 # https://github.com/jupyterhub/ldapauthenticator/issues/54
+# To put this config in /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py, run:
+ # sudo ./update_jupyterhub_config_then_restart.sh
+ 
 from jupyter_client.localinterfaces import public_ips
 import os, sys, subprocess
 
@@ -18,7 +21,7 @@ c.PAMAuthenticator.admin_groups = {'sudo'}
 # This will run the command:
 # adduser -q –gecos “” –home /customhome/river –disabled-password river
 # when the user ‘river’ is created.
-c.PAMAuthenticator.add_user_cmd = ['/root/admin_util/.add_user.sh']
+c.PAMAuthenticator.add_user_cmd = ['sudo','bash','/root/admin_util/.add_user.sh']
 
 c.JupyterHub.ssl_key = '/var/ssl/private.key'
 c.JupyterHub.ssl_cert = '/var/ssl/certificate.crt'
