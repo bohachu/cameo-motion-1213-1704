@@ -14,7 +14,9 @@ if [[ ! -d /root/admin_util ]]; then
     echo "已建立 /root/admin_util/"
 fi
 
+
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/管理者系統設定.ipynb /root/admin_util/
+echo "管理者系統設定.ipynb copied"
 
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/.*.sh /root/admin_util/
 echo ".*.sh copied"
