@@ -20,10 +20,10 @@ function remove_folder_ipynb() {
     local folderpath=$1
     local list=$2
     for Item in ${list[*]} 
-    do  
-        echo "Removing $folderpath/$Item"  
-        remove_if_exists $folderpath/$Item
-    done
+        do  
+            echo "Removing $folderpath/$Item"  
+            remove_if_exists $folderpath/$Item
+        done
 }
 echo "移除既有 /etc/skel/my-web下 舊ipynb"
 List=( "get-myweb-iframe.ipynb" "get-iframe.ipynb" "fork-component.ipynb" "get-preview-address.ipynb" "fork_component.ipynb" "get_preview_address.ipynb" "get_iframe.ipynb" )
