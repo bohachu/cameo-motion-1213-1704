@@ -2,6 +2,8 @@
 
 #處理 ipynb更名
 
+source .env
+
 function remove_if_exists() {
     local filepath=$1
     if [ -f $filepath ]; then
