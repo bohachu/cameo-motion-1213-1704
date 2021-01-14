@@ -280,7 +280,7 @@ sudo chmod 755 /etc/skel
 # 750會讓 /home/user/my-web無法顯示在網站上
 
 echo "準備admin維護工具"
-sudo bash /home/$INSTALL_USER/$PRJ_DIR_NAME/deploy_admin_util.sh
+sudo bash /home/$INSTALL_USER/$PRJ_DIR_NAME/release_admin_util.sh
 
 echo "建立起始admin帳號"
 sudo bash /root/admin_util/add_admin_user.sh $INIT_ADMIN_USER
