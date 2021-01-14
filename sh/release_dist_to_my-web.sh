@@ -47,7 +47,7 @@ function cp_file_to_etcskel() {
 # my-web功能設定.ipynb (可以fork, get-iframe, prevew address)
 List=( "my-web功能設定.ipynb" )
 
-for Item in ${List[*]} 
+for Item in ${List[*]} s
   do
     echo "cp_file_to_etcskel /home/$INSTALL_USER/$PRJ_DIR_NAME/program/$Item /etc/skel/my-web/$Item"
     cp_file_to_etcskel $Item "/etc/skel/my-web"
