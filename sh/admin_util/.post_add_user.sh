@@ -1,7 +1,10 @@
 #!/bin/bash
 # 使用情境: admin透過jupyterhub GUI建立使用者後, 手動處理後續
 # 001 建立密碼
-# 002 建立預覽連結到網頁相對目錄下
+# 002 將預覽my-web連結至HTML目錄下
+# 003 將使用者加入analysts group
+# 004 設定Home目錄檔案權限
+# 005 設定my-web權限
 # 用法 ./post_add_user.sh username
 # 執行目錄: admin home目錄
 
