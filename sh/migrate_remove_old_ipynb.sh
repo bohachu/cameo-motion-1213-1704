@@ -31,7 +31,7 @@ echo "移除既有 /etc/skel/my-web下 舊ipynb"
 remove_folder_ipynb /etc/skel/my-web "${List[@]}"
 
 
-function remove_folder_ipynbㄉ() {
+function remove_folder_ipynb2() {
     local folderpath="$1"
     local List2=( "get_iframe.ipynb" "get-www-iframe.ipynb" )
     for Item in ${List2[*]};
