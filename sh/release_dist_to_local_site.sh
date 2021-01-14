@@ -14,7 +14,8 @@ function release_dist_to_folder() {
         sudo mkdir -p $folderpath
     fi
     sudo /bin/cp -Rf /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/* $folderpath
-    sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/get-www-iframe.ipynb $folderpath/get-www-iframe.ipynb    
+    # sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/get-www-iframe.ipynb $folderpath/get-www-iframe.ipynb    
+    sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/www功能設定.ipynb $folderpath/www功能設定.ipynb
 }
 release_dist_to_folder $HTML_DIR
 release_dist_to_folder $HTML_DIR-bak
