@@ -28,4 +28,4 @@ function setup_folder_perm() {
 setup_folder_perm root $HTML_DIR 0775 0774
 setup_folder_perm root $HTML_DIR-bak 0775 0774
 
-echo "重新設定local site權限 作業完成。"
+echo "重新設定local site權限 作業完成。重新設定local site權限後, 須針對個別使用者設定權限。"

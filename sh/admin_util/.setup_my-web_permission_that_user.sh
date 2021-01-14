@@ -1,4 +1,5 @@
 #!/bin/bash
+# 重新設定local site權限後, 須針對個別使用者設定權限
 
 new_user=$1
 
