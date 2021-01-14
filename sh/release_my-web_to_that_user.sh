@@ -9,12 +9,12 @@ echo "重新佈署既有使用者home資料夾,/home/$that_user/ 資料夾..."
 
 # overwrite homepage.html for every user
 
-
-if [ -d /home/$that_user/my-web ]; then 
-    # echo "清除/home/$that_user/my-web/*資料"
-    sudo rm -rf /home/$that_user/my-web/*
-    echo "清除/home/$that_user/my-web/*完成"
-fi
+## 不應該清除!!!!不要清除!!!!
+# if [ -d /home/$that_user/my-web ]; then 
+#     # echo "清除/home/$that_user/my-web/*資料"
+#     sudo rm -rf /home/$that_user/my-web/*
+#     echo "清除/home/$that_user/my-web/*完成"
+# fi
 
 if [ ! -d /home/$that_user/my-web ]; then  
     # echo "建立/home/$that_user/my-web資料夾"
