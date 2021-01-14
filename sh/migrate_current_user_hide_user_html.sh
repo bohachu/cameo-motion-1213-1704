@@ -25,6 +25,7 @@ if [[ -d $HTML_DIR/$the_user ]]; then
     echo "$HTML_DIR/$the_user 已成功移除"
 fi
 
+
 sudo chmod 0755 /home/$the_user
 echo "/home/$the_user 已改成0755"
 
