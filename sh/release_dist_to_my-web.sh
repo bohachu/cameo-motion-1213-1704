@@ -47,13 +47,15 @@ function cp_file_to_etcskel() {
 # my-web功能設定.ipynb (可以fork, get-iframe, prevew address)
 List=( "my-web功能設定.ipynb" )
 
-for Item in ${List[*]} 
+for Item in ${List[*]} s
   do
     echo "cp_file_to_etcskel /home/$INSTALL_USER/$PRJ_DIR_NAME/program/$Item /etc/skel/my-web/$Item"
     cp_file_to_etcskel $Item "/etc/skel/my-web"
   done
 
-sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/settings.ipynb /etc/skel/
+# sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/settings.ipynb /etc/skel/
+# 系統設定.ipynb
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/系統設定.ipynb /etc/skel/
 
 ## 因為dist內已經預先保留components, 讓縮圖可以正常顯示, 所以這裡不需要做 
 # TODO: 未來需要修改路徑, 讓dist 和www 目錄不須有components
