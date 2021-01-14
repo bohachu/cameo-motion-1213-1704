@@ -10,3 +10,4 @@ package-lock.json
 
 jupyterhub_cookie_secret
 secrets/*
+.DS_Store
