@@ -12,7 +12,7 @@ sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/admin-settings.ipyn
 
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/.*.sh /root/admin_util/
 
-sudo ln -s /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/.env /root/admin_util/.env
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/.env /root/admin_util/.env
 sudo chown -R root:root /root/admin_util
 sudo chmod 770 -R /root/admin_util/
 #echo "將預設admin加入root"
