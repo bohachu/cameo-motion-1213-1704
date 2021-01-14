@@ -12,13 +12,4 @@ the_user=$1
 
 sudo bash /root/admin_util/.post_add_user.sh $the_user
 
-source .env
-
-source /root/admin_util/.env
-
-
-new_user=$1
-
-sudo bash /root/admin_util/.post_add_user.sh $new_user
-
-sudo bash /root/admin_util/.post_add_admin.sh $new_user
+sudo bash /root/admin_util/.post_add_admin.sh $the_user
