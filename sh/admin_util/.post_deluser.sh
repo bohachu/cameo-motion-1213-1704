@@ -9,12 +9,12 @@ source /root/admin_util/.env
 sudo deluser --remove-all-files $the_user
 echo "001 使用者目錄移除...成功。"
 
-if [ -d $HTML_DIR/$the_user ]; then
+if [ -L $HTML_DIR/$the_user ]; then
     sudo rm -f $HTML_DIR/$the_user
     echo "002.1 使用者WWW連結 $HTML_DIR/$the_user 移除...成功。"
 fi
 
-if [ -d $HTML_DIR/.$the_user ]; then
+if [ -L $HTML_DIR/.$the_user ]; then
     sudo rm -f $HTML_DIR/.$the_user
     echo "002.2 使用者WWW連結 $HTML_DIR/.$the_user 移除...成功。"
 fi

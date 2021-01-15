@@ -9,7 +9,7 @@ sudo rm /home/$the_user/*.py
 sudo rm /home/$the_user/*.ipynb
 
 
-if [[ -d $HTML_DIR/$the_user ]]; then
+if [[ -L $HTML_DIR/$the_user ]]; then
     sudo rm -f $HTML_DIR/$the_user
     echo "$HTML_DIR/$the_user 已成功移除"
 fi
