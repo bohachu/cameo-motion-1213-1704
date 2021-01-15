@@ -23,7 +23,7 @@ function remove_if_exists() {
     fi
 }
 # 移除既有 my-web下 .ipynb
-List=( "get-myweb-iframe.ipynb" "get-iframe.ipynb" "fork-component.ipynb" "get-preview-address.ipynb" )
+List=( "get-myweb-iframe.ipynb" "get-iframe.ipynb" "fork-component.ipynb" "get-preview-address.ipynb" "fork_component.ipynb" "get_preview_address.ipynb" "get_iframe.ipynb" "settings.ipynb")
 # cd /home/$the_user/my-web
 for Item in ${List[*]} 
   do    
