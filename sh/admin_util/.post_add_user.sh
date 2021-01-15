@@ -12,12 +12,12 @@ source /root/admin_util/.env
 
 the_user=$1
 
-sudo /bin/cp -r /etc/skel/* /home/${user}/    
-sudo chown -R ${user}:${user} /home/${user}/
+sudo /bin/cp -r /etc/skel/* /home/$the_user/    
+sudo chown -R $the_user:$the_user /home/$the_user/
 echo "001 將/etc/skel所有檔案複製到使用者home目錄, 套用使用者權限...完成"
 # sudo passwd $the_user
 
-if [[ ! -d $HTML_DIR/.$the_user ]]; then
+if [[ ! -L $HTML_DIR/.$the_user ]]; then
     sudo ln -s /home/$the_user/my-web $HTML_DIR/.$the_user
 fi
 echo "002 建立預覽連結到網頁相對目錄下...完成"
