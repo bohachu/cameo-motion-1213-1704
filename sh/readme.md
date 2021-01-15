@@ -89,14 +89,19 @@ sudo ./migrate_current_user_hide_user_html.sh that_user
 cd 專案目錄/sh 
 ./install_server.sh
 
-### 006 建立第一位jupyterhub admin帳號
+### 006 建立jupyterhub admin帳號
 有兩種方法:
 
 透過jupyterhub 介面建立使用者後
-sudo ./post_add_admin_user.sh <username>
+sudo ./admin_util/.post_add_admin_user.sh <username>
+或如果jupyterhub admin要建立其他admin, 在該使用者home目錄可以用terminal執行
+sudo ./.post_add_admin_user.sh <username>
 
 不透過jupyterhub 介面
-sudo ./add_admin_user.sh <username>
+sudo ./admin_util/.add_admin_user.sh <username>
+或如果jupyterhub admin要建立其他admin, 在該使用者home目錄可以用terminal執行
+sudo ./.add_admin_user.sh <username>
+
 
 說明:建立時OS會自動 從/etc/skel當作模板copy到此新增使用者加目錄
 以及將必要的sh和program內的ipynb 複製過去使用者加目錄
@@ -107,11 +112,18 @@ sudo ./add_admin_user.sh <username>
 ### 007 建立一般使用者
 有兩種方法:
 
-透過jupyterhub 介面建立使用者後
-sudo ./post_add_user.sh <username>
+Admin使用者透過jupyterhub 介面建立使用者後會自動執行.add_user.sh指令
 
-不透過jupyterhub 介面
-sudo ./add_user.sh <username>
+若透過admin使用者的home目錄在terminal執行:
+sudo bash .add_user.sh <username>
+or
+sudo bash /root/admin_util/.add_user.sh <username>
+
+若需套用建立使用者後的行為, 則在admin家目錄:
+sudo bash .post_add_user.sh <username>
+or
+sudo bash /root/admin_util/.post_add_user.sh <username>
+
 
 ### 008 密碼操作
 設定個別使用者密碼:
@@ -120,9 +132,10 @@ sudo passwd <username>
 使用者自行改密碼
 passwd <username>
 
-### 009 其他要建立使用者家目錄中的檔案
+### 009 手動增加其他要建立使用者家目錄中的檔案
 可以copy進 /etc/skel
-在add_user/post_add_user 等過程會處理
+
+在add_user 與 post_add_user, post_add_admin等過程會處理建立使用者目錄的過程
 
 # 將Javascript 亂碼與壓縮說明
 ### 打包 js 
