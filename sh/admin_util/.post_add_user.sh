@@ -22,7 +22,7 @@ if [[ ! -L $HTML_DIR/.$the_user ]]; then
     
 fi
 # 改成root:analysts, for www還原
-sudo chown root:analysts $HTML_DIR/.$the_user
+sudo chown -h root:analysts $HTML_DIR/.$the_user
 echo "002 建立預覽連結到網頁相對目錄下...完成"
 
 
