@@ -43,19 +43,40 @@ cd 專案目錄/sh
 
 若修改程式碼後重新佈署時, compile以及發布www 和myweb要同時執行, 可執行:
 ./compile_and_release.sh 
+(包含 compile,release_dist_to_local_site,release_dist_to_my-web,release_admin_util )
+
 
 若compile, 以及發布www 和myweb需要獨立執行
 compile dist, 包含js加密和打包, 產出的網站檔案在dist
-./compile.sh
+sudo ./compile.sh
 
 發佈到網站目錄
-./release_dist_to_local_site.sh
+sudo ./release_dist_to_local_site.sh
 
 發佈到預設使用者目錄
-./release_dist_to_my-web.sh
+sudo ./release_dist_to_my-web.sh
 
-### 005 若重新佈署,既有使用者須轉移進新的檔案
-./release_my-web_to_that_user.sh
+發佈管理員工具
+sudo ./release_admin_util.sh
+
+
+### 004.1 轉移既有使用者與ipynb
+轉移已經建立過的一般使用者 "that_user", 套用新的設定
+sudo ./migrate_current_user_hide_user_html.sh that_user
+
+轉移已經建立過的admin使用者 "that_user", 套用新的設定 (其中包含上述程式碼)
+sudo ./migrate_current_admin_user_hide_admin_util_files.sh that_user
+
+將舊的ipynb換成新的(WWW目錄以及/etc/skel中的)
+sudo ./migrate_remove_old_ipynb.sh
+
+### 005 若重新佈署,僅更新既有使用者my-web檔案(不刪除)
+sudo ./release_my-web_to_that_user.sh the_user
+
+或直接執行
+sudo ./migrate_current_user_hide_user_html.sh that_user
+
+
 
 ### 005 安裝jupyterhub, jupyterlab, extension等主程式
 第一次安裝server時需要安裝
