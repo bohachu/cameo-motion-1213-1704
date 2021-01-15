@@ -19,6 +19,8 @@ echo "001 將/etc/skel所有檔案複製到使用者home目錄, 套用使用者�
 
 if [[ ! -L $HTML_DIR/.$the_user ]]; then
     sudo ln -s /home/$the_user/my-web $HTML_DIR/.$the_user
+    # 改成root:analysts, for www還原
+    sudo chown root:analysts $HTML_DIR/.$the_user
 fi
 echo "002 建立預覽連結到網頁相對目錄下...完成"
 
