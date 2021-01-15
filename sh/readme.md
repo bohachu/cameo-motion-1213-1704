@@ -59,21 +59,26 @@ sudo ./release_dist_to_my-web.sh
 發佈管理員工具
 sudo ./release_admin_util.sh
 
+應先將將舊的ipynb換成新的(WWW目錄以及/etc/skel中的)
+sudo ./migrate_remove_old_ipynb.sh
 
-### 004.1 轉移既有使用者與ipynb
+
+不需要的使用者, 應先移除該使用者的超連結
+sudo ./admin_util/.post_deluser.sh the_user
+
+### 004.1 轉移既有使用者
+
 轉移已經建立過的一般使用者 "that_user", 套用新的設定
 sudo ./migrate_current_user_hide_user_html.sh that_user
 
 轉移已經建立過的admin使用者 "that_user", 套用新的設定 (其中包含上述程式碼)
 sudo ./migrate_current_admin_user_hide_admin_util_files.sh that_user
 
-將舊的ipynb換成新的(WWW目錄以及/etc/skel中的)
-sudo ./migrate_remove_old_ipynb.sh
 
 ### 005 若重新佈署,僅更新既有使用者my-web檔案(不刪除)
 sudo ./release_my-web_to_that_user.sh the_user
 
-或直接執行
+直接執行
 sudo ./migrate_current_user_hide_user_html.sh that_user
 
 
