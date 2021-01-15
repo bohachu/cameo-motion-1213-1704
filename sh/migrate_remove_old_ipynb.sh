@@ -17,7 +17,7 @@ remove_if_exists /etc/skel/settings.ipynb
 # ref https://askubuntu.com/questions/674333/how-to-pass-an-array-as-function-argument
 function remove_folder_ipynb() {
     local folderpath="$1"
-    local List=( "get-myweb-iframe.ipynb" "get-iframe.ipynb" "fork-component.ipynb" "get-preview-address.ipynb" "fork_component.ipynb" "get_preview_address.ipynb" "get_iframe.ipynb" )
+    local List=( "get-myweb-iframe.ipynb" "get-iframe.ipynb" "fork-component.ipynb" "get-preview-address.ipynb" "fork_component.ipynb" "get_preview_address.ipynb" "get_iframe.ipynb" "settings.ipynb")
     for Item in ${List[*]};
         do  
             echo "Removing $folderpath/$Item"  
@@ -33,7 +33,7 @@ remove_folder_ipynb /etc/skel/my-web "${List[@]}"
 
 function remove_folder_ipynb2() {
     local folderpath="$1"
-    local List2=( "get_iframe.ipynb" "get-www-iframe.ipynb" )
+    local List2=( "get_iframe.ipynb" "get-www-iframe.ipynb" "settings.ipynb" )
     for Item in ${List2[*]};
         do  
             echo "Removing $folderpath/$Item"  
