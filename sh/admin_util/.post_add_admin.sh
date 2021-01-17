@@ -21,13 +21,11 @@ sudo ln -s /root/admin_util/.*.sh /home/$the_user/
 sudo ln -s /root/admin_util/.env /home/$the_user/
 
 echo "003 複製.ipynb"
-sudo /bin/cp /root/admin_util/管理者系統設定.ipynb /home/$the_user/
-if [ -f /home/$the_user/系統設定.ipynb ]; then
-    sudo rm -f /home/$the_user/系統設定.ipynb
-fi
+sudo rm -f /home/$the_user/*.ipynb
+sudo /bin/cp /root/admin_util/*.ipynb /home/$the_user/
 
 echo "004 調整權限"
-sudo chown $the_user:$the_user /home/$the_user/*.py
+#sudo chown $the_user:$the_user /home/$the_user/*.py
 sudo chown $the_user:$the_user /home/$the_user/*.ipynb
 # sudo chmod +x /home/$the_user/*.ipynb
 # # *.ipynb只有此admin可以操作

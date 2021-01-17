@@ -23,10 +23,8 @@ else
     sudo useradd -m -p $(openssl passwd -6 ${user}) -G analysts ${user} 
     echo "001 建立使用者, 密碼與使用者帳號一樣...完成"
     sudo mkdir -p $userhome
-    sudo chown ${user}:${user} userhome
-    sudo cp -r /etc/skel/* /home/${user}/    
-    sudo chown -R ${user}:${user} /home/${user}/
-    echo "002 建立使用者home目錄, 將/etc/skel所有檔案複製到使用者home目錄, 套用使用者權限...完成"
+    sudo chown -R ${user}:${user} userhome
+    
 fi
 
 sudo bash /root/admin_util/.post_add_user.sh ${user}

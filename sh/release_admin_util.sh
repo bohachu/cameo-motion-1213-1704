@@ -22,7 +22,12 @@ echo ".*.sh copied"
 sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/.env /root/admin_util/.env
 echo ".env copied"
 sudo chown -R root:root /root/admin_util
+echo "sudo chown -R root:root /root/admin_util ...done"
+
+sudo chown :analysts /root/admin_util/.setup_my-web_permission_that_user.sh
+echo "chown :analysts /root/admin_util/.setup_my-web_permission_that_user.sh ...done"
+
 sudo chmod 770 -R /root/admin_util/
-echo "chown root:root and chmod 770 /root/admin_util/ ...done"
+echo "sudo chmod 770 -R /root/admin_util/ ...done"
 
 echo "完成佈署admin_util維護工具。"
