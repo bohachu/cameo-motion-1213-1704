@@ -18,4 +18,9 @@ echo "發佈到admin_util..."
 sudo bash release_admin_util.sh
 echo "發佈到admin_util完成。"
 
+echo "發佈到user_util..."
+sudo bash release_user_util.sh
+echo "發佈到user_util完成。"
+
+
 echo "重新佈署完成, 請手動更新既有使用者目錄中的檔案"
