@@ -66,6 +66,9 @@ sudo ./migrate_remove_old_ipynb.sh
 不需要的使用者, 應先移除該使用者的超連結
 sudo ./admin_util/.post_deluser.sh the_user
 
+如果有更新jupyterhub_config.py
+sudo ./update_jupyterhub_config_then_restart.sh
+
 ### 004.1 轉移既有使用者
 
 轉移已經建立過的一般使用者 "that_user", 套用新的設定
