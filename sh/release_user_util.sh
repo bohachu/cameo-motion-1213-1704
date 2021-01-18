@@ -1,6 +1,6 @@
 #!/bin/bash
-# 使用情境: Deploy admin_util, 給admin使用的工具
-# 放到 /root/admin_util
+# 使用情境: Deploy user_util, 給user使用的工具
+# 放到 /root/user_util
 source .env
 if [[ -d /root/user_util ]]; then
     sudo rm -rf /root/user_util
@@ -20,3 +20,5 @@ echo "get-iframe.ipynb copied"
 sudo chown -R root:analysts /root/user_util
 sudo chmod 755 -R /root/user_util/
 echo "sudo chown -R root:analysts /root/user_util ...done"
+
+echo "完成佈署user_util維護工具。"
