@@ -112,8 +112,12 @@ cd /opt/jupyterhub/etc/jupyterhub/
 # Create the configuration for JupyterHub
 # sudo /opt/jupyterhub/bin/jupyterhub --generate-config
 echo "Prepare jupyterhub_confug.py"
+if [ ! -f /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py ]; then
+    cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config-template.py /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py
+fi
 sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
 sudo chmod a+x /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
+echo "Prepare jupyterhub_confug.py ...Done!"
 
 # userlist
 echo "Prepare userlist"
