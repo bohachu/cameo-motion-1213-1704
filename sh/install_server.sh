@@ -60,7 +60,8 @@ sudo apt update && \
     sudo apt install --upgrade -y \
     python3 python3-dev  python3-venv \
     curl wget sudo cron joe nano \
-    zip unzip file fonts-dejavu acl libpq-dev 
+    zip unzip file fonts-dejavu acl libpq-dev \
+    sqlite3
     
 sudo apt install --upgrade -y \
     apt-utils ffmpeg libssl1.1 libssl-dev \
@@ -206,7 +207,7 @@ sudo /opt/jupyterhub/bin/jupyter nbextension install --py widgetsnbextension --s
 sudo /opt/jupyterhub/bin/jupyter nbextension enable widgetsnbextension --py --sys-prefix && \
 sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build && \
 # sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager keplergl-jupyter --no-build && \
-sudo /opt/jupyterhub/bin/jupyter labextension install jupyter-matplotlib --no-build && \
+# sudo /opt/jupyterhub/bin/jupyter labextension install jupyter-matplotlib --no-build && \ 
 sudo /opt/jupyterhub/bin/jupyter labextension install jupyterlab_filetree --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-sidecar --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install @jupyterlab/geojson-extension --no-build && \
@@ -216,7 +217,7 @@ sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-voila/jupyterlab-
 # sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager jupyter-leaflet --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install jupyterlab_iframe  --no-build && \
 sudo /opt/jupyterhub/bin/jupyter serverextension enable --py jupyterlab_iframe && \
-sudo /opt/jupyterhub/bin/jupyter clean && \
+sudo /opt/jupyterhub/bin/jupyter lab clean && \
 sudo /opt/jupyterhub/bin/jupyter lab build --minimize=False && \
 unset NODE_OPTIONS 
 
