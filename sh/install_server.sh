@@ -217,7 +217,7 @@ sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-voila/jupyterlab-
 # sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager jupyter-leaflet --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install jupyterlab_iframe  --no-build && \
 sudo /opt/jupyterhub/bin/jupyter serverextension enable --py jupyterlab_iframe && \
-sudo /opt/jupyterhub/bin/jupyter clean && \
+sudo /opt/jupyterhub/bin/jupyter lab clean && \
 sudo /opt/jupyterhub/bin/jupyter lab build --minimize=False && \
 unset NODE_OPTIONS 
 
