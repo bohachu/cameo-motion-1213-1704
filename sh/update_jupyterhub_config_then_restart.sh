@@ -12,6 +12,6 @@ sudo systemctl stop jupyterhub.service
 if [ ! -f /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py ]; then
     cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config-template.py /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py
 fi
-sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/jupyterhub_config.py /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
+sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
 sudo chmod +x /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
 sudo systemctl start jupyterhub.service
