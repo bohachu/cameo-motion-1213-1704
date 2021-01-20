@@ -60,7 +60,8 @@ sudo apt update && \
     sudo apt install --upgrade -y \
     python3 python3-dev  python3-venv \
     curl wget sudo cron joe nano \
-    zip unzip file fonts-dejavu acl libpq-dev 
+    zip unzip file fonts-dejavu acl libpq-dev \
+    sqlite3
     
 sudo apt install --upgrade -y \
     apt-utils ffmpeg libssl1.1 libssl-dev \
