@@ -20,7 +20,7 @@ user_result=$(sudo sqlite3 /jupyterhub.sqlite "$sql_cmd")
 
 for Item in ${user_result[*]};
   do
-    sudo bash .post_add_admin.sh $Item
+    sudo bash /root/admin_util/.post_add_admin.sh $Item
   done
 
 
