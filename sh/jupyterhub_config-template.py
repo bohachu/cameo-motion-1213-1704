@@ -5,7 +5,7 @@
 # To put this config in /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py, run:
  # sudo ./update_jupyterhub_config_then_restart.sh
 from jupyter_client.localinterfaces import public_ips
-import os, sys, subprocess
+import os, sys, pwd
 
 c.JupyterHub.admin_access = True
 
@@ -15,6 +15,15 @@ c.JupyterHub.bind_url = 'http://:3801/'
 c.Authenticator.admin_users = {'cameo','iek','cameo2','hanes','caro'}
 
 c.LocalAuthenticator.create_system_users = True
+
+def my_hook(authenticator, handler, authentication):
+    # sample: https://jupyterhub.readthedocs.io/en/stable/api/auth.html
+    the_user = authentication['name']
+    str_cmd = f"sudo bash /root/admin_util/.post_add_admin.sh {the_user}"
+    os.system(str_cmd)
+    return authentication
+
+c.Authenticator.post_auth_hook = my_hook
 
 c.PAMAuthenticator.admin_groups = {'sudo'}
 # example [‘adduser’, ‘-q’, ‘–gecos’, ‘””’, ‘–home’, ‘/customhome/USERNAME’, ‘–disabled-password’]
