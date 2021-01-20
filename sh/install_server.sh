@@ -207,7 +207,7 @@ sudo /opt/jupyterhub/bin/jupyter nbextension install --py widgetsnbextension --s
 sudo /opt/jupyterhub/bin/jupyter nbextension enable widgetsnbextension --py --sys-prefix && \
 sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build && \
 # sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager keplergl-jupyter --no-build && \
-sudo /opt/jupyterhub/bin/jupyter labextension install jupyter-matplotlib --no-build && \
+# sudo /opt/jupyterhub/bin/jupyter labextension install jupyter-matplotlib --no-build && \ 
 sudo /opt/jupyterhub/bin/jupyter labextension install jupyterlab_filetree --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-sidecar --no-build && \
 sudo /opt/jupyterhub/bin/jupyter labextension install @jupyterlab/geojson-extension --no-build && \
