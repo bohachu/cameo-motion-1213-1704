@@ -47,7 +47,7 @@ echo "005 設定my-web權限...完成"
 
 echo "決定使用者是否為admin(sudo), 如果是admin, 執行授權設定"
 
-is_admin=$(sudo bash /root/admin_util/.determine_admin.sh $the_user sudo)
+is_admin=$(sudo bash /root/admin_util/.determine_admin.sh $the_user)
 
 if [ is_admin = "True" ]; then
     sudo bash /root/admin_util/.post_add_admin.sh $the_user
