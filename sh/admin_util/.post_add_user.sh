@@ -45,5 +45,17 @@ echo "005 設定my-web權限...完成"
 
 # sudo chmod +x /home/$the_user/my-web/*.ipynb
 
+echo "決定使用者是否為admin(sudo), 如果是admin, 執行授權設定"
+
+is_admin=$(sudo bash /root/admin_util/.determine_admin.sh $the_user)
+echo "$the_user is admin = $is_admin"
+
+if [ is_admin == "True" ];then
+    echo "is_admin is True in if condision"
+    sudo bash /root/admin_util/.post_add_admin.sh $the_user
+    echo "$the_user admin授權完成!"
+else
+    echo "$ths_user 非admin!"
+fi
 
 echo "Post add user process completed."
