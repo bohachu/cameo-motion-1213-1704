@@ -12,7 +12,10 @@ c.JupyterHub.admin_access = True
 # c.JupyterHub.base_rul = ''
 # c.JupyterHub.bind_url = 'http://127.0.0.1:3801/' 會失效, jhub無法連線
 c.JupyterHub.bind_url = 'http://:3801/'
-c.Authenticator.admin_users = {'cameo','iek','cameo2','hanes','caro'}
+# c.Authenticator.admin_users = {'cameo','iek','cameo2','hanes','caro'}
+
+
+If set, allowed username set is ignored.
 
 c.LocalAuthenticator.create_system_users = True
 
@@ -26,6 +29,8 @@ def my_hook(authenticator, handler, authentication):
 c.Authenticator.post_auth_hook = my_hook
 
 c.PAMAuthenticator.admin_groups = {'sudo'}
+c.PAMAuthenticator.allowed_groups = {'sudo','analysts'}
+
 # example [‘adduser’, ‘-q’, ‘–gecos’, ‘””’, ‘–home’, ‘/customhome/USERNAME’, ‘–disabled-password’]
 # This will run the command:
 # adduser -q –gecos “” –home /customhome/river –disabled-password river
