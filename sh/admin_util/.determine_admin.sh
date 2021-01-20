@@ -11,7 +11,7 @@ user_group_result=$(sudo sqlite3 /jupyterhub.sqlite "$sql_cmd")
 # 2|cameo|1|2020-12-11 04:29:30.015911|2021-01-18 16:07:19.002000|f93d966d76f047c596fa00ced0052fa8|{}|
 
 
-echo "user_group_result=$user_group_result"
+# echo "user_group_result=$user_group_result"
 
 if [[ $user_group_result == *$str_group* ]]
 then
