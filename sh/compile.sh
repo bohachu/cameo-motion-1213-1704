@@ -29,7 +29,7 @@ if [[ ! -d /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/www.amcharts.com/lib/4/plugins
     mkdir -p /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/www.amcharts.com/lib/4/plugins
 fi
 
-/bin/cp -R /home/$INSTALL_USER/$PRJ_DIR_NAME/cameo-motion/lib/$lib_version /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/cameo-motion/lib/$lib_version
+/bin/cp -R /home/$INSTALL_USER/$PRJ_DIR_NAME/cameo-motion/lib/$/* /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/cameo-motion/lib/$lib_version
 /bin/cp -R /home/$INSTALL_USER/$PRJ_DIR_NAME/app-* /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/
 /bin/cp -R /home/$INSTALL_USER/$PRJ_DIR_NAME/www.amcharts.com/lib/4/plugins/* /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/www.amcharts.com/lib/4/plugins/
 /bin/cp -R /home/$INSTALL_USER/$PRJ_DIR_NAME/cdn.amcharts.com/lib/4/* /home/$INSTALL_USER/$PRJ_DIR_NAME/dist/cdn.amcharts.com/lib/4/
