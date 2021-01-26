@@ -173,6 +173,7 @@
           <cameo-line
             data="app-cameo-line/data/data.csv"
             meta="app-cameo-line/data/meta.csv"
+            color="app-cameo-line/data/color.csv"
           ></cameo-line>
         </div>
       </div>
@@ -314,15 +315,13 @@
       </div>
     </footer>
 
-    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
-    <script src="https://www.amcharts.com/lib/4/plugins/timeline.js"></script>
-    <script src="https://www.amcharts.com/lib/4/plugins/bullets.js"></script>
-    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-    <script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/geodata/worldHigh.js"></script>
+    <script src="/cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="/cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="/cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="/www.amcharts.com/lib/4/plugins/timeline.js"></script>
+    <script src="/www.amcharts.com/lib/4/plugins/bullets.js"></script>
+    <script src="/cdn.amcharts.com/lib/4/maps.js"></script>
+    <script src="/cdn.amcharts.com/lib/4/geodata/worldHigh.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/aos/3.0.0-beta.6/aos.js"
       integrity="sha512-tnNM6PPNOVfZ5sGPw6hThCrcUBeqt2mVEk3EAj8tCtuMHqbuVm5/HsZagrr8W2aaFE+6rKIByGwQbEnmodrYVg=="
@@ -330,17 +329,17 @@
     ></script>
 
     <script
-      src="lib/v1/cameo-divergent-stacked-bars/cameo-divergent-stacked-bars.js"
+      src="/cameo-motion/lib/v2/cameo-divergent-stacked-bars.js"
       type="module"
     ></script>
-    <script src="lib/v1/cameo-run/cameo-run.js" type="module"></script>
-    <script src="lib/v1/cameo-line/cameo-line.js" type="module"></script>
-    <script src="lib/v1/cameo-rank/cameo-rank.js" type="module"></script>
+    <script src="/cameo-motion/lib/v2/cameo-run.js" type="module"></script>
+    <script src="/cameo-motion/lib/v2/cameo-line.js" type="module"></script>
+    <script src="/cameo-motion/lib/v2/cameo-rank.js" type="module"></script>
     <script
-      src="lib/v1/cameo-multi-axis-prediction/cameo-multi-axis-prediction.js"
+      src="/cameo-motion/lib/v2/cameo-multi-axis-prediction.js"
       type="module"
     ></script>
-    <script src="lib/v1/cameo-map-tw/cameo-map-tw.js" type="module"></script>
+    <script src="/cameo-motion/lib/v2/cameo-map-tw.js" type="module"></script>
 
     <script type="module">
 
@@ -358,16 +357,6 @@
           series.appear();
         });
       }
-
-      // function refresh_chart(str_cameo_motion_component_tag_name) {
-      //   let cameo_motion_component = document.getElementsByTagName(
-      //     str_cameo_motion_component_tag_name
-      //   )[0];
-      //   cameo_motion_component.chart.appear();
-      //   cameo_motion_component.chart.series.each(function (series) {
-      //     series.appear();
-      //   });
-      // }
 
       AOS.init({
         duration: 800, // values from 0 to 3000, with step 50ms
