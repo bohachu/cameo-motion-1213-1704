@@ -16,6 +16,9 @@ echo "重新佈署既有使用者home資料夾,/home/$that_user/ 資料夾..."
 #     echo "清除/home/$that_user/my-web/*完成"
 # fi
 
+# backup my-web
+sudo ./backup_my-web_that_user.sh $the_user
+
 if [ ! -d /home/$that_user/my-web ]; then  
     # echo "建立/home/$that_user/my-web資料夾"
     sudo mkdir -p /home/$that_user/my-web
