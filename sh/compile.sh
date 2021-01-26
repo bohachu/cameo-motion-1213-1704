@@ -48,7 +48,7 @@ echo "Copied favicon.ico and *.html."
 function compile_module() {
     local module_path=$1
     local js_name=$2
-    echo "Compiling module_path: $module_path"
+    echo "Compiling fpath: $module_path/$js_name.js"
     javascript-obfuscator "$module_path/$js_name.js"
     rm "$module_path/$js_name.js"
     /bin/cp "$module_path/$js_name-obfuscated.js" "$module_path/$js_name.js"
@@ -67,8 +67,8 @@ List=( "cameo-am-element" "cameo-clean" "cameo-divergent-stacked-bars" "cameo-li
 
 for Item in ${List[*]} 
   do
-    # echo "compile_module dist/lib/$lib_version/$Item $Item"
     compile_module "/home/$INSTALL_USER/$PRJ_DIR_NAME/dist/cameo-motion/lib/$lib_version" $Item
+    echo "compile_module dist/lib/$lib_version $Item ... Done"
   done
 
 # TODO: 未來需要修改路徑, 讓dist 和www 目錄不須有components (須同步修改release_dist_to_my-web.sh)
