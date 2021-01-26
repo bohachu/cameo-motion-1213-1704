@@ -1,3 +1,5 @@
+version 2.0.0
+date :2021/01/26
 ---
 2021-01-08 12:28 Hanes, AC v1.0 release
 done fix www, myweb 權限, even after restore, add user/admin user
