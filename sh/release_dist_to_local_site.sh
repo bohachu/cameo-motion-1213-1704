@@ -17,6 +17,9 @@ function release_dist_to_folder() {
     # sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/get-www-iframe.ipynb $folderpath/get-www-iframe.ipynb    
     sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/www功能設定.ipynb $folderpath/www功能設定.ipynb
 }
+# backup localsite before release
+sudo ./backup_local_site.sh
+
 release_dist_to_folder $HTML_DIR
 release_dist_to_folder $HTML_DIR-bak
 # echo "複製到HTML_DIR"
