@@ -8,6 +8,7 @@ node_modules/
 
 package-lock.json
 
+jupyterhub_config.py
 jupyterhub_cookie_secret
 secrets/*
 .DS_Store
