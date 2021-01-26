@@ -14,6 +14,7 @@ if [[ -L $HTML_DIR/$the_user ]]; then
     echo "$HTML_DIR/$the_user 已成功移除"
 fi
 
+
 #處理 ipynb更名
 function remove_if_exists() {
     local filepath=$1
@@ -30,5 +31,8 @@ for Item in ${List[*]}
     remove_if_exists /home/$the_user/my-web/$Item
   done
 
+# backup my-web
+sudo ./backup_my-web_that_user.sh $the_user
 
+# post add user
 sudo ./admin_util/.post_add_user.sh $the_user

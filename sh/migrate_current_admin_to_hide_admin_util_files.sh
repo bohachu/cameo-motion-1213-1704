@@ -7,7 +7,8 @@ sudo bash migrate_current_user_hide_user_html.sh $the_user
 
 
 echo "remove $the_user obsolete admin util files"
-sudo rm /home/$the_user/*.sh
+sudo rm /home/$the_user/.*.sh
+sudo unlink /home/$the_user/.*.sh
 sudo rm /home/$the_user/*.py
 sudo rm /home/$the_user/*.ipynb
 
