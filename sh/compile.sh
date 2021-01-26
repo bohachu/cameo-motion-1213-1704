@@ -68,7 +68,7 @@ List=( "cameo-am-element" "cameo-clean" "cameo-divergent-stacked-bars" "cameo-li
 for Item in ${List[*]} 
   do
     # echo "compile_module dist/lib/$lib_version/$Item $Item"
-    compile_module "/home/$INSTALL_USER/$PRJ_DIR_NAME/dist/cameo-motion/lib/$lib_version/$Item" $Item
+    compile_module "/home/$INSTALL_USER/$PRJ_DIR_NAME/dist/cameo-motion/lib/$lib_version" $Item
   done
 
 # TODO: 未來需要修改路徑, 讓dist 和www 目錄不須有components (須同步修改release_dist_to_my-web.sh)
