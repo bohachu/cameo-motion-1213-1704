@@ -32,7 +32,7 @@ for Item in ${List[*]}
   done
 
 # backup my-web
-sudo ./backup_my-web_that_user.sh $the_user
+# sudo ./backup_my-web_that_user.sh $the_user
 
 # post add user
 sudo ./admin_util/.post_add_user.sh $the_user
