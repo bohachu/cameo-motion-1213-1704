@@ -17,7 +17,7 @@ echo "重新佈署既有使用者home資料夾,/home/$that_user/ 資料夾..."
 # fi
 
 # backup my-web
-sudo ./backup_my-web_that_user.sh $the_user
+# sudo ./backup_my-web_that_user.sh $the_user
 
 if [ ! -d /home/$that_user/my-web ]; then  
     # echo "建立/home/$that_user/my-web資料夾"
