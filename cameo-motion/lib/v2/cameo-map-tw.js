@@ -19,9 +19,7 @@ class CameoMapTw extends CameoAmElement {
     return ary_chart_data;
   }
   async chart_render() {
-    var chart = am4core.create(this.str_random_id, am4maps.MapChart);
     let [ary_data, dic_meta] = await this.fetch_data_meta();
-    this.set_theme_height_menu_watermark_title(chart, dic_meta);
 
     //針對產業描述斷行
     var length = ary_data[0].length;
@@ -47,6 +45,9 @@ class CameoMapTw extends CameoAmElement {
       ary_data[3][i] = t;
     }
     const ary_chart_data = this.parse_ary_chart_data(ary_data);
+    var chart = am4core.create(this.str_random_id, am4maps.MapChart);
+    this.set_theme_height_menu_watermark_title(chart, dic_meta);
+
     // Set map definition
     chart.geodata = am4geodata_worldHigh;
     // Set projection
