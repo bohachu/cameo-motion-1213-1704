@@ -214,7 +214,7 @@ sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-voila/jupyterlab-
 sudo /opt/jupyterhub/bin/jupyter labextension install jupyterlab_iframe  --no-build #&& \
 sudo /opt/jupyterhub/bin/jupyter serverextension enable --py jupyterlab_iframe #&& \
 sudo /opt/jupyterhub/bin/jupyter lab clean #&& \
-sudo /opt/jupyterhub/bin/jupyter lab build --minimize=False --dev-build=False #&& \
+sudo /opt/jupyterhub/bin/jupyter lab build --dev-build=False #&& \
 unset NODE_OPTIONS 
 # 移除 --minimize=False 會進一步加速,但是如果記憶體不足則會出現runtime error
 # sudo /opt/jupyterhub/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager keplergl-jupyter --no-build && \

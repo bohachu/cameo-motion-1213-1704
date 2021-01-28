@@ -43,6 +43,7 @@ if [ "$is_admin" = "True" ];then
     # sudo chmod +x /home/$the_user/*.ipynb
     # # *.ipynb只有此admin可以操作
     sudo chmod 740 /home/$the_user/*.ipynb
+    sudo bash .update_db_admin.sh $the_user
     echo "$the_user admin授權完成!"
 else
     echo "$ths_user 非admin,不需設定。"
