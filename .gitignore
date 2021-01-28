@@ -2,6 +2,7 @@
 dist/
 dist/*
 
+.env
 sh/etc_skel/.env
 sh/etc_skel/.user-env 
 node_modules/
