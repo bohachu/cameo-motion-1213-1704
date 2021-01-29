@@ -1,6 +1,13 @@
 import os, shutil, getpass
 import ipywidgets as widgets
+from ipywidgets import Button, Layout
 # for my-web功能設定
+def get_user_home_path():
+    username=getpass.getuser()
+    str_path_home = f'/home/{username}'
+    return str_path_home
+
+str_user_home_path = get_user_home_path()
 
 btn_width='300px'
 btn_height='40px'
@@ -29,7 +36,8 @@ output_get_iframe = widgets.Output()
 button_get_preview = widgets.Button(description="取得預覽網址",layout=Layout(width='200px', height='40px'))
 output_get_preview = widgets.Output()
 
-def check_folder_name_duplicate(folder_name, check_folder_name):
+def check_folder_name_duplicate(folder_name, appname):
+    check_folder_name=os.path.join(str_user_home_path,appname)
     folder_duplicate_number=0
     while 1:
         if not os.path.exists(check_folder_name):
@@ -43,71 +51,6 @@ def check_folder_name_duplicate(folder_name, check_folder_name):
 def copyIframeGeneratorToComponet(dist):
     shutil.copy2("/root/user_util/get-iframe.ipynb",dist)
 
-def on_button_clicked_app_cameo_run():
-    src_folder="./components/app-cameo-run"
-    folder_name="./app-cameo-run"
-    check_folder_name="./app-cameo-run"
-    check_folder_name = check_folder_name_duplicate(folder_name, check_folder_name)
-    copytree(src_folder,check_folder_name)
-    copyIframeGeneratorToComponet(check_folder_name)
-    with output_app_cameo_run:
-        print(check_folder_name+" creating...")
-
-
-def on_button_clicked_app_cameo_rank():
-    src_folder=os.path.join(str_user_home_path,"components","app-cameo-rank")
-    # src_folder="./components/app-cameo-rank"
-    # folder_name="./app-cameo-rank"
-    folder_name=os.path.join(str_user_home_path,"app-cameo-rank")
-    # check_folder_name="./app-cameo-rank"
-    check_folder_name=os.path.join(str_user_home_path,"app-cameo-rank")
-    check_folder_name = check_folder_name_duplicate(folder_name, check_folder_name)
-    copytree(src_folder,check_folder_name)
-    copyIframeGeneratorToComponet(check_folder_name)
-    with output_app_cameo_rank:
-        print(check_folder_name+" creating...")
-
-def on_button_clicked_app_cameo_multi_axis_prediction():
-    src_folder="./components/app-cameo-multi-axis-prediction"
-    folder_name="./app-cameo-multi-axis-prediction"
-    check_folder_name="./app-cameo-multi-axis-prediction"
-    check_folder_name = check_folder_name_duplicate(folder_name, check_folder_name)
-    copytree(src_folder,check_folder_name)
-    copyIframeGeneratorToComponet(check_folder_name)
-    with output_app_cameo_multi_axis_prediction:
-        print(check_folder_name+" creating...")
-
-def on_button_clicked_app_cameo_map_tw():
-    src_folder="./components/app-cameo-map-tw"
-    folder_name="./app-cameo-map-tw"
-    check_folder_name="./app-cameo-map-tw"
-    check_folder_name = check_folder_name_duplicate(folder_name, check_folder_name)
-    copytree(src_folder,check_folder_name)
-    copyIframeGeneratorToComponet(check_folder_name)
-    with output_app_cameo_map_tw:
-        print(check_folder_name+" creating...")
-
-def on_button_clicked_cameo_app_cameo_line():
-    src_folder="./components/app-cameo-line"
-    folder_name="./app-cameo-line"
-    check_folder_name="./app-cameo-line"
-    check_folder_name = check_folder_name_duplicate(folder_name, check_folder_name)
-    copytree(src_folder,check_folder_name)
-    copyIframeGeneratorToComponet(check_folder_name)
-    with output_cameo_app_cameo_line:
-        print(check_folder_name+" creating...")
-        
-def on_button_clicked_cameo_divergent_stacked_bars():
-    src_folder="./components/app-cameo-divergent-stacked-bars"
-    folder_name="./app-cameo-divergent-stacked-bars"
-    check_folder_name="./app-cameo-divergent-stacked-bars"
-    check_folder_name = check_folder_name_duplicate(folder_name, check_folder_name)
-    copytree(src_folder,check_folder_name)
-    copyIframeGeneratorToComponet(check_folder_name)
-    with output_app_cameo_divergent_stacked_bars:
-        print(check_folder_name+" creating...")
-
-   
 def copytree(src, dst, symlinks=False, ignore=None):
     for item in os.listdir(src):
         s = os.path.join(src, item)
@@ -117,14 +60,68 @@ def copytree(src, dst, symlinks=False, ignore=None):
         else:
             shutil.copy2(s, d)        
 
+def get_folder_names(appname):
+    src_folder=os.path.join(str_user_home_path,"components",appname)
+    folder_name=os.path.join(str_user_home_path,appname)
+    check_folder_name=check_folder_name_duplicate(folder_name, appname)
+    return src_folder, check_folder_name
 
-def on_button_clicked_get_iframe():
+
+def on_button_clicked_app_cameo_run(b):
+    appname="app-cameo-run"
+    src_folder, check_folder_name=get_folder_names(appname)
+    copytree(src_folder,check_folder_name)
+    copyIframeGeneratorToComponet(check_folder_name)
+    with output_app_cameo_run:
+        print(check_folder_name+" creating...")
+
+def on_button_clicked_app_cameo_rank(b):
+    appname="app-cameo-rank"
+    src_folder, check_folder_name=get_folder_names(appname)
+    copytree(src_folder,check_folder_name)
+    copyIframeGeneratorToComponet(check_folder_name)
+    with output_app_cameo_rank:
+        print(check_folder_name+" creating...")
+
+def on_button_clicked_app_cameo_multi_axis_prediction(b):
+    appname="app-cameo-multi-axis-prediction"
+    src_folder, check_folder_name=get_folder_names(appname)
+    copytree(src_folder,check_folder_name)
+    copyIframeGeneratorToComponet(check_folder_name)
+    with output_app_cameo_multi_axis_prediction:
+        print(check_folder_name+" creating...")
+
+def on_button_clicked_app_cameo_map_tw(b):
+    appname="app-cameo-map-tw"
+    src_folder, check_folder_name=get_folder_names(appname)
+    copytree(src_folder,check_folder_name)
+    copyIframeGeneratorToComponet(check_folder_name)
+    with output_app_cameo_map_tw:
+        print(check_folder_name+" creating...")
+
+def on_button_clicked_cameo_app_cameo_line(b):
+    appname="app-cameo-line"
+    src_folder, check_folder_name=get_folder_names(appname)
+    copytree(src_folder,check_folder_name)
+    copyIframeGeneratorToComponet(check_folder_name)
+    with output_cameo_app_cameo_line:
+        print(check_folder_name+" creating...")
+        
+def on_button_clicked_cameo_divergent_stacked_bars(b):
+    appname="app-cameo-divergent-stacked-bars"
+    src_folder, check_folder_name=get_folder_names(appname)
+    copytree(src_folder,check_folder_name)
+    copyIframeGeneratorToComponet(check_folder_name)
+    with output_app_cameo_divergent_stacked_bars:
+        print(check_folder_name+" creating...")
+
+def on_button_clicked_get_iframe(b):
     with output_get_iframe:
         print("iframe 碼如下")
         dic_name= os.getcwd().split("/")
         print("<iframe frameborder=\"0\" src=\"https://iek.cameo.tw/."+dic_name[len(dic_name)-2]+"\" width=\"100%\" height=\"900\"></iframe>")
 
-def on_button_clicked_get_preview():
+def on_button_clicked_get_preview(b):
     with output_get_preview:
         print("預覽網址如下")
         #print("https://iek.cameo.tw/"+dic_name[len(dic_name)-2]+"/"+dic_name[len(dic_name)-1])
