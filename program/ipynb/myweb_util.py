@@ -4,10 +4,10 @@ from ipywidgets import Button, Layout
 # for my-web功能設定
 def get_user_home_path():
     username=getpass.getuser()
-    str_path_home = f'/home/{username}'
+    str_path_home = f'/home/{username}/my-web'
     return str_path_home
 
-str_user_home_path = get_user_home_path()
+str_user_myweb_path = get_user_home_path()
 
 btn_width='300px'
 btn_height='40px'
@@ -37,7 +37,7 @@ button_get_preview = widgets.Button(description="取得預覽網址",layout=Layo
 output_get_preview = widgets.Output()
 
 def check_folder_name_duplicate(folder_name, appname):
-    check_folder_name=os.path.join(str_user_home_path,appname)
+    check_folder_name=os.path.join(str_user_myweb_path,appname)
     folder_duplicate_number=0
     while 1:
         if not os.path.exists(check_folder_name):
@@ -61,8 +61,8 @@ def copytree(src, dst, symlinks=False, ignore=None):
             shutil.copy2(s, d)        
 
 def get_folder_names(appname):
-    src_folder=os.path.join(str_user_home_path,"components",appname)
-    folder_name=os.path.join(str_user_home_path,appname)
+    src_folder=os.path.join(str_user_myweb_path,"components",appname)
+    folder_name=os.path.join(str_user_myweb_path,appname)
     check_folder_name=check_folder_name_duplicate(folder_name, appname)
     return src_folder, check_folder_name
 
