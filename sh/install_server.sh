@@ -21,8 +21,8 @@ if [[ ! -f .env ]]; then
     sudo chmod 600 .env
 fi
 
-if [[ ! -f etc_skel/.user-env ]]; then
-    cp etc_skel/.user-env-template etc_skel/.user-env
+if [[ ! -f .user-env ]]; then
+    cp .user-env-template .user-env
 fi
 source .env
 
