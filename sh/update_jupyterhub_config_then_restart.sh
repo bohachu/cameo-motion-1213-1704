@@ -9,6 +9,9 @@
 source .env
 
 sudo systemctl stop jupyterhub.service
+if [ -f /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py ]; then
+    sudo mv /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py /opt/jupyterhub/etc/jupyterhub/jupyterhub_config-bak.py
+fi
 if [ ! -f /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py ]; then
     cp /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config-template.py /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/jupyterhub_config.py
 fi
