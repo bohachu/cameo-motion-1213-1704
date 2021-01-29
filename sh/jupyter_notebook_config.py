@@ -1,5 +1,5 @@
 # Configuration file for jupyter-notebook.
-# in /home/$USER/.jupyter/jupyter_notebook_config.py
+# cp to /opt/jupyterhub/etc/jupyter/
 # prerequisite: jupyterlab iframe extension
 
 # jupyterlab iframe
