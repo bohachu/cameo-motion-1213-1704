@@ -2,12 +2,23 @@ import os, shutil
 from distutils import dir_util
 import getpass
 
+import ipywidgets as widgets
+
+
 def get_user_home_path():
     username=getpass.getuser()
     str_path_home = f'/home/{username}'
     return str_path_home
 
 str_user_home_path=get_user_home_path()
+
+button_www_reset = widgets.Button(description="www 回復原廠設定",layout=Layout(width='200px', height='40px'))
+output_www_reset = widgets.Output()
+
+
+button_myweb_reset = widgets.Button(description="my-web 回復原廠設定",layout=Layout(width='200px', height='40px'))
+output_myweb_reset = widgets.Output()
+
 
 def www_copytree(src, dst, symlinks=False, ignore=None):
     for item in os.listdir(src):
@@ -27,7 +38,7 @@ def www_copytree(src, dst, symlinks=False, ignore=None):
             #shutil.copy2(s, d)
             shutil.copyfile(s, d)
 
-def backup_www(output_www_reset):
+def backup_www():
     with output_www_reset:
         print("www 備份中...")
     # str_user_home_path=get_user_home_path()
@@ -55,7 +66,7 @@ def backup_www(output_www_reset):
         print("www 備份完成")
 
     
-def reset_www(output_myweb_reset):
+def reset_www():
     with output_myweb_reset:
         print("www 重置中...")
     src_folder="/var/www/iek.cameo.tw/html-bak"
@@ -69,9 +80,9 @@ def reset_www(output_myweb_reset):
     with output_myweb_reset:
         print("www 重置完成")
 
-def on_button_clicked_www_reset(output_myweb_reset):
-    backup_www(output_myweb_reset)
-    reset_www(output_myweb_reset)
+def on_button_clicked_www_reset(b):
+    backup_www()
+    reset_www()
 
 def myweb_copytree(src, dst, symlinks=False, ignore=None):
     for item in os.listdir(src):
@@ -92,7 +103,7 @@ def myweb_copytree(src, dst, symlinks=False, ignore=None):
             #shutil.copyfile(s, d)
 
 
-def reset_my_web(output_myweb_reset):
+def reset_my_web():
     with output_myweb_reset:
         print("my-web 重置中...")
     src_folder="/etc/skel/my-web"
@@ -110,7 +121,7 @@ def reset_my_web(output_myweb_reset):
         print("my-web 重置完成")
 
 
-def backup_my_web(output_myweb_reset):
+def backup_my_web():
     with output_myweb_reset:
         print("my-web 備份中...")
     str_user_home_path = get_user_home_path()
@@ -133,6 +144,6 @@ def backup_my_web(output_myweb_reset):
     with output_myweb_reset:
         print("my-web 備份至"+new_folder_name)
 
-def on_button_clicked_myweb_reset(output_myweb_reset):
-    backup_my_web(output_myweb_reset)
-    reset_my_web(output_myweb_reset)
+def on_button_clicked_myweb_reset(b):
+    backup_my_web()
+    reset_my_web()
