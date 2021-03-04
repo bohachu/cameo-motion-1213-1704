@@ -1,3 +1,8 @@
+2021-0304 13:49 caro
+done 子建需求：
+cameo-map-tw 元件加入顏色與區域的修改
+裡面的 data meta 都已經新增欄位
+
 2021-01-24 23:09 刪除 amcore 參數，讓整體更乾淨
 
 2021-01-24 22:57 Bowen 測試運用 WebStorm 編輯看看 new branch
@@ -19,7 +24,7 @@ cameo-run 229 lines to 199 lines
 
 2021-01-24 14:23 caro commit again
 
-2021-01-24 13:02 caro 
+2021-01-24 13:02 caro
 done 001 在 components 底下的所有動圖完成 v2 架構修改及挖空變數修改
 todo 002 要把 v2 js 內容及 data meta img html 更新到首頁動圖，讓全部資料夾都可以成功讀取
 
