@@ -34,8 +34,12 @@ c.PAMAuthenticator.allowed_groups = {'sudo','analysts'}
 # when the user ‘river’ is created.
 c.PAMAuthenticator.add_user_cmd = ['sudo','bash','/root/admin_util/.add_user.sh']
 
-c.JupyterHub.ssl_key = '/var/ssl/private.key'
-c.JupyterHub.ssl_cert = '/var/ssl/certificate.crt'
+# c.JupyterHub.ssl_key = '/var/ssl/private.key'
+# c.JupyterHub.ssl_cert = '/var/ssl/certificate.crt'
+# 需要先安裝並設定certbot
+c.JupyterHub.ssl_key = '/etc/letsencrypt/live/iek.cameo.tw/privkey.pem'
+c.JupyterHub.ssl_cert = '/etc/letsencrypt/live/iek.cameo.tw/fullchain.pem'
+
 c.JupyterHub.cookie_secret_file = '/srv/jupyterhub/jupyterhub_cookie_secret'
 c.Spawner.default_url = '/lab'
 
