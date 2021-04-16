@@ -227,24 +227,24 @@ unset NODE_OPTIONS
 # sudo rm -rf /var/lib/apt/lists/*
 
 echo "SSL憑證設定"
-sudo usermod -a -G ssl-cert root
+# sudo usermod -a -G ssl-cert root
 
-cd /home/$INSTALL_USER
+# cd /home/$INSTALL_USER
 
-sudo mkdir -p /var/ssl
-# ssl_certificate 
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/certificate.crt /var/ssl/certificate.crt
-# ssl_certificate_key 
-sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/private.key /var/ssl/private.key
-# set permission of private key
-# optional, but safer. Private keys then have group ssl-cert, owner root, and permissions 640.
-sudo addgroup ssl-cert
-# sudo adduser root ssl-cert
-sudo usermod -a -G ssl-cert root
-sudo chown root:ssl-cert /var/ssl/private.key
-sudo chmod 600 /var/ssl/private.key
-sudo chown root:ssl-cert /var/ssl/certificate.crt
-sudo chmod 644 /var/ssl/certificate.crt
+# sudo mkdir -p /var/ssl
+# # ssl_certificate 
+# sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/certificate.crt /var/ssl/certificate.crt
+# # ssl_certificate_key 
+# sudo cp /home/$INSTALL_USER/$PRJ_DIR_NAME/secrets/private.key /var/ssl/private.key
+# # set permission of private key
+# # optional, but safer. Private keys then have group ssl-cert, owner root, and permissions 640.
+# sudo addgroup ssl-cert
+# # sudo adduser root ssl-cert
+# sudo usermod -a -G ssl-cert root
+# sudo chown root:ssl-cert /var/ssl/private.key
+# sudo chmod 600 /var/ssl/private.key
+# sudo chown root:ssl-cert /var/ssl/certificate.crt
+# sudo chmod 644 /var/ssl/certificate.crt
 
 echo "nginx 安裝啟動設定"
 cd /home/$INSTALL_USER/$PRJ_DIR_NAME/sh

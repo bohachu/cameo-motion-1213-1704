@@ -7,7 +7,15 @@ cd 家目錄
 git clone <repo網址> 
 
 ### 002 準備SSL憑證
-將private key和public key,和crt憑證 放置到專案目錄/secrets 目錄 下面
+安裝certbot:
+(修改install_cerrtbot.sh中的domain name)
+sudo ./install_cerrtbot.sh
+
+完成後cert會在
+ssl_certificate /etc/letsencrypt/live/iek.cameo.tw/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/iek.cameo.tw/private.pem;
+
+(obsolete)將private key和public key,和crt憑證 放置到專案目錄/secrets 目錄 下面
 
 ### 003 準備env檔案
 
