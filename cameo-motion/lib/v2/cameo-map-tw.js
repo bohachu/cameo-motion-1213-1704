@@ -72,6 +72,14 @@ class CameoMapTw extends CameoAmElement {
         marker.width = 14;
         marker.height = 14;
 
+        //if mobile, hide panel, Hanes ++ 
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            console.log("This is mobile device.")
+            chart.legend.disabled = true;
+        }else{
+            console.log("This is not mobile device.")
+        }
+
         const str_taiwan_json = "/cameo-motion/lib/v2/taiwan.json";
 
         // 台灣地圖
