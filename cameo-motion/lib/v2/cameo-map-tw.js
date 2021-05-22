@@ -55,15 +55,16 @@ class CameoMapTw extends CameoAmElement {
         // Set projection
         chart.projection = new am4maps.projections.Miller();
         chart.homeGeoPoint = {
-            latitude: -25,
-            longitude: -60
+            latitude: eval(dic_meta["地圖中心位置latitude"]),
+            longitude: eval(dic_meta["地圖中心位置longitude"])
         };
+
         chart.legend = new am4maps.Legend();
-        chart.legend.position = "left";
-        chart.legend.align = "left";
+        chart.legend.position = dic_meta["圖例位置(right or left)"];
+        chart.legend.align = dic_meta["圖例位置(right or left)"];
         chart.legend.background.fill = am4core.color("#e3f6f5");
         //chart.legend.background.fillOpacity = 0.85;
-        chart.legend.width = 180;
+        chart.legend.width = eval(dic_meta["圖例寬度"]);
         chart.legend.fontSize = "12px";
 
         chart.legend.useDefaultMarker = true;
@@ -72,12 +73,13 @@ class CameoMapTw extends CameoAmElement {
         marker.width = 14;
         marker.height = 14;
 
-        //if mobile, hide panel, Hanes ++ 
+        //if mobile, hide panel, Hanes ++
         if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
             console.log("This is mobile device.")
             chart.legend.disabled = true;
         }else{
             console.log("This is not mobile device.")
+            chart.legend.disabled = eval(dic_meta["網頁版是否隱藏圖例"]);
         }
 
         const str_taiwan_json = "/cameo-motion/lib/v2/taiwan.json";

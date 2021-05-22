@@ -1,3 +1,14 @@
+2021-05-22 10:28 caro bowen
+cameo-motion/lib/v2/cameo-map-tw.js 新增 meta.csv 功能完成
+    網頁版是否隱藏圖例,false
+    圖例位置(right or left),left
+    圖例寬度,150
+    地圖中心位置latitude,10
+    地圖中心位置longitude,-120
+
+2021-05-22 08:22 caro bowen
+新增 cameo-map-tw 可以隱藏圖例，並且在 iframe 可以同時顯示，美美的畫面
+
 2021-0304 13:49 caro
 done 子建需求：
 cameo-map-tw 元件加入顏色與區域的修改

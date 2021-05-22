@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>app-cameo-map-tw</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/scss/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row pb-5 pt-5">
+        <div class="col-md-8 pt-5 my-auto">
+          <cameo-map-tw data="data/data.csv" meta="data/meta.csv"></cameo-map-tw>
+        </div>
+      </div>
+    </div>
+
+    <script src="/cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="/cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="/cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="/www.amcharts.com/lib/4/plugins/bullets.js"></script>
+    <script src="/cdn.amcharts.com/lib/4/maps.js"></script>
+    <script src="/cdn.amcharts.com/lib/4/geodata/worldHigh.js"></script>
+    <script src="/cameo-motion/lib/v2/cameo-am-element.js" type="module"></script>
+    <script src="/cameo-motion/lib/v2/cameo-clean.js" type="module"></script>
+    <script src="/cameo-motion/lib/v2/cameo-map-tw.js" type="module"></script>
+  </body>
+</html>
