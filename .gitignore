@@ -13,3 +13,7 @@ jupyterhub_config.py
 jupyterhub_cookie_secret
 secrets/*
 .DS_Store
+
+components/app-cameo-map-tw-andrew/data/data.csv
+components/app-cameo-map-tw-andrew/data/meta.csv
+components/app-cameo-map-tw-andrew/index.html
