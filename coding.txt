@@ -1,3 +1,6 @@
+2021-05-24 16:24 caro
+更新 app-cameo-map-tw/data/meta.csv
+
 2021-05-22 10:28 caro bowen
 cameo-motion/lib/v2/cameo-map-tw.js 新增 meta.csv 功能完成
     網頁版是否隱藏圖例,false

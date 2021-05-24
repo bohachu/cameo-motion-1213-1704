@@ -21,3 +21,8 @@ key,value
 地圖區域8顏色,
 地圖區域9顏色,
 地圖區域10顏色,
+網頁版是否隱藏圖例,false
+圖例位置(right or left),left
+圖例寬度,180
+地圖中心位置latitude,-30
+地圖中心位置longitude,-100
