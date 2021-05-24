@@ -1,0 +1,77 @@
+ TODO:
+ 001 
+ 
+ 
+ cd sh
+~/cameo-motion-1213-1704/sh$ sudo ./backup_my-web_that_user.sh iek
+/home/iek/my-web was backuped to /home/iek/my-web+_+20210524
+should be /home/iek/history/my-web_bak20210524
+
+
+sudo mkdir /home/iek/history/my-web_bak20210524
+sudo cp -R /home/iek/my-web+_+20210524/* history/my-web_bak20210524/
+
+sudo chown -R iek:iek /home/iek/history/my-web_bak20210524
+
+
+
+cd sh
+
+sudo ./backup_local_site.sh
+
+cd /var/www/iek.cameo.tw/
+
+sudo mv /var/www/iek.cameo.tw/html+_+20210524 html-bak_20210524
+sudo chown -R root:analysts /var/www/iek.cameo.tw/html-bak_20210524
+
+
+~/cameo-motion-1213-1704/sh$ cat .env
+# Installation user = Linux user
+INIT_ADMIN_USER=iek
+INSTALL_USER=rsa-key-20201205
+PRJ_DIR_NAME=cameo-motion-1213-1704
+SITE_DOMAIN=iek.cameo.tw
+HTML_DIR=/var/www/iek.cameo.tw/html
+JS_LIB_VERSION=v2
+# To override these values, set the shell environment variables.
+# Note: Wildcard (*) cannot be used for JUPYTERHUB_VERSION.
+JUPYTERHUB_VERSION=1.2.2
+JUPYTERLAB_VERSION=2.2
+NOTEBOOK_VERSION=6.1
+
+
+DEFAULT_GIT_USER_EMAIL=ycchang.pmp@cameo.tw
+DEFAULT_GIT_USER_NAME=austinyuch
+
+# JupyterHub PostGRESQL version
+POSTGRES_VERSION=12.5
+POSTGRES_HOST=localhost:5432
+POSTGRES_PASSWORD=Q1w2e3r4
+POSTGRES_DB=jupyterhub
+JPY_PSQL_PASSWORD=Q1w2e3r4
+
+PGDATA=/var/lib/postgresql/data/jupyterhub
+
+#JPY_COOKIE_SECRET=
+
+cd sh
+sudo ./compile_and_release_lib.sh
+
+sudo cp /etc/skel/my-web/cameo-motion/lib/v2/cameo-map-tw.js /home/iek/my-web/cameo-motion/lib/v2/
+sudo chown iek:analysts /home/iek/my-web/cameo-motion/lib/v2/cameo-map-tw.js
+
+
+sudo /bin/cp components/app-cameo-map-tw/data/meta.csv /etc/skel/my-web/components/app-cameo-map-tw/data/meta.csv
+
+sudo /bin/cp components/app-cameo-map-tw/data/meta.csv /home/iek/my-web/components/app-cameo-map-tw/data/meta.csv
+
+sudo /bin/cp components/app-cameo-map-tw/data/meta.csv /etc/skel/my-web/app-cameo-map-tw/data/meta.csv
+
+sudo /bin/cp /etc/skel/my-web/app-cameo-map-tw/data/meta.csv /home/iek/my-web/app-cameo-map-tw/data/meta.csv
+
+sudo /bin/cp /etc/skel/my-web/app-cameo-map-tw/data/meta.csv /var/www/iek.cameo.tw/html-bak/app-cameo-map-tw/data/meta.csv
+
+sudo /bin/cp /var/www/iek.cameo.tw/html-bak/app-cameo-map-tw/data/meta.csv /var/www/iek.cameo.tw/html-bak/app-cameo-map-tw/data/meta.csv
+/bin/cp: '/var/www/iek.cameo.tw/html-bak/app-cameo-map-tw/data/meta.csv' and '/var/www/iek.cameo.tw/html-bak/app-cameo-map-tw/data/meta.csv' are the same file
+ sudo /bin/cp /var/www/iek.cameo.tw/html-bak/app-cameo-map-tw/data/meta.csv /var/www/iek.cameo.tw/html/app-cameo-map-tw/data/meta.csv
+
