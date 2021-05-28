@@ -20,9 +20,13 @@ echo "重新佈署既有使用者home資料夾,/home/$that_user/ 資料夾..."
 # sudo ./backup_my-web_that_user.sh $the_user
 
 if [ ! -d /home/$that_user/my-web ]; then  
-    # echo "建立/home/$that_user/my-web資料夾"
+    # 如果不存在就 "建立/home/$that_user/my-web資料夾"
     sudo mkdir -p /home/$that_user/my-web
     echo "建立/home/$that_user/my-web資料夾建立完成"
+else
+    # 如果存在就備份既有的my-web folder
+    sudo bash backup_my-web_that_user $that_user
+    echo "/home/$that_user/my-web資料夾備份完成"
 fi
 
 sudo /bin/cp -Rf /etc/skel/*  /home/$that_user/
@@ -39,6 +43,8 @@ sudo bash /home/$INSTALL_USER/$PRJ_DIR_NAME/sh/admin_util/.setup_my-web_permissi
 # cd /home/$that_user/my-web
 # sudo find . -type d -exec chmod 0755 {} \;
 # sudo find . -type f -exec chmod 0744 {} \;
+
+
 
 # sudo chmod +x /home/$that_user/my-web/*.ipynb
 chown -R $that_user:analysts /home/$that_user/*.ipynb

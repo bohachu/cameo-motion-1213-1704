@@ -18,7 +18,8 @@ function release_dist_to_folder() {
     sudo /bin/cp /home/$INSTALL_USER/$PRJ_DIR_NAME/program/ipynb/www功能設定.ipynb $folderpath/www功能設定.ipynb
 }
 # backup localsite before release
-# sudo ./backup_local_site.sh
+# backup to /var/www/iek.cameo.tw/html_bak$date
+sudo bash backup_local_site.sh
 
 release_dist_to_folder $HTML_DIR
 release_dist_to_folder $HTML_DIR-bak
