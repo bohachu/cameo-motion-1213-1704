@@ -4,7 +4,20 @@ the_user=$1
 backup_source=$2 #$HTML_DIR
 
 postfix=$3 #$(date +"%Y%m%d")
-backup_dest=$backup_source"_"$postfix
+# myweb:
+# source:  /home/$the_user/myweb
+# target: /home/$the_user/history/myweb_bak$postfix
+# backup_dest=/home/$the_user/myweb/history/myweb_bak$postfix
+# www:
+# source: /var/www/iek.cameo.tw/html
+# target: /var/www/iek.cameo.tw/html_bak$postfix
+# backup_dest=$backup_source"_"bak$postfix
+if [[ $backup_source == *"myweb"* ]]; then
+  backup_dest=/home/$the_user/myweb/history/myweb_bak$postfix
+else
+  backup_dest=$backup_source"_"bak$postfix
+fi
+
 
 sudo /bin/cp -r $backup_source/ $backup_dest/
 sudo chown $the_user:$the_user -R $backup_dest
