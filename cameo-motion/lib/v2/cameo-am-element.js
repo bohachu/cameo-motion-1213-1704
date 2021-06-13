@@ -53,8 +53,7 @@ function set_chart_exporting_menu(chart, str_filename) {
           menu: [
             { type: "png", label: "PNG" },
             { type: "jpg", label: "JPG" },
-            { type: "svg", label: "SVG" },
-            { type: "pdf", label: "PDF" }
+            { type: "svg", label: "SVG" }
           ]
         },
         {
