@@ -1,4 +1,14 @@
-2021-06-13 caro
+2021-06-13 13:10 caro
+新增方塊圖 cameo-treemap 尚未完成挖格子，需修改：
+todo
+001 name 斷行一樣無法完成
+002 name 的分類年份，無法分類，會重複出現
+003 為了湊出格式，直接加上 []
+dic_data["children"] = [ary_children_data[i]];
+004 會有一個 NAN 不知是哪來的？
+005 下方的標籤會按照 name 的 value 來做排序，所以無法用年份大小來排序
+
+2021-06-13 10:40 caro
 新增泡泡圖 cameo-bubble 完成挖格子
 
 2021-05-24 16:24 caro
