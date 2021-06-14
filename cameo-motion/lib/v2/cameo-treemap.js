@@ -9,18 +9,35 @@ class CameoTreemap extends CameoAmElement {
             dic_children_data["showname"] = ary_data[2][i];
             dic_children_data["value"] = parseFloat(ary_data[3][i]);
             ary_children_data.push(dic_children_data);
+            if (typeof ary_children_data[ary_children_data.length - 1].name == "string") {
+                ary_children_data[ary_children_data.length - 1].name = ary_children_data[ary_children_data.length - 1].name.replace("\\n", "\n");
+            }
         }
-        console.log(ary_children_data);
         return ary_children_data;
     }
 
-    parse_ary_chart_data(ary_data,ary_children_data) {
+    如果name一樣就塞到同一個children的dic_如果name不一樣就要新增一個新dic(ary_chart_data, dic_data) {
+        if (dic_data.name == "") {
+            return;
+        }
+        for (let i = 0; i < ary_chart_data.length; i++) {
+            if (ary_chart_data[i].name == dic_data.name) {
+                ary_chart_data[i].children.push(dic_data.children[0]);
+                return;
+            }
+        }
+        ary_chart_data.push(dic_data);
+    }
+
+    parse_ary_chart_data(ary_data, ary_children_data) {
         let ary_chart_data = [];
         for (let i = 0; i < ary_data[0].length; i++) {
             let dic_data = {};
             dic_data["name"] = ary_data[0][i];
             dic_data["children"] = [ary_children_data[i]];
-            ary_chart_data.push(dic_data);
+            console.log("ary_children_data[i]");
+            console.log(ary_children_data[i]);
+            this.如果name一樣就塞到同一個children的dic_如果name不一樣就要新增一個新dic(ary_chart_data, dic_data);
         }
         console.log("ary_chart_data");
         console.log(ary_chart_data);
@@ -29,13 +46,16 @@ class CameoTreemap extends CameoAmElement {
 
     async chart_render() {
         var chart = am4core.create(this.str_random_id, am4charts.TreeMap);
-        let [ary_data,dic_meta] = await this.fetch_data_meta();
+        let [ary_data, dic_meta] = await this.fetch_data_meta();
         this.set_theme_height_menu_watermark_title(chart, dic_meta);
 
         const ary_children_data = this.parse_ary_children_data(ary_data);
-        const ary_chart_data = this.parse_ary_chart_data(ary_data,ary_children_data);
+        const ary_chart_data = this.parse_ary_chart_data(ary_data, ary_children_data);
 
         chart.data = ary_chart_data;
+        console.log("!!!final data!!!");
+        console.log(JSON.stringify(ary_chart_data));
+        // chart.data =
         //     [{
         //     name: "1999",
         //     children: [
@@ -226,7 +246,7 @@ class CameoTreemap extends CameoAmElement {
         level2_column.stroke = am4core.color("#fff");
         level2_column.strokeWidth = 5;
         level2_column.strokeOpacity = 1;
-        level2_column.tooltipText = "{name}\n"+dic_meta["文字標籤"]+"{value}"+dic_meta["文字標籤單位"];
+        level2_column.tooltipText = "{name}\n" + dic_meta["文字標籤"] + "{value}" + dic_meta["文字標籤單位"];
 
         var level2_bullet = level2.bullets.push(new am4charts.LabelBullet());
         level2_bullet.locationY = 0.5;
