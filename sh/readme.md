@@ -7,7 +7,7 @@ https://docs.google.com/spreadsheets/d/1tWdxukgrTkYYMxSWTksB98aDaiHLGq7kPeJgOC48
 目前release_dist_to_local_site.sh有備份既有檔案的功能。 
 所以專案目錄下git pull後直接執行: 
 cd sh 
-sudo bash compile_and_release.sh 
+001 sudo bash compile_and_release.sh 
 這個會做: 
 將網站打包到dist: 包含js加密和打包, 產出的網站檔案在dist 
 發佈到網站目錄 , 包含備份既有目錄內容到/var/www/iek.cameo.tw/html_bak$date
@@ -16,7 +16,7 @@ sudo bash compile_and_release.sh
 發佈到user_util 
 
 完成後逐使用者更新my-web:  
-sudo bash release_my-web_to_that_user $username
+002 sudo bash release_my-web_to_that_user.sh $username
 
 ## 僅更新cameo-motion/lib/$lib_version檔案, 不更新.csv檔案 (所以不用備份) 
 sudo bash compile_and_release_lib.sh 
