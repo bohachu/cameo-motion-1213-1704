@@ -20,7 +20,7 @@ cd sh
 
 003 如果更新管理者系統設定.ipynb 
 sudo /bin/cp /root/admin_util/管理者系統設定.ipynb /home/$the_user/ 
-sudo chown -h $the_user:$the_user /home/$the_user/.*.sh
+照原本的權限就好不用改
 
 ## 僅更新cameo-motion/lib/$lib_version檔案, 不更新.csv檔案 (所以不用備份) 
 sudo bash compile_and_release_lib.sh 
