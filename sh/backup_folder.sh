@@ -13,7 +13,7 @@ postfix=$3 #$(date +"%Y%m%d")
 # backup_dest=$backup_source"_"bak$postfix
 if [[ $backup_source == *"myweb"* ]]; then
   backup_dest=/home/$the_user/myweb/history/myweb_bak$postfix
-  if [[ ! -d $backup_dest ]]:
+  if [[ ! -d $backup_dest ]]; then
     sudo mkdir $backup_dest
   sudo /bin/cp -r $backup_source/ $backup_dest/
   sudo chown $the_user:$the_user -R $backup_dest
